@@ -3,165 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMART CANE ALBANIA</title>
+    <title>Smart Cane Albania | Ledjan Bitri</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Times New Roman', Times, serif; font-weight: bold; }
         
         body { 
-            background: #000; 
-            color: #fff;
-            /* KORNIZA GJEOMETRIKE */
-            border: 20px solid;
-            border-image: repeating-linear-gradient(45deg, #000, #000 10px, #fff 10px, #fff 20px, #00e5ff 20px, #00e5ff 30px) 20;
+            background: #00050a;
+            color: #ffffff; line-height: 1.6;
         }
 
-        /* SHKRIMI ROCKWELL PER TITUJT */
-        h1, h2, h3, .btn-wa, summary {
-            font-family: 'Rockwell', 'Arial Black', serif;
-            font-weight: 900;
-            text-transform: uppercase;
+        /* Navigimi me tre viza */
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 30px; background: #000000; border-bottom: 2px solid #003366;
+            position: sticky; top: 0; z-index: 1000;
         }
 
-        /* SHKRIMI TIMES NEW ROMAN PER TEKSTIN */
-        p, span, div, li {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 1.25rem;
-            line-height: 1.5;
+        .menu-icon { cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
+        .menu-icon div { width: 30px; height: 4px; background-color: white; }
+
+        header { text-align: center; padding: 50px 20px; background: rgba(0,0,0,0.8); }
+        header h1 { font-size: 2.8rem; text-transform: uppercase; margin-bottom: 10px; }
+        header p { color: #3498db; font-size: 1.4rem; }
+
+        .main-photo {
+            width: 100%; max-width: 850px; display: block; margin: 20px auto;
+            border: 2px solid #ffffff; border-radius: 10px;
         }
 
-        /* MENU ME 3 VIJA */
-        .menu-btn {
-            position: fixed; top: 40px; left: 40px;
-            z-index: 1000; cursor: pointer;
-            background: #00e5ff; padding: 10px; border: 2px solid #fff;
-        }
-        .menu-btn div { width: 25px; height: 3px; background: #000; margin: 4px 0; }
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
 
-        /* SEKSIONI KRYESOR */
-        .hero {
-            text-align: center;
-            padding: 100px 20px 50px;
+        /* Login Section */
+        .login-section {
+            max-width: 400px; margin: 40px auto; padding: 30px;
+            background: #001122; border: 2px solid #3498db; border-radius: 10px;
         }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 25px;
-            text-shadow: 3px 3px 0px #00e5ff;
+        .login-section input {
+            width: 100%; padding: 12px; margin-bottom: 10px;
+            background: #000; border: 1px solid #fff; color: white;
         }
+        .btn-login { width: 100%; padding: 12px; background: #3498db; color: white; border: none; cursor: pointer; }
 
-        /* GALERIA ME 3 FOTO */
-        .image-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
+        /* Accordion */
+        details { background: #000c1a; margin-bottom: 15px; border: 1px solid #ffffff; }
+        summary { padding: 20px; font-size: 1.4rem; cursor: pointer; display: flex; justify-content: space-between; }
+        .content { padding: 25px; font-size: 1.2rem; border-top: 1px solid #3498db; }
 
-        .photo-space {
-            width: 280px;
-            height: 190px;
-            border: 3px solid #fff;
-            background: #111;
-        }
+        .price-text { font-size: 4rem; text-align: center; margin: 20px 0; color: #ffffff; }
 
-        .photo-space img {
-            width: 100%; height: 100%; object-fit: cover;
-        }
+        .btn-group { display: flex; gap: 15px; margin-top: 20px; }
+        .btn { padding: 18px; text-decoration: none; flex: 1; text-align: center; border: 2px solid #ffffff; font-size: 1.2rem; }
+        .btn-mail { background: #002244; color: #fff; }
+        .btn-wa { background: #fff; color: #000; }
 
-        /* KUTITE E INFORMACIONIT (ACCORDION) */
-        .info-box {
-            max-width: 900px;
-            margin: 0 auto 50px;
-            padding: 0 20px;
-        }
-
-        details {
-            background: rgba(0, 229, 255, 0.05);
-            border: 1px solid #fff;
-            margin-bottom: 15px;
-        }
-
-        summary {
-            padding: 20px;
-            font-size: 1.3rem;
-            cursor: pointer;
-            color: #00e5ff;
-            list-style: none;
-        }
-
-        .content {
-            padding: 20px;
-            border-top: 1px solid #fff;
-        }
-
-        /* WHATSAPP JESHIL */
-        .btn-wa {
-            display: inline-block;
-            background: #25D366;
-            color: #fff;
-            padding: 15px 30px;
-            text-decoration: none;
-            font-size: 1.1rem;
-            margin-top: 20px;
-        }
-
-        /* FAQJA E TRETE (LOGIN/TEAM) */
-        #overlay-page {
-            position: fixed; top: 0; left: -100%; width: 100%; height: 100%;
-            background: #000; z-index: 2000; transition: 0.5s;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-        }
-        #overlay-page.active { left: 0; }
-
+        footer { text-align: center; padding: 60px; background: #000; border-top: 3px solid #003366; }
+        .footer-name { color: #3498db; font-size: 2.2rem; letter-spacing: 4px; }
     </style>
 </head>
 <body>
 
-    <div class="menu-btn" onclick="toggleView()">
-        <div></div><div></div><div></div>
-    </div>
+<nav class="navbar">
+    <div class="menu-icon"><div></div><div></div><div></div></div>
+    <div style="font-size: 1.2rem; color: #3498db;">ANTARËSIMI</div>
+</nav>
 
-    <div id="home">
-        <section class="hero">
-            <h1>Smart Cane Albania</h1>
-            
-            <div class="image-container">
-                <div class="photo-space"><img src="shkopi1.jpg" alt="Foto 1"></div>
-                <div class="photo-space"><img src="shkopi2.jpg" alt="Foto 2"></div>
-                <div class="photo-space"><img src="shkopi3.jpg" alt="Foto 3"></div>
-            </div>
-        </section>
+<header>
+    <h1>Shkop Inteligjent</h1>
+    <p>Për personat me mungesë shikimi</p>
+</header>
 
-        <div class="info-box">
-            <details>
-                <summary>Detajet e Shkopit</summary>
-                <div class="content">
-                    <p>Ky shkop inteligjent pÃ«rdor sensorÃ« ultrasonikÃ« pÃ«r tÃ« dedektuar pengesat. Ka speaker tÃ« integruar qÃ« lÃ«shon sinjale zanore dhe motor vibrimi pÃ«r siguri maksimale.</p>
-                </div>
-            </details>
+<img src="shkopi1.jpg" alt="Pamja e Shkopit" class="main-photo">
 
-            <details>
-                <summary>Ã‡mimi dhe Garancia</summary>
-                <div class="content">
-                    <p>Vlera: 50 â‚¬ <br> Garancia: 1 Vit (pÃ«r pjesÃ«t elektronike).</p>
-                    <a href="https://wa.me/355682673885" class="btn-wa">POROSIT NE WHATSAPP</a>
-                </div>
-            </details>
+<div class="login-section">
+    <h3 style="text-align: center; margin-bottom: 15px;">LOGOHU SI ANTAR</h3>
+    <input type="text" placeholder="Emri">
+    <input type="password" placeholder="Fjalëkalimi">
+    <button class="btn-login">HYR</button>
+</div>
+
+<div class="container">
+    <details>
+        <summary>Përshkrimi i Produktit</summary>
+        <div class="content">
+            Teknologji e avancuar ultrasonike për një lëvizje të sigurt. Ky shkop identifikon pengesat në distancë dhe njofton përdoruesin përmes vibrimit dhe zërit.
         </div>
-    </div>
+    </details>
 
-    <div id="overlay-page">
-        <h1>BÃ«hu pjesÃ« e ekipit</h1>
-        <p style="margin: 20px 0;">PÃ«r bashkÃ«punim kontaktoni Luis SallÃ«n.</p>
-        <a href="https://wa.me/355693076658" class="btn-wa" style="background:#fff; color:#000;">WHATSAPP LUIS</a>
-        <button onclick="toggleView()" style="margin-top: 50px; padding: 10px 20px; cursor: pointer;">MBYLLE</button>
-    </div>
+    <details>
+        <summary>Çmimi</summary>
+        <div class="content">
+            <div class="price-text">50 €</div>
+        </div>
+    </details>
 
-    <script>
-        function toggleView() {
-            document.getElementById('overlay-page').classList.toggle('active');
-        }
-    </script>
+    <img src="shkopi2.jpg" alt="Përdorimi i Shkopit" class="main-photo" style="margin: 40px 0;">
+
+    <details>
+        <summary>Kontakti dhe Porosia</summary>
+        <div class="content">
+            <div class="btn-group">
+                <a href="mailto:ecisigurt@gmail.com" class="btn btn-mail">Email</a>
+                <a href="https://wa.me/355682673885" class="btn btn-wa">WhatsApp</a>
+            </div>
+        </div>
+    </details>
+</div>
+
+<footer>
+    <div class="footer-name">LEDJAN BITRI</div>
+    <p style="margin-top: 15px;">&copy; 2026 Shkop Inteligjent Albania</p>
+</footer>
+
 </body>
 </html>
