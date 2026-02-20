@@ -2,307 +2,155 @@
 <html lang="sq">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, 
-initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SMART CANE ALBANIA</title>
     <style>
-        /* DIZAJNI GLOBAL - TIMES NEW ROMAN & LUXURY DARK 
-*/
+        /* DIZAJNI GLOBAL */
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         
         body { 
-            
-background: #000; 
+            background: #000; 
             color: #fff; 
-            font-family: 'Times New Roman', Times, serif;
-            border: 20px 
-solid #111; /* Korniza e madhe luksoze */
+            font-family: 'Georgia', serif; /* Shkrim më elegant */
+            border: 15px solid #111;
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
-        /* 
-NAVIGATION - 3 VIJAT MODERNE */
+        /* NAVIGATION */
         .nav-trigger {
-            position: fixed; top: 40px; left: 50px;
-            z-index: 
-9999; cursor: pointer;
-            background: rgba(255,255,255,0.1); padding: 15px;
-            border-radius: 50%; 
-transition: 0.3s;
+            position: fixed; top: 30px; left: 30px;
+            z-index: 10000; cursor: pointer;
+            background: rgba(46, 204, 113, 0.2); padding: 12px;
+            border-radius: 50%; border: 1px solid #2ecc71;
         }
-        .nav-trigger:hover { background: #3498db; }
-        .nav-trigger div { width: 25px; height: 
-2px; background: #fff; margin: 6px 0; }
+        .nav-trigger div { width: 25px; height: 2px; background: #fff; margin: 6px 0; }
 
-        /* HERO SECTION - BACKGROUNDI ME KONTRAST GRI */
+        /* HERO SECTION */
         .hero {
-            
-height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('shkopi1.jpg');
-            
-background-size: cover; background-position: center;
-            display: flex; flex-direction: column; justify-content: 
-center; align-items: center;
-            text-align: center; padding: 20px;
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('shkopi1.jpg');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center;
         }
 
         .hero h1 { 
-            font-size: 
-4rem; font-weight: bold; color: #fff; 
-            text-transform: uppercase; letter-spacing: 5px; margin-bottom: 20px;
-        
-    text-shadow: 5px 5px 15px #000;
+            font-size: 3.5rem; font-weight: bold; color: #fff; 
+            text-transform: uppercase; letter-spacing: 5px;
+            font-family: 'Playfair Display', serif;
         }
 
-        .hero p { color: #3498db; font-size: 1.5rem; letter-spacing: 2px; font-
-weight: bold; }
+        .hero p { color: #2ecc71; font-size: 1.2rem; letter-spacing: 2px; margin-top: 10px; }
 
         /* CONTENT CONTAINER */
-        .main-container { max-width: 1000px; margin: -100px auto 100px; 
-position: relative; z-index: 10; }
+        .main-container { max-width: 800px; margin: 40px auto; padding: 20px; }
 
-        /* ACCORDION - GRUPET E INFORMACIONIT */
+        /* ACCORDION */
         details {
-            background: 
-rgba(255, 255, 255, 0.03);
-            margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);
-            backdrop-
-filter: blur(10px); transition: 0.5s;
+            background: rgba(255, 255, 255, 0.02);
+            margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1);
         }
-        details[open] { background: rgba(255, 255, 255, 0.08); border: 1px 
-solid #3498db; }
+        details[open] { border: 1px solid #2ecc71; }
 
         summary {
-            padding: 30px; font-size: 1.6rem; font-weight: bold;
-            color: #fff; 
-cursor: pointer; list-style: none;
-            display: flex; justify-content: space-between; align-items: center;
-            
-text-transform: uppercase;
+            padding: 20px; font-size: 1.3rem; font-weight: bold;
+            color: #fff; cursor: pointer; list-style: none;
+            text-transform: uppercase;
         }
 
         .inner-text {
-            padding: 0 30px 40px 30px; 
-            color: #3498db; /* 
-Blu e erret/elektrike */
-            font-family: Arial, sans-serif; font-size: 1.3rem; 
-            line-height: 1.8; border-
-top: 1px solid rgba(52, 152, 219, 0.3);
-            padding-top: 30px;
+            padding: 20px; color: #ccc;
+            font-family: 'Arial', sans-serif; font-size: 1.1rem; 
+            line-height: 1.6; border-top: 1px solid rgba(46, 204, 113, 0.3);
         }
 
-        .highlight-white { color: #fff; font-
-weight: bold; }
-
-        /* FOTOT MODERNE */
+        /* FOTOT ME TE VOGLA */
         .product-img { 
-            width: 100%; border-radius: 5px; margin-top: 
-20px; 
-            filter: grayscale(30%); transition: 0.5s; border: 1px solid #3498db;
-        }
-        .product-img:hover { 
-filter: grayscale(0%); transform: scale(1.01); }
-
-        /* FAQJA E TRETE - FULL SCREEN OVERLAY */
-        .overlay-page {
-      
-      position: fixed; top: 0; left: -100%; width: 100%; height: 100%;
-            background: #000; z-index: 9000; 
-transition: 0.6s cubic-bezier(0.77, 0, 0.175, 1);
-            padding: 100px 50px; overflow-y: auto;
-        }
-        
-.overlay-page.active { left: 0; }
-
-        .login-card {
-            max-width: 500px; margin: 0 auto; background: #050505;
-      
-      padding: 50px; border: 1px solid #3498db; box-shadow: 0 0 30px rgba(52, 152, 219, 0.2);
+            display: block; width: 60%; max-width: 400px; 
+            margin: 20px auto; border-radius: 8px; border: 1px solid #2ecc71;
         }
 
-        input {
-         
-   width: 100%; padding: 15px; margin-bottom: 20px;
-            background: transparent; border: none; border-bottom: 2px 
-solid #3498db;
-            color: #fff; font-size: 1.1rem; outline: none;
-        }
-
-        .btn-premium {
-            width: 
-100%; padding: 15px; background: #3498db; color: #fff;
-            border: none; font-weight: bold; cursor: pointer; text-
-transform: uppercase;
+        /* BUTONAT JESHIL DHE BOLD */
+        .contact-wa {
+            display: inline-block; margin-top: 15px; color: #fff;
+            background-color: #2ecc71; /* Ngjyra Jeshile */
+            text-decoration: none; padding: 15px 30px;
+            font-weight: bold; border-radius: 5px;
             transition: 0.3s;
         }
-        .btn-premium:hover { background: #fff; color: #000; }
+        .contact-wa:hover { background-color: #27ae60; transform: scale(1.05); }
 
-      
-  .contact-wa {
-            display: inline-block; margin-top: 30px; color: #fff;
-            text-decoration: none; border: 
-1px solid #3498db; padding: 15px 40px;
-            transition: 0.3s; font-size: 1.2rem;
+        /* OVERLAY PAGE */
+        .overlay-page {
+            position: fixed; top: 0; left: -100%; width: 100%; height: 100%;
+            background: #000; z-index: 9000; 
+            transition: 0.6s ease;
+            padding: 80px 20px; overflow-y: auto; text-align: center;
         }
-        .contact-wa:hover { 
-background: #3498db; }
-
-        /* SCROLL ANIMATION */
-        .fade-in { opacity: 0; transform: translateY(30px); transition: 
-1s; }
-        .fade-in.appear { opacity: 1; transform: translateY(0); }
-
+        .overlay-page.active { left: 0; }
     </style>
 </head>
 <body>
 
-    <div class="nav-trigger" 
-onclick="toggleOverlay()">
+    <div class="nav-trigger" onclick="toggleOverlay()">
         <div></div><div></div><div></div>
     </div>
 
     <section class="hero">
-        <h1>Smart Cane 
-Albania</h1>
+        <h1>Smart Cane Albania</h1>
         <p>TEKNOLOGJIA QË NDRIÇON ERRËSIRËN</p>
     </section>
 
     <div class="main-container">
         
-        
-<details class="fade-in">
-            <summary>01. Inovacioni pas Produktit</summary>
+        <details>
+            <summary>★ Si funksionon ky produkt</summary>
             <div class="inner-text">
-      
-          Ky nuk është thjesht një shkop. Është një <span class="highlight-white">sistem inteligjent radari</span> i krijuar 
-për të ofruar siguri maksimale. Përmes valëve ultrasonike, ai skanon mjedisin duke indentifikuar pengesat dhe i jep 
-përdoruesit sytë që i mungojnë.
-                <img src="shkopi1.jpg" class="product-img" alt="Inovacioni">
-            </div>
- 
-       </details>
-
-        <details class="fade-in">
-            <summary>02. Misioni dhe Qëllimi</summary>
-            <div 
-class="inner-text">
-                Misioni ynë bazohet në tre shtylla kryesore:<br><br>
-                1. <span 
-class="highlight-white">Pavarësia:</span> Liria për të lëvizur pa ndihmën e askujt.<br>
-                2. <span 
-class="highlight-white">Siguria Urban:</span> Detektimi i pengesave ne rruge shtepi shkolle dhe shume vende te tjera .<br>
-                3. 
-<span class="highlight-white">Integriteti:</span> Integrimi i plotë social i personave me aftësi të kufizuara.
-            
-</div>
-        </details>
-
-        <details class="fade-in">
-            <summary>03. Udhezuesi i Përdorimit</summary>
-            
-<div class="inner-text">
-                Përdorimi është intuitiv. Me një shtypje të butonit "Master", sistemi aktivizohet. 
-speakeri  do të fillojë të vibrojë sapo një objekt të jetë në rrezen prej <2 metrash. Sa më shumë shtohet vibrimi, aq më 
-pranë është pengesa.
-                <img src="shkopi2.jpg" class="product-img" alt="Perdorimi">
-            </div>
-        
-</details>
-
-        <details class="fade-in">
-            <summary>04. Cmimi i produktit</summary>
-            <div 
-class="inner-text">
-                Vlera e kësaj teknologjie është e pakrahasueshme, por ne e ofrojmë për vetëm <span 
-class="highlight-white">45 €</span>.<br>
-                Pajisja është e ndërtuar për t'i rezistuar kohës me një jetëgjatësi 
-prej mbi 1 vit dhe bateri që mban deri në 30 orë me një karikim të vetëm.
+                Ky sistem përdor valë ultrasonike për të skanuar mjedisin. Kur detekton një pengesë, pajisja lëshon vibrime që paralajmërojnë përdoruesin në kohë reale.
+                <img src="shkopi1.jpg" class="product-img" alt="Funksionimi">
             </div>
         </details>
 
-        <details 
-class="fade-in">
-            <summary>05. Per porosi </summary>
+        <details>
+            <summary>★ Misioni ynë</summary>
             <div class="inner-text">
-                
-Ne besojmë te shpejtësia. Porositni online dhe përfitoni <span class="highlight-white">Transport FALAS</span> kudo brenda 
-Tiranës. Pajisja ju vjen në paketim hermetik dhe e gatshme për përdorim të menjëhershëm.
+                • Pavarësia e plotë në lëvizje.<br>
+                • Siguri maksimale në ambientet urbane.<br>
+                • Integrimi social përmes teknologjisë.
             </div>
         </details>
 
-  
-      <details class="fade-in">
-            <summary>06. Hub-i i Komunikimit</summary>
-            <div class="inner-text" 
-style="text-align: center;">
-                <p>Për çdo pyetje teknike ose blerje direkte:</p><br>
-                <a 
-href="mailto:ecisigurt@gmail.com" style="color: #fff; font-size: 1.5rem;">ecisigurt@gmail.com</a><br><br>
-                <a 
-href="https://wa.me/355682673885" class="contact-wa">KONTAKTO WHATSAPP</a>
+        <details>
+            <summary>★ Grupi i komunikimit</summary>
+            <div class="inner-text" style="text-align: center;">
+                <p>Për informacione dhe porosi, na kontaktoni:</p>
+                <a href="https://wa.me/355682673885" class="contact-wa">KONTAKTO NË WHATSAPP</a>
+            </div>
+        </details>
+
+        <details>
+            <summary>★ Porosia dhe Logjistika</summary>
+            <div class="inner-text">
+                Transporti kryhet falas brenda Tiranës. Pajisja vjen e montuar dhe gati për përdorim.
             </div>
         </details>
 
     </div>
 
-    
-<div id="overlay" class="overlay-page">
-        <h2 style="text-align: center; font-size: 3rem; margin-bottom: 50px; letter-
-spacing: 5px;">BËHU PJESË E EKIPIT</h2>
+    <div id="overlay" class="overlay-page">
+        <h2 style="font-size: 2.5rem; margin-bottom: 30px;">BËHU PJESË E EKIPIT</h2>
+        <p style="color: #888; margin-bottom: 30px;">Ky është një projekt vullnetar për të ndihmuar komunitetin.</p>
         
-        <div class="login-card">
-            <form 
-action="mailto:hapiim@gmail.com" method="post" enctype="text-plain">
-                <input type="text" placeholder="EMRI DHE 
-MBIEMRI" required>
-                <input type="email" placeholder="EMAIL ADRESA" required>
-                <button 
-type="submit" class="btn-premium">DËRGO APLIKIMIN</button>
-            </form>
-        </div>
-
-        <div style="text-align: 
-center; margin-top: 60px; max-width: 800px; margin-left: auto; margin-right: auto;">
-            <p style="font-size: 1.4rem; 
-color: #888; line-height: 1.8;">
-                Ky projekt është një nismë vullnetare nga studentë të përkushtuar. Çdo 
-kontribut shkon për përmirësimin e teknologjisë. Nëse dëshironi të ndihmoni:
-            </p>
-            <a 
-href="https://wa.me/355693076658" class="contact-wa">KONTAKTO KOORDINATORIN </a>
-            <br><br>
-            <img 
-src="shkopi3.jpg" class="product-img" style="max-width: 600px;" alt="Ekipi">
-        </div>
+        <a href="https://wa.me/355693076658" class="contact-wa">KONTAKTO KOORDINATORIN</a>
+        
+        <br><br><br>
+        <button onclick="toggleOverlay()" style="background:none; border:1px solid #fff; color:#fff; padding:10px 20px; cursor:pointer;">MBYLL</button>
     </div>
 
     <script>
-        // 
-Funksioni per te hapur faqen e trete
         function toggleOverlay() {
-            document.getElementById
-('overlay').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
         }
-
-        // Efekti i shfaqjes gjate scroll-it
-        const faders = 
-document.querySelectorAll('.fade-in');
-        const appearOptions = { threshold: 0.3 };
-
-        const appearOnScroll = new 
-IntersectionObserver(function(entries, appearOnScroll) {
-            entries.forEach(entry => {
-                if (!
-entry.isIntersecting) return;
-                entry.target.classList.add('appear');
-                appearOnScroll.unobserve
-(entry.target);
-            });
-        }, appearOptions);
-
-        faders.forEach(fader => { appearOnScroll.observe(fader); });
-  
-  </script>
+    </script>
 </body>
 </html>
