@@ -11,9 +11,10 @@
         body { 
             background: #000; 
             color: #fff; 
-            font-family: 'Georgia', serif; /* Shkrim më elegant */
+            font-family: 'Georgia', serif; 
             border: 15px solid #111;
             min-height: 100vh;
+            line-height: 1.6;
         }
 
         /* NAVIGATION */
@@ -27,58 +28,70 @@
 
         /* HERO SECTION */
         .hero {
-            height: 60vh;
+            height: 65vh;
             background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('shkopi1.jpg');
             background-size: cover; background-position: center;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center;
+            text-align: center; padding: 20px;
         }
 
         .hero h1 { 
             font-size: 3.5rem; font-weight: bold; color: #fff; 
             text-transform: uppercase; letter-spacing: 5px;
-            font-family: 'Playfair Display', serif;
+            text-shadow: 2px 2px 10px rgba(46, 204, 113, 0.5);
         }
 
-        .hero p { color: #2ecc71; font-size: 1.2rem; letter-spacing: 2px; margin-top: 10px; }
+        .hero p { color: #2ecc71; font-size: 1.2rem; letter-spacing: 2px; margin-top: 10px; font-weight: bold; }
 
         /* CONTENT CONTAINER */
-        .main-container { max-width: 800px; margin: 40px auto; padding: 20px; }
+        .main-container { max-width: 850px; margin: 40px auto; padding: 20px; }
 
         /* ACCORDION */
         details {
-            background: rgba(255, 255, 255, 0.02);
-            margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.03);
+            margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s;
         }
-        details[open] { border: 1px solid #2ecc71; }
+        details[open] { border: 1px solid #2ecc71; background: rgba(46, 204, 113, 0.05); }
 
         summary {
-            padding: 20px; font-size: 1.3rem; font-weight: bold;
+            padding: 25px; font-size: 1.4rem; font-weight: bold;
             color: #fff; cursor: pointer; list-style: none;
-            text-transform: uppercase;
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
         .inner-text {
-            padding: 20px; color: #ccc;
-            font-family: 'Arial', sans-serif; font-size: 1.1rem; 
-            line-height: 1.6; border-top: 1px solid rgba(46, 204, 113, 0.3);
+            padding: 0 25px 30px 25px; color: #ddd;
+            font-family: 'Arial', sans-serif; font-size: 1.15rem; 
+            border-top: 1px solid rgba(46, 204, 113, 0.3);
+            padding-top: 20px;
         }
 
-        /* FOTOT ME TE VOGLA */
+        /* FOTOT */
         .product-img { 
-            display: block; width: 60%; max-width: 400px; 
-            margin: 20px auto; border-radius: 8px; border: 1px solid #2ecc71;
+            display: block; width: 70%; max-width: 450px; 
+            margin: 25px auto; border-radius: 10px; border: 1px solid #2ecc71;
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.2);
         }
 
         /* BUTONAT JESHIL DHE BOLD */
-        .contact-wa {
-            display: inline-block; margin-top: 15px; color: #fff;
-            background-color: #2ecc71; /* Ngjyra Jeshile */
+        .contact-btn {
+            display: inline-block; margin: 10px 5px; color: #fff;
+            background-color: #2ecc71; 
             text-decoration: none; padding: 15px 30px;
             font-weight: bold; border-radius: 5px;
-            transition: 0.3s;
+            transition: 0.3s; text-align: center;
         }
-        .contact-wa:hover { background-color: #27ae60; transform: scale(1.05); }
+        .contact-btn:hover { background-color: #27ae60; transform: translateY(-3px); }
+
+        .email-link { color: #2ecc71; font-weight: bold; text-decoration: underline; }
+
+        /* FOOTER */
+        footer {
+            text-align: center; padding: 40px; color: #666;
+            font-size: 0.9rem; border-top: 1px solid #111;
+            margin-top: 50px;
+        }
 
         /* OVERLAY PAGE */
         .overlay-page {
@@ -88,6 +101,8 @@
             padding: 80px 20px; overflow-y: auto; text-align: center;
         }
         .overlay-page.active { left: 0; }
+
+        .highlight { color: #2ecc71; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -106,46 +121,80 @@
         <details>
             <summary>★ Si funksionon ky produkt</summary>
             <div class="inner-text">
-                Ky sistem përdor valë ultrasonike për të skanuar mjedisin. Kur detekton një pengesë, pajisja lëshon vibrime që paralajmërojnë përdoruesin në kohë reale.
-                <img src="shkopi1.jpg" class="product-img" alt="Funksionimi">
+                Pajisja përdor teknologjinë e <span class="highlight">sensorëve ultrasonikë</span> për të matur distancën midis personit dhe objekteve përreth. Valët zëri emetohen dhe kthehen mbrapsht sapo godasin një pengesë. 
+                <br><br>
+                Sistemi e përpunon këtë informacion brenda milisekondave dhe njofton përdoruesin përmes një <span class="highlight">motori vibrimi</span> dhe sinjaleve akustike. Sa më afër pengesës të jetë përdoruesi, aq më intensiv bëhet vibrimi, duke ofruar një hartë intuitive të mjedisit pa pasur nevojë për shikim.
+                <img src="shkopi1.jpg" class="product-img" alt="Teknologjia">
             </div>
         </details>
 
         <details>
             <summary>★ Misioni ynë</summary>
             <div class="inner-text">
-                • Pavarësia e plotë në lëvizje.<br>
-                • Siguri maksimale në ambientet urbane.<br>
-                • Integrimi social përmes teknologjisë.
+                Misioni i "Smart Cane Albania" është të thyejë barrierat e lëvizshmërisë për personat me dëmtime të shikimit në Shqipëri. Ne synojmë:
+                <br><br>
+                • <span class="highlight">Siguri Urbane:</span> Detektimi i rreziqeve në lartësi (tabela, degë pemësh) që shkopi tradicional nuk i kap.<br>
+                • <span class="highlight">Pavarësi:</span> T'i japim çdo individi vetëbesimin për të ecur në rrugë pa pasur nevojë për shoqërues.<br>
+                • <span class="highlight">Inovacion Social:</span> Sjellja e teknologjisë moderne me një kosto të përballueshme për tregun tonë.
+                <img src="misioni-foto.jpg" class="product-img" alt="Misioni ynë">
+            </div>
+        </details>
+
+        <details>
+            <summary>★ Udhëzuesi i Përdorimit</summary>
+            <div class="inner-text">
+                Përdorimi është projektuar për të qenë sa më i thjeshtë (Plug & Play):
+                <br><br>
+                1. <span class="highlight">Ndezja:</span> Shtypni butonin anësor "Power". Një sinjal i shkurtër do t'ju njoftojë se sistemi është aktiv.<br>
+                2. <span class="highlight">Mbajtja:</span> Mbajeni shkopin në një kënd natyral. Sensori duhet të jetë i drejtuar përpara.<br>
+                3. <span class="highlight">Reagimi:</span> Kur ndjeni një dridhje të lehtë, keni një objekt rreth 1.5 metra larg. Nëse dridhja bëhet e vazhdueshme, objekti është nën 50cm.<br>
+                4. <span class="highlight">Karikimi:</span> Pajisja karikohet me një kabull standard USB dhe bateria zgjat deri në 2 ditë përdorim normal.
+                <img src="perdorimi-foto.jpg" class="product-img" alt="Udhëzuesi">
+            </div>
+        </details>
+
+        <details>
+            <summary>★ Porosia dhe Logjistika</summary>
+            <div class="inner-text" style="text-align: center;">
+                Ne jemi të përkushtuar që kjo teknologji të shkojë te kushdo që ka nevojë.
+                <br><br>
+                Çmimi i pajisjes: <span class="highlight" style="font-size: 1.5rem;">45 Euro</span><br>
+                (Çmimi përfshin pajisjen e kompletuar dhe <span class="highlight">Transportin FALAS</span> kudo në Tiranë).
+                <br><br>
+                Për dërgesat jashtë Tiranës, na kontaktoni për detajet e postës. Çdo pajisje vjen me një garanci funksionale dhe asistencë teknike.
             </div>
         </details>
 
         <details>
             <summary>★ Grupi i komunikimit</summary>
             <div class="inner-text" style="text-align: center;">
-                <p>Për informacione dhe porosi, na kontaktoni:</p>
-                <a href="https://wa.me/355682673885" class="contact-wa">KONTAKTO NË WHATSAPP</a>
-            </div>
-        </details>
-
-        <details>
-            <summary>★ Porosia dhe Logjistika</summary>
-            <div class="inner-text">
-                Transporti kryhet falas brenda Tiranës. Pajisja vjen e montuar dhe gati për përdorim.
+                <p>Për porosi të shpejta ose pyetje teknike, na shkruani direkt:</p>
+                <br>
+                <a href="https://wa.me/355682673885" class="contact-btn">KONTAKTO NË WHATSAPP</a>
+                <br><br>
+                <p>Ose na dërgoni Email zyrtar:</p>
+                <a href="mailto:ecisigurt@gmail.com" class="email-link">ecisigurt@gmail.com</a>
             </div>
         </details>
 
     </div>
 
     <div id="overlay" class="overlay-page">
-        <h2 style="font-size: 2.5rem; margin-bottom: 30px;">BËHU PJESË E EKIPIT</h2>
-        <p style="color: #888; margin-bottom: 30px;">Ky është një projekt vullnetar për të ndihmuar komunitetin.</p>
+        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">BËHU PJESË E EKIPIT</h2>
+        <p style="color: #888; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Ky projekt rritet përmes bashkëpunimit. Nëse jeni inxhinier, dizajner ose dëshironi të kontribuoni në shpërndarjen e këtij produkti, na kontaktoni.
+        </p>
         
-        <a href="https://wa.me/355693076658" class="contact-wa">KONTAKTO KOORDINATORIN</a>
+        <a href="https://wa.me/355693076658" class="contact-btn">KONTAKTO KOORDINATORIN</a>
         
         <br><br><br>
-        <button onclick="toggleOverlay()" style="background:none; border:1px solid #fff; color:#fff; padding:10px 20px; cursor:pointer;">MBYLL</button>
+        <button onclick="toggleOverlay()" style="background:none; border:1px solid #fff; color:#fff; padding:10px 20px; cursor:pointer; border-radius: 5px;">KTHEHU MBRAPA</button>
     </div>
+
+    <footer>
+        <p>&copy; 2026 Copyright - Smart Cane Albania</p>
+        <p>Drejtues i projektit: <span style="color: #ccc;">Ledjan Bitri</span></p>
+    </footer>
 
     <script>
         function toggleOverlay() {
