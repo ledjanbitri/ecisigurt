@@ -1,3849 +1,1090 @@
-<!DOCTYPE html>
-<html lang="sq">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="description" content="POLARIS — Smart Cane. Teknologji inteligjente për lëvizje më të sigurt.">
-<meta name="theme-color" content="#080808">
-
-<title>POLARIS — Smart Cane Albania</title>
-
-<style>
-
-/* =========================================================
-   POLARIS — SMART CANE ALBANIA
-   SINGLE FILE WEBSITE
-   ========================================================= */
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
-
-/* ---------------- GLOBAL ---------------- */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#080808;
-    color:#fff;
-    font-family:'Inter',Arial,sans-serif;
-    overflow-x:hidden;
-}
-
-body.locked{
-    overflow:hidden;
-}
-
-img{
-    max-width:100%;
-}
-
-button,
-a{
-    font-family:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-:root{
-
-    --black:#080808;
-    --black2:#0d0d0d;
-    --black3:#141414;
-    --black4:#1b1b1b;
-
-    --orange:#a94412;
-    --orange2:#c65b20;
-    --orange3:#e07132;
-
-    --cream:#f0ebe5;
-
-    --white:#ffffff;
-    --gray:#8c8c8c;
-    --gray2:#b0b0b0;
-
-    --border:rgba(255,255,255,.09);
-
-}
-
-
-/* ---------------- LOADING ---------------- */
-
-.loader{
-
-    position:fixed;
-    inset:0;
-    background:#080808;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    z-index:99999;
-
-    transition:
-        opacity .7s ease,
-        visibility .7s ease;
-
-}
-
-.loader.hide{
-    opacity:0;
-    visibility:hidden;
-}
-
-.loader-inner{
-    text-align:center;
-}
-
-.loader-logo{
-
-    font-size:42px;
-    font-weight:900;
-    letter-spacing:13px;
-
-}
-
-.loader-logo span{
-    color:var(--orange3);
-}
-
-.loader-line{
-
-    width:160px;
-    height:2px;
-
-    background:#252525;
-
-    margin:25px auto 0;
-
-    overflow:hidden;
-
-}
-
-.loader-line::after{
-
-    content:"";
-
-    display:block;
-
-    width:50%;
-
-    height:100%;
-
-    background:var(--orange3);
-
-    animation:loader 1.2s infinite;
-
-}
-
-@keyframes loader{
-
-    0%{
-        transform:translateX(-100%);
-    }
-
-    100%{
-        transform:translateX(300%);
-    }
-
-}
-
-
-/* ---------------- NAVIGATION ---------------- */
-
-.nav{
-
-    position:fixed;
-
-    top:0;
-    left:0;
-
-    width:100%;
-    height:82px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:0 6%;
-
-    z-index:8000;
-
-    background:rgba(8,8,8,.72);
-
-    backdrop-filter:blur(18px);
-
-    border-bottom:1px solid rgba(255,255,255,.06);
-
-    transition:.4s;
-
-}
-
-.nav.scrolled{
-
-    height:68px;
-
-    background:rgba(8,8,8,.94);
-
-}
-
-.logo{
-
-    font-size:24px;
-
-    font-weight:900;
-
-    letter-spacing:6px;
-
-}
-
-.logo span{
-    color:var(--orange3);
-}
-
-.nav-menu{
-
-    display:flex;
-    align-items:center;
-    gap:30px;
-
-}
-
-.nav-menu a{
-
-    font-size:11px;
-    font-weight:800;
-    letter-spacing:1.5px;
-
-    color:#aaa;
-
-    transition:.3s;
-
-}
-
-.nav-menu a:hover{
-    color:#fff;
-}
-
-.nav-cta{
-
-    border:1px solid var(--orange);
-
-    padding:11px 19px;
-
-    border-radius:30px;
-
-    color:#fff !important;
-
-}
-
-.mobile-menu{
-
+<!DOCTYPE html>  
+<html lang="sq">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>POLARIS — Smart Cane</title>  
+<style>  
+  
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');  
+  
+*{  
+    margin:0;  
+    padding:0;  
+    box-sizing:border-box;  
+    scroll-behavior:smooth;  
+}  
+  
+:root{  
+    --black:#070707;  
+    --black2:#101010;  
+    --orange:#b84a13;  
+    --orange2:#e06a25;  
+    --light:#f3eee8;  
+    --gray:#a5a5a5;  
+}  
+  
+body{  
+    background:var(--black);  
+    color:white;  
+    font-family:'Inter',sans-serif;  
+    overflow-x:hidden;  
+}  
+  
+a{  
+    text-decoration:none;  
+    color:inherit;  
+}  
+  
+/* LOADER */  
+.loader{  
+    position:fixed;  
+    inset:0;  
+    background:#070707;  
+    z-index:99999;  
+    display:flex;  
+    align-items:center;  
+    justify-content:center;  
+    animation:loaderOut 1s ease 1.5s forwards;  
+}  
+  
+.loader h1{  
+    font-size:42px;  
+    letter-spacing:8px;  
+    font-weight:900;  
+}  
+  
+.loader span{  
+    color:var(--orange2);  
+}  
+  
+@keyframes loaderOut{  
+    to{  
+        opacity:0;  
+        visibility:hidden;  
+    }  
+}  
+  
+/* NAVBAR */  
+nav{  
+    position:fixed;  
+    top:0;  
+    left:0;  
+    width:100%;  
+    height:80px;  
+    z-index:5000;  
+    display:flex;  
+    align-items:center;  
+    justify-content:space-between;  
+    padding:0 6%;  
+    background:rgba(7,7,7,.85);  
+    backdrop-filter:blur(18px);  
+    border-bottom:1px solid rgba(255,255,255,.06);  
+}  
+  
+.logo{  
+    font-size:24px;  
+    font-weight:900;  
+    letter-spacing:5px;  
+}  
+  
+.logo span{  
+    color:var(--orange2);  
+}  
+  
+.nav-links{  
+    display:flex;  
+    gap:35px;  
+    align-items:center;  
+}  
+  
+.nav-links a{  
+    font-size:13px;  
+    font-weight:700;  
+    letter-spacing:1px;  
+    color:#ddd;  
+    transition:.3s;  
+}  
+  
+.nav-links a:hover{  
+    color:var(--orange2);  
+}  
+  
+.nav-button{  
+    border:1px solid var(--orange);  
+    padding:11px 20px;  
+    border-radius:30px;  
+}  
+
+/* HAMBURGER MENU BUTTON */
+.menu-toggle{
     display:none;
-
-    background:none;
-    border:0;
-
-    color:white;
-
-    font-size:25px;
-
-}
-
-
-/* ---------------- HERO ---------------- */
-
-.hero{
-
-    position:relative;
-
-    min-height:100vh;
-
-    display:flex;
-    align-items:center;
-
-    padding:120px 7% 80px;
-
-    overflow:hidden;
-
-    background:
-
-        radial-gradient(
-            circle at 80% 45%,
-            rgba(180,70,18,.19),
-            transparent 28%
-        ),
-
-        #080808;
-
-}
-
-.hero::after{
-
-    content:"POLARIS";
-
-    position:absolute;
-
-    right:-100px;
-    bottom:-100px;
-
-    font-size:25vw;
-
-    font-weight:900;
-
-    color:rgba(255,255,255,.018);
-
-    pointer-events:none;
-
-}
-
-.hero-content{
-
-    position:relative;
-
-    z-index:5;
-
-    width:52%;
-
-}
-
-.eyebrow{
-
-    color:var(--orange3);
-
-    font-size:11px;
-
-    font-weight:900;
-
-    letter-spacing:5px;
-
-    margin-bottom:27px;
-
-}
-
-.hero h1{
-
-    font-size:clamp(75px,10vw,155px);
-
-    line-height:.78;
-
-    letter-spacing:-9px;
-
-    font-weight:900;
-
-}
-
-.hero h1 span{
-    color:var(--orange3);
-}
-
-.hero-subtitle{
-
-    margin-top:35px;
-
-    max-width:580px;
-
-    color:#969696;
-
-    font-size:17px;
-
-    line-height:1.85;
-
-}
-
-.hero-actions{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:13px;
-
-    margin-top:38px;
-
-}
-
-.btn{
-
-    border:0;
-
-    padding:16px 27px;
-
-    border-radius:3px;
-
-    font-size:11px;
-
-    font-weight:900;
-
-    letter-spacing:1.4px;
-
-    transition:.35s;
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-}
-
-.btn-orange{
-
-    background:var(--orange2);
-
-    color:white;
-
-}
-
-.btn-orange:hover{
-
-    background:var(--orange3);
-
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 15px 45px rgba(198,91,32,.23);
-
-}
-
-.btn-outline{
-
-    background:transparent;
-
-    border:1px solid #444;
-
-    color:#fff;
-
-}
-
-.btn-outline:hover{
-    border-color:var(--orange3);
-}
-
-.hero-visual{
-
-    position:absolute;
-
-    right:1%;
-
-    top:12%;
-
-    width:52%;
-
-    height:80%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-}
-
-.hero-visual::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:500px;
-    height:500px;
-
-    background:var(--orange);
-
-    opacity:.14;
-
-    border-radius:50%;
-
-    filter:blur(120px);
-
-}
-
-.hero-visual img{
-
-    position:relative;
-
-    z-index:2;
-
-    width:min(85%,650px);
-
-    max-height:760px;
-
-    object-fit:contain;
-
-    filter:
-        drop-shadow(0 40px 50px rgba(0,0,0,.8));
-
-    animation:
-        floating 6s ease-in-out infinite;
-
-}
-
-@keyframes floating{
-
-    0%,100%{
-        transform:translateY(0) rotate(0deg);
-    }
-
-    50%{
-        transform:translateY(-15px) rotate(.5deg);
-    }
-
-}
-
-.scroll-indicator{
-
-    position:absolute;
-
-    left:7%;
-    bottom:35px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-    color:#555;
-
-    font-size:9px;
-
-    font-weight:800;
-
-    letter-spacing:3px;
-
-}
-
-.scroll-line{
-
-    width:55px;
-    height:1px;
-    background:#444;
-
-}
-
-
-/* ---------------- INTRO ---------------- */
-
-.intro{
-
-    background:var(--cream);
-
-    color:#080808;
-
-    padding:155px 8%;
-
-}
-
-.intro-label{
-
-    color:var(--orange);
-
-    font-size:11px;
-
-    font-weight:900;
-
-    letter-spacing:4px;
-
-}
-
-.intro h2{
-
-    max-width:1050px;
-
-    margin-top:27px;
-
-    font-size:clamp(48px,7vw,100px);
-
-    line-height:.91;
-
-    letter-spacing:-6px;
-
-    font-weight:900;
-
-}
-
-.intro h2 span{
-    color:var(--orange);
-}
-
-.intro-description{
-
-    max-width:700px;
-
-    color:#555;
-
-    margin-top:40px;
-
-    font-size:17px;
-
-    line-height:1.9;
-
-}
-
-
-/* ---------------- TECHNOLOGY ---------------- */
-
-.technology{
-
-    padding:150px 8%;
-
-    background:#090909;
-
-}
-
-.section-label{
-
-    color:var(--orange3);
-
-    font-size:11px;
-
-    font-weight:900;
-
-    letter-spacing:4px;
-
-}
-
-.section-title{
-
-    margin-top:22px;
-
-    font-size:clamp(50px,7vw,95px);
-
-    line-height:.87;
-
-    letter-spacing:-6px;
-
-    font-weight:900;
-
-}
-
-.section-title span{
-    color:var(--orange3);
-}
-
-.tech-intro{
-
-    max-width:700px;
-
-    margin-top:35px;
-
-    color:#777;
-
-    line-height:1.9;
-
-}
-
-
-/* ---------------- FEATURE LIST ---------------- */
-
-.feature-list{
-
-    margin-top:80px;
-
-    border-top:1px solid #252525;
-
-}
-
-.feature{
-
-    border-bottom:1px solid #252525;
-
-}
-
-.feature-button{
-
-    width:100%;
-
-    background:none;
-
-    border:0;
-
-    color:white;
-
-    display:grid;
-
-    grid-template-columns:80px 1fr 50px;
-
-    align-items:center;
-
-    gap:25px;
-
-    padding:35px 0;
-
-    text-align:left;
-
-    transition:.4s;
-
-}
-
-.feature-button:hover{
-
-    padding-left:12px;
-
-}
-
-.feature-number{
-
-    width:57px;
-    height:57px;
-
-    border:1px solid var(--orange);
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    color:var(--orange3);
-
-    font-size:12px;
-    font-weight:900;
-
-}
-
-.feature-name{
-
-    font-size:27px;
-
-    font-weight:900;
-
-    letter-spacing:-.5px;
-
-}
-
-.feature-short{
-
-    display:block;
-
-    color:#666;
-
-    font-size:12px;
-
-    font-weight:500;
-
-    margin-top:7px;
-
-}
-
-.feature-arrow{
-
-    color:var(--orange3);
-
-    font-size:25px;
-
-    transition:.4s;
-
-}
-
-.feature.open .feature-arrow{
-
-    transform:rotate(45deg);
-
-}
-
-.feature-description{
-
-    max-height:0;
-
-    overflow:hidden;
-
-    opacity:0;
-
-    transition:
-
-        max-height .6s ease,
-        opacity .4s ease;
-
-}
-
-.feature.open .feature-description{
-
-    max-height:350px;
-
-    opacity:1;
-
-}
-
-.feature-description-inner{
-
-    padding:
-
-        0
-
-        70px
-
-        40px
-
-        105px;
-
-    color:#929292;
-
-    max-width:1000px;
-
-    line-height:1.9;
-
-}
-
-
-/* ---------------- FULL SCREEN DETAIL ---------------- */
-
-.detail-screen{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:9500;
-
-    background:#080808;
-
-    display:none;
-
-    overflow-y:auto;
-
-    padding:120px 8% 80px;
-
-}
-
-.detail-screen.active{
-
-    display:block;
-
-    animation:detailIn .4s ease;
-
-}
-
-@keyframes detailIn{
-
-    from{
-        opacity:0;
-        transform:translateX(35px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateX(0);
-    }
-
-}
-
-.detail-close{
-
-    position:fixed;
-
-    top:25px;
-    right:30px;
-
-    width:48px;
-    height:48px;
-
-    border-radius:50%;
-
-    background:#111;
-
-    border:1px solid #444;
-
-    color:white;
-
-    font-size:25px;
-
-    z-index:9600;
-
-    transition:.3s;
-
-}
-
-.detail-close:hover{
-
-    border-color:var(--orange3);
-
-    transform:rotate(90deg);
-
-}
-
-.detail-wrapper{
-
-    max-width:1100px;
-
-    margin:auto;
-
-}
-
-.detail-number{
-
-    color:var(--orange3);
-
-    font-size:11px;
-
-    font-weight:900;
-
-    letter-spacing:5px;
-
-}
-
-.detail-title{
-
-    font-size:clamp(55px,9vw,120px);
-
-    line-height:.85;
-
-    letter-spacing:-7px;
-
-    font-weight:900;
-
-    margin:25px 0 40px;
-
-}
-
-.detail-title span{
-    color:var(--orange3);
-}
-
-.detail-description{
-
-    color:#9a9a9a;
-
-    font-size:17px;
-
-    line-height:1.95;
-
-    max-width:850px;
-
-}
-
-.detail-image{
-
-    width:100%;
-
-    max-height:550px;
-
-    object-fit:contain;
-
-    margin:55px 0;
-
-    filter:
-        drop-shadow(0 30px 40px rgba(0,0,0,.6));
-
-}
-
-.detail-extra{
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:15px;
-
-    margin:40px 0;
-
-}
-
-.extra-box{
-
-    background:#111;
-
-    border:1px solid #222;
-
-    padding:27px;
-
-}
-
-.extra-box strong{
-
-    display:block;
-
-    font-size:25px;
-
-    font-weight:900;
-
-    margin-bottom:8px;
-
-}
-
-.extra-box span{
-
-    color:#666;
-
-    font-size:11px;
-
-}
-
-
-/* ---------------- PRODUCT ---------------- */
-
-.product{
-
-    background:#111;
-
-    padding:150px 8%;
-
-}
-
-.product-grid{
-
-    display:grid;
-
-    grid-template-columns:1.05fr .95fr;
-
-    gap:90px;
-
-    align-items:center;
-
-}
-
-.product-image{
-
-    position:relative;
-
-}
-
-.product-image::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:400px;
-    height:400px;
-
-    background:var(--orange);
-
-    opacity:.1;
-
-    filter:blur(100px);
-
-    border-radius:50%;
-
-}
-
-.product-image img{
-
-    position:relative;
-
-    width:100%;
-
-    max-height:680px;
-
-    object-fit:contain;
-
-}
-
-.product-label{
-
-    color:var(--orange3);
-
-    font-size:11px;
-
-    font-weight:900;
-
-    letter-spacing:4px;
-
-}
-
-.product-title{
-
-    font-size:clamp(50px,7vw,92px);
-
-    line-height:.88;
-
-    letter-spacing:-6px;
-
-    font-weight:900;
-
-    margin:22px 0 32px;
-
-}
-
-.product-title span{
-    color:var(--orange3);
-}
-
-.product-description{
-
-    color:#858585;
-
-    line-height:1.9;
-
-    max-width:600px;
-
-}
-
-.spec-grid{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:12px;
-
-    margin-top:40px;
-
-}
-
-.spec{
-
-    padding:25px;
-
-    background:#171717;
-
-    border:1px solid #242424;
-
-    transition:.3s;
-
-}
-
-.spec:hover{
-
-    border-color:#493020;
-
-    transform:translateY(-3px);
-
-}
-
-.spec strong{
-
-    display:block;
-
-    font-size:27px;
-
-    font-weight:900;
-
-}
-
-.spec span{
-
-    display:block;
-
-    margin-top:7px;
-
-    color:#666;
-
-    font-size:10px;
-
-    font-weight:800;
-
-    letter-spacing:1px;
-
-}
-
-
-/* ---------------- GALLERY ---------------- */
-
-.gallery{
-
-    padding:150px 8%;
-
-    background:#070707;
-
-}
-
-.gallery-header{
-
-    display:flex;
-
-    align-items:end;
-
-    justify-content:space-between;
-
-    gap:30px;
-
-}
-
-.gallery-note{
-
-    max-width:400px;
-
-    color:#666;
-
-    font-size:13px;
-
-    line-height:1.8;
-
-}
-
-.gallery-grid{
-
-    display:grid;
-
-    grid-template-columns:1.5fr .8fr;
-
-    grid-template-rows:280px 280px;
-
-    gap:15px;
-
-    margin-top:65px;
-
-}
-
-.gallery-item{
-
-    position:relative;
-
-    overflow:hidden;
-
-    background:#111;
-
-}
-
-.gallery-item:first-child{
-
-    grid-row:span 2;
-
-}
-
-.gallery-item img{
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    transition:
-        transform .8s ease,
-        filter .8s ease;
-
-}
-
-.gallery-item:hover img{
-
-    transform:scale(1.06);
-
-    filter:brightness(.72);
-
-}
-
-.gallery-caption{
-
-    position:absolute;
-
-    left:25px;
-    bottom:22px;
-
-    z-index:2;
-
-    font-size:11px;
-
-    font-weight:900;
-
-    letter-spacing:2px;
-
-}
-
-
-/* ---------------- MISSION ---------------- */
-
-.mission{
-
-    padding:160px 8%;
-
-    background:var(--cream);
-
-    color:#080808;
-
-}
-
-.mission-label{
-
-    color:var(--orange);
-
-    font-size:11px;
-
-    font-weight:900;
-
-    letter-spacing:4px;
-
-}
-
-.mission-title{
-
-    max-width:1100px;
-
-    margin-top:25px;
-
-    font-size:clamp(55px,8vw,115px);
-
-    line-height:.86;
-
-    letter-spacing:-7px;
-
-    font-weight:900;
-
-}
-
-.mission-title span{
-    color:var(--orange);
-}
-
-.mission-text{
-
-    max-width:760px;
-
-    margin-top:50px;
-
-    color:#555;
-
-    font-size:17px;
-
-    line-height:1.9;
-
-}
-
-
-/* ---------------- HOW TO USE ---------------- */
-
-.how{
-
-    padding:150px 8%;
-
-    background:#090909;
-
-}
-
-.steps{
-
-    margin-top:75px;
-
-    border-top:1px solid #252525;
-
-}
-
-.step{
-
-    display:grid;
-
-    grid-template-columns:80px 1fr;
-
-    gap:30px;
-
-    padding:42px 0;
-
-    border-bottom:1px solid #252525;
-
-}
-
-.step-number{
-
-    width:57px;
-    height:57px;
-
-    border:1px solid var(--orange);
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    color:var(--orange3);
-
-    font-weight:900;
-
-}
-
-.step h3{
-
-    font-size:29px;
-
-    font-weight:900;
-
-    margin-bottom:10px;
-
-}
-
-.step p{
-
-    max-width:750px;
-
-    color:#808080;
-
-    line-height:1.9;
-
-}
-
-
-/* ---------------- ORDER ---------------- */
-
-.order{
-
-    position:relative;
-
-    overflow:hidden;
-
-    padding:160px 8%;
-
-    background:
-
-        linear-gradient(
-            rgba(5,5,5,.87),
-            rgba(5,5,5,.95)
-        ),
-
-        url("shkopi.jpg")
-
-        center/cover fixed;
-
-}
-
-.order-content{
-
-    position:relative;
-
-    z-index:2;
-
-    max-width:850px;
-
-}
-
-.order-price{
-
-    font-size:60px;
-
-    font-weight:900;
-
-    color:var(--orange3);
-
-    margin:25px 0;
-
-}
-
-.order-description{
-
-    color:#999;
-
-    max-width:650px;
-
-    line-height:1.9;
-
-    margin-bottom:35px;
-
-}
-
-.order-details{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:12px;
-
-    margin-bottom:35px;
-
-}
-
-.order-tag{
-
-    border:1px solid #383838;
-
-    padding:11px 16px;
-
-    color:#aaa;
-
-    font-size:10px;
-
-    font-weight:800;
-
-}
-
-
-/* ---------------- CONTACT ---------------- */
-
-.contact{
-
-    padding:130px 8%;
-
-    background:#111;
-
-}
-
-.contact-grid{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:80px;
-
-}
-
-.contact-title{
-
-    font-size:clamp(50px,7vw,90px);
-
-    line-height:.88;
-
-    letter-spacing:-6px;
-
-    font-weight:900;
-
-    margin-top:20px;
-
-}
-
-.contact-title span{
-    color:var(--orange3);
-}
-
-.contact-description{
-
-    margin-top:30px;
-
-    max-width:550px;
-
-    color:#888;
-
-    line-height:1.9;
-
-}
-
-.contact-info{
-
-    display:flex;
-
     flex-direction:column;
-
-    gap:15px;
-
+    cursor:pointer;
+    gap:6px;
+    z-index:6000;
 }
 
-.contact-box{
-
-    padding:27px;
-
-    border:1px solid #282828;
-
-    background:#151515;
-
-}
-
-.contact-box small{
-
-    color:#666;
-
-    font-size:9px;
-
-    font-weight:900;
-
-    letter-spacing:2px;
-
-}
-
-.contact-box a{
-
-    display:block;
-
-    margin-top:8px;
-
-    font-size:17px;
-
-    font-weight:800;
-
-}
-
-.contact-box a:hover{
-    color:var(--orange3);
-}
-
-
-/* ---------------- FEEDBACK ---------------- */
-
-.feedback{
-
-    padding:140px 8%;
-
-    background:#080808;
-
-}
-
-.feedback-inner{
-
-    max-width:850px;
-
-    margin:auto;
-
-    text-align:center;
-
-}
-
-.feedback-inner h2{
-
-    font-size:clamp(45px,7vw,80px);
-
-    line-height:.9;
-
-    letter-spacing:-5px;
-
-    font-weight:900;
-
-}
-
-.feedback-inner h2 span{
-    color:var(--orange3);
-}
-
-.feedback-inner p{
-
-    color:#777;
-
-    line-height:1.9;
-
-    margin:25px auto 40px;
-
-    max-width:600px;
-
-}
-
-.feedback-form{
-
-    text-align:left;
-
-    display:grid;
-
-    gap:13px;
-
-}
-
-.feedback-form input,
-.feedback-form textarea{
-
-    width:100%;
-
-    background:#111;
-
-    border:1px solid #292929;
-
-    color:#fff;
-
-    padding:17px;
-
-    outline:none;
-
-    border-radius:2px;
-
-    font-family:inherit;
-
-}
-
-.feedback-form textarea{
-
-    min-height:150px;
-
-    resize:vertical;
-
-}
-
-.feedback-form input:focus,
-.feedback-form textarea:focus{
-
-    border-color:var(--orange);
-
-}
-
-.feedback-status{
-
-    color:#777;
-
-    font-size:12px;
-
-    margin-top:15px;
-
-}
-
-
-/* ---------------- FOOTER ---------------- */
-
-footer{
-
-    padding:50px 8%;
-
-    background:#050505;
-
-    border-top:1px solid #1d1d1d;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    flex-wrap:wrap;
-
-    gap:20px;
-
-}
-
-.footer-logo{
-
-    font-size:20px;
-
-    font-weight:900;
-
-    letter-spacing:5px;
-
-}
-
-.footer-logo span{
-    color:var(--orange3);
-}
-
-.footer-right{
-
-    color:#555;
-
-    font-size:10px;
-
-    letter-spacing:1px;
-
-    text-align:right;
-
-}
-
-
-/* ---------------- BACK TO TOP ---------------- */
-
-.top-button{
-
-    position:fixed;
-
-    right:25px;
-    bottom:25px;
-
-    width:45px;
-    height:45px;
-
-    background:#151515;
-
-    border:1px solid #333;
-
-    color:white;
-
-    z-index:7000;
-
-    border-radius:50%;
-
-    opacity:0;
-    visibility:hidden;
-
+.menu-toggle span{
+    width:30px;
+    height:3px;
+    background:white;
     transition:.3s;
+}
+  
+/* HERO */  
+.hero{  
+    min-height:100vh;  
+    position:relative;  
+    display:flex;  
+    align-items:center;  
+    overflow:hidden;  
+    padding:120px 7% 70px;  
+}  
+  
+.hero::before{  
+    content:"";  
+    position:absolute;  
+    width:600px;  
+    height:600px;  
+    background:rgba(184,74,19,.16);  
+    filter:blur(120px);  
+    border-radius:50%;  
+    right:-150px;  
+    top:100px;  
+}  
+  
+.hero-content{  
+    width:50%;  
+    position:relative;  
+    z-index:2;  
+}  
+  
+.small-title{  
+    color:var(--orange2);  
+    font-size:13px;  
+    font-weight:800;  
+    letter-spacing:4px;  
+    margin-bottom:25px;  
+}  
+  
+.hero h1{  
+    font-size:clamp(65px,9vw,145px);  
+    line-height:.86;  
+    font-weight:900;  
+    letter-spacing:-7px;  
+}  
+  
+.hero h1 span{  
+    color:var(--orange2);  
+}  
+  
+.hero-description{  
+    max-width:540px;  
+    color:#aaa;  
+    font-size:17px;  
+    line-height:1.8;  
+    margin:35px 0;  
+}  
+  
+.hero-buttons{  
+    display:flex;  
+    gap:15px;  
+    flex-wrap:wrap;  
+}  
+  
+.primary-btn,  
+.secondary-btn{  
+    padding:17px 30px;  
+    border-radius:4px;  
+    font-weight:800;  
+    font-size:13px;  
+    letter-spacing:1px;  
+    transition:.3s;  
+    cursor: pointer;
+}  
+  
+.primary-btn{  
+    background:var(--orange2);  
+    color:white;  
+    border: none;
+}  
+  
+.primary-btn:hover{  
+    transform:translateY(-4px);  
+    box-shadow:0 15px 40px rgba(224,106,37,.25);  
+}  
+  
+.secondary-btn{  
+    border:1px solid #444;  
+    color:#eee;  
+    background: transparent;
+}  
+  
+.secondary-btn:hover{  
+    border-color:var(--orange2);  
+}  
+  
+/* HERO IMAGE */  
+.hero-image{  
+    position:absolute;  
+    right:4%;  
+    width:50%;  
+    height:80%;  
+    display:flex;  
+    align-items:center;  
+    justify-content:center;  
+}  
+  
+.hero-image::after{  
+    content:"";  
+    position:absolute;  
+    width:70%;  
+    height:70%;  
+    background:var(--orange);  
+    filter:blur(130px);  
+    opacity:.18;  
+}  
+  
+.hero-image img{  
+    position:relative;  
+    z-index:2;  
+    width:min(75%,620px);  
+    max-height:750px;  
+    object-fit:contain;  
+    filter:drop-shadow(0 30px 50px rgba(0,0,0,.8));  
+    animation:float 5s ease-in-out infinite;  
+}  
+  
+@keyframes float{  
+    0%,100%{transform:translateY(0)}  
+    50%{transform:translateY(-15px)}  
+}  
+  
+.scroll{  
+    position:absolute;  
+    bottom:35px;  
+    left:7%;  
+    color:#666;  
+    font-size:11px;  
+    letter-spacing:3px;  
+}  
+  
+/* INTRO */  
+.intro{  
+    padding:140px 8%;  
+    background:var(--light);  
+    color:#0b0b0b;  
+}  
+  
+.intro-label{  
+    color:var(--orange);  
+    font-weight:900;  
+    letter-spacing:3px;  
+    font-size:12px;  
+}  
+  
+.intro h2{  
+    font-size:clamp(40px,6vw,82px);  
+    line-height:1;  
+    max-width:1000px;  
+    margin-top:25px;  
+    font-weight:900;  
+    letter-spacing:-4px;  
+}  
+  
+.intro h2 span{  
+    color:var(--orange);  
+}  
+  
+/* FEATURES */  
+.features{  
+    padding:130px 8%;  
+    background:#0b0b0b;  
+}  
+  
+.section-head{  
+    margin-bottom:70px;  
+}  
+  
+.section-head small{  
+    color:var(--orange2);  
+    font-weight:800;  
+    letter-spacing:3px;  
+}  
+  
+.section-head h2{  
+    font-size:clamp(42px,6vw,80px);  
+    font-weight:900;  
+    margin-top:15px;  
+    letter-spacing:-3px;  
+}  
+  
+.feature{  
+    display:grid;  
+    grid-template-columns:100px 1fr;  
+    gap:30px;  
+    padding:45px 0;  
+    border-top:1px solid #242424;  
+    transition:.4s;  
+}  
+  
+.feature:hover{  
+    padding-left:20px;  
+    border-color:var(--orange);  
+}  
+  
+.feature-number{  
+    font-size:18px;  
+    color:var(--orange2);  
+    font-weight:900;  
+}  
+  
+.feature h3{  
+    font-size:32px;  
+    margin-bottom:12px;  
+    font-weight:900;  
+}  
+  
+.feature p{  
+    max-width:800px;  
+    color:#888;  
+    line-height:1.8;  
+}  
+  
+/* PRODUCT */  
+.product{  
+    min-height:90vh;  
+    padding:130px 8%;  
+    background:radial-gradient(circle at 80% 50%,rgba(184,74,19,.15),transparent 35%), #111;  
+    display:flex;  
+    align-items:center;  
+}  
+  
+.product-inner{  
+    width:100%;  
+    display:grid;  
+    grid-template-columns:1fr 1fr;  
+    gap:80px;  
+    align-items:center;  
+}  
+  
+.product-image{  
+    min-height:550px;  
+    display:flex;  
+    align-items:center;  
+    justify-content:center;  
+}  
+  
+.product-image img{  
+    width:85%;  
+    max-width:600px;  
+    max-height:650px;  
+    object-fit:contain;  
+    filter:drop-shadow(0 35px 50px rgba(0,0,0,.8));  
+}  
+  
+.product-text small{  
+    color:var(--orange2);  
+    letter-spacing:3px;  
+    font-weight:800;  
+}  
+  
+.product-text h2{  
+    font-size:clamp(50px,6vw,90px);  
+    line-height:.9;  
+    font-weight:900;  
+    margin:20px 0 30px;  
+    letter-spacing:-4px;  
+}  
+  
+.product-text p{  
+    color:#999;  
+    line-height:1.8;  
+    max-width:600px;  
+}  
+  
+.specs{  
+    display:grid;  
+    grid-template-columns:1fr 1fr;  
+    gap:20px;  
+    margin-top:40px;  
+}  
+  
+.spec{  
+    padding:22px;  
+    background:#171717;  
+    border:1px solid #242424;  
+}  
+  
+.spec strong{  
+    display:block;  
+    font-size:23px;  
+    color:white;  
+}  
+  
+.spec span{  
+    color:#777;  
+    font-size:12px;  
+}  
+  
+/* MISSION */  
+.mission{  
+    padding:150px 8%;  
+    background:#f3eee8;  
+    color:#080808;  
+}  
+  
+.mission h2{  
+    max-width:1000px;  
+    font-size:clamp(45px,7vw,100px);  
+    line-height:.95;  
+    font-weight:900;  
+    letter-spacing:-5px;  
+}  
+  
+.mission h2 span{  
+    color:var(--orange);  
+}  
+  
+.mission p{  
+    margin-top:45px;  
+    max-width:750px;  
+    font-size:18px;  
+    line-height:1.9;  
+    color:#555;  
+}  
+  
+/* HOW */  
+.how{  
+    padding:140px 8%;  
+    background:#080808;  
+}  
+  
+.steps{  
+    margin-top:60px;  
+}  
+  
+.step{  
+    display:flex;  
+    align-items:flex-start;  
+    gap:40px;  
+    padding:40px 0;  
+    border-top:1px solid #222;  
+}  
+  
+.step-number{  
+    width:60px;  
+    height:60px;  
+    border:1px solid var(--orange);  
+    border-radius:50%;  
+    display:flex;  
+    align-items:center;  
+    justify-content:center;  
+    color:var(--orange2);  
+    font-weight:900;  
+    flex-shrink:0;  
+}  
+  
+.step h3{  
+    font-size:27px;  
+    margin-bottom:8px;  
+}  
+  
+.step p{  
+    color:#888;  
+    line-height:1.7;  
+}  
 
+/* PUBLIC CHAT SECTION */
+.community-chat{
+    padding:130px 8%;
+    background:#0e0e0e;
+    border-top: 1px solid #222;
 }
 
-.top-button.show{
-
-    opacity:1;
-    visibility:visible;
-
+.chat-container{
+    max-width:800px;
+    margin: 40px auto 0;
+    background:#141414;
+    border: 1px solid #262626;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
 }
 
-
-/* ---------------- MOBILE ---------------- */
-
-@media(max-width:900px){
-
-    .nav-menu{
-        display:none;
-    }
-
-    .mobile-menu{
-        display:block;
-    }
-
-    .hero{
-
-        min-height:auto;
-
-        display:block;
-
-        padding-top:140px;
-
-    }
-
-    .hero-content{
-
-        width:100%;
-
-    }
-
-    .hero h1{
-
-        font-size:78px;
-
-        letter-spacing:-6px;
-
-    }
-
-    .hero-visual{
-
-        position:relative;
-
-        top:auto;
-        right:auto;
-
-        width:100%;
-        height:480px;
-
-        margin-top:20px;
-
-    }
-
-    .hero-visual img{
-        width:92%;
-    }
-
-    .scroll-indicator{
-        display:none;
-    }
-
-    .product-grid,
-    .contact-grid{
-
-        grid-template-columns:1fr;
-
-        gap:55px;
-
-    }
-
-    .gallery-grid{
-
-        grid-template-columns:1fr;
-
-        grid-template-rows:400px 250px 250px;
-
-    }
-
-    .gallery-item:first-child{
-
-        grid-row:auto;
-
-    }
-
-    .detail-extra{
-
-        grid-template-columns:1fr;
-
-    }
-
+.chat-box{
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-
-@media(max-width:600px){
-
-    .nav{
-
-        height:68px;
-
-        padding:0 5%;
-
-    }
-
-    .logo{
-        font-size:19px;
-        letter-spacing:5px;
-    }
-
-    .hero{
-
-        padding-left:6%;
-        padding-right:6%;
-
-    }
-
-    .hero h1{
-
-        font-size:67px;
-
-    }
-
-    .hero-subtitle{
-        font-size:15px;
-    }
-
-    .hero-visual{
-        height:390px;
-    }
-
-    .intro,
-    .technology,
-    .product,
-    .gallery,
-    .mission,
-    .how,
-    .order,
-    .contact,
-    .feedback{
-
-        padding:95px 6%;
-
-    }
-
-    .section-title,
-    .mission-title{
-
-        letter-spacing:-4px;
-
-    }
-
-    .feature-button{
-
-        grid-template-columns:58px 1fr 25px;
-
-        gap:14px;
-
-    }
-
-    .feature-name{
-        font-size:21px;
-    }
-
-    .feature-short{
-        font-size:10px;
-    }
-
-    .feature-description-inner{
-
-        padding-left:72px;
-        padding-right:0;
-
-    }
-
-    .spec-grid{
-
-        grid-template-columns:1fr 1fr;
-
-    }
-
-    .spec{
-        padding:18px;
-    }
-
-    .spec strong{
-        font-size:22px;
-    }
-
-    .detail-screen{
-
-        padding:
-            100px
-            6%
-            60px;
-
-    }
-
-    .detail-title{
-
-        font-size:65px;
-
-        letter-spacing:-5px;
-
-    }
-
-    .detail-description{
-
-        font-size:15px;
-
-    }
-
-    .order-price{
-        font-size:48px;
-    }
-
-    footer{
-
-        flex-direction:column;
-
-        text-align:center;
-
-    }
-
-    .footer-right{
-        text-align:center;
-    }
-
+.chat-message{
+    background: #1c1c1c;
+    padding: 12px 16px;
+    border-radius: 6px;
+    max-width: 80%;
+    border-left: 3px solid var(--orange2);
 }
 
-
-/* ---------------- REVEAL ANIMATION ---------------- */
-
-.reveal{
-
-    opacity:0;
-
-    transform:translateY(35px);
-
-    transition:
-        opacity .8s ease,
-        transform .8s ease;
-
+.chat-message .user-name{
+    font-size: 11px;
+    color: var(--orange2);
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
 }
 
-.reveal.visible{
-
-    opacity:1;
-
-    transform:translateY(0);
-
+.chat-message .msg-text{
+    font-size: 14px;
+    color: #ddd;
+    line-height: 1.5;
 }
 
-</style>
+.chat-input-area{
+    display: flex;
+    padding: 15px;
+    background: #101010;
+    border-top: 1px solid #262626;
+    gap: 10px;
+}
 
-</head>
+.chat-input-area input{
+    flex: 1;
+    background: #1c1c1c;
+    border: 1px solid #333;
+    padding: 12px 15px;
+    border-radius: 4px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+}
 
+.chat-input-area input:focus{
+    border-color: var(--orange2);
+}
 
-<body>
+.chat-input-area button{
+    padding: 0 25px;
+    background: var(--orange2);
+    color: white;
+    border: none;
+    font-weight: 800;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .3s;
+}
 
+.chat-input-area button:hover{
+    opacity: .85;
+}
+  
+/* ORDER */  
+.order{  
+    padding:140px 8%;  
+    background:linear-gradient(rgba(0,0,0,.86),rgba(0,0,0,.95)), url('polaris.jpg') center/cover;  
+}  
+  
+.order-box{  
+    max-width:850px;  
+}  
+  
+.order small{  
+    color:var(--orange2);  
+    font-weight:900;  
+    letter-spacing:3px;  
+}  
+  
+.order h2{  
+    font-size:clamp(50px,7vw,100px);  
+    font-weight:900;  
+    line-height:.9;  
+    letter-spacing:-5px;  
+    margin:20px 0 30px;  
+}  
+  
+.price{  
+    font-size:45px;  
+    font-weight:900;  
+    margin-bottom:15px;  
+}  
+  
+.price span{  
+    color:var(--orange2);  
+}  
+  
+.order p{  
+    color:#999;  
+    line-height:1.8;  
+    max-width:650px;  
+    margin-bottom:35px;  
+}  
+  
+/* CONTACT */  
+.contact{  
+    padding:130px 8%;  
+    background:#111;  
+    text-align:center;  
+}  
+  
+.contact h2{  
+    font-size:clamp(45px,7vw,90px);  
+    font-weight:900;  
+    letter-spacing:-4px;  
+}  
+  
+.contact p{  
+    color:#888;  
+    max-width:600px;  
+    margin:25px auto 40px;  
+}  
+  
+.contact-buttons{  
+    display:flex;  
+    justify-content:center;  
+    gap:15px;  
+    flex-wrap:wrap;  
+}  
+  
+/* FOOTER */  
+footer{  
+    padding:45px 8%;  
+    background:#050505;  
+    border-top:1px solid #181818;  
+    display:flex;  
+    justify-content:space-between;  
+    gap:20px;  
+    flex-wrap:wrap;  
+}  
+  
+footer strong{  
+    letter-spacing:4px;  
+}  
+  
+footer span{  
+    color:#666;  
+    font-size:13px;  
+}  
+  
+/* MOBILE */  
+@media(max-width:850px){  
+    nav{  
+        padding:0 5%;  
+    }  
+  
+    .nav-links{  
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: rgba(7,7,7,.98);
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 0;
+        gap: 25px;
+        border-bottom: 1px solid #222;
+        transform: translateY(-150%);
+        transition: transform .4s ease;
+    }  
 
-<!-- ======================================================
-     LOADER
-     ====================================================== -->
+    .nav-links.active{
+        transform: translateY(0);
+    }
 
-<div class="loader" id="loader">
+    .menu-toggle{
+        display: flex;
+    }
+  
+    .hero{  
+        min-height:100vh;  
+        padding:120px 7% 80px;  
+        display:block;  
+    }  
+  
+    .hero-content{  
+        width:100%;  
+        padding-top:30px;  
+    }  
+  
+    .hero h1{  
+        font-size:75px;  
+        letter-spacing:-5px;  
+    }  
+  
+    .hero-image{  
+        position:relative;  
+        right:auto;  
+        width:100%;  
+        height:430px;  
+        margin-top:20px;  
+    }  
+  
+    .hero-image img{  
+        width:90%;  
+        max-height:420px;  
+    }  
+  
+    .intro,  
+    .features,  
+    .product,  
+    .mission,  
+    .how,  
+    .community-chat,
+    .order,  
+    .contact{  
+        padding:90px 7%;  
+    }  
+  
+    .product-inner{  
+        grid-template-columns:1fr;  
+        gap:40px;  
+    }  
+  
+    .product-image{  
+        min-height:350px;  
+    }  
+  
+    .feature{  
+        grid-template-columns:45px 1fr;  
+        gap:15px;  
+    }  
+  
+    .feature h3{  
+        font-size:25px;  
+    }  
+  
+    .step{  
+        gap:20px;  
+    }  
+  
+    .mission h2,  
+    .order h2{  
+        letter-spacing:-3px;  
+    }  
+  
+    footer{  
+        text-align:center;  
+        justify-content:center;  
+    }  
+}  
+</style>  
+</head>  
+<body>  
 
-    <div class="loader-inner">
+<div class="loader">  
+    <h1>POLAR<span>I</span>S</h1>  
+</div>  
 
-        <div class="loader-logo">
-            POLAR<span>I</span>S
+<!-- NAVIGATION -->  
+<nav>  
+    <a href="#home" class="logo">  
+        POLAR<span>I</span>S  
+    </a>  
+
+    <div class="nav-links" id="navLinks">  
+        <a href="#technology" onclick="closeMenu()">TEKNOLOGJIA</a>  
+        <a href="#product" onclick="closeMenu()">POLARIS</a>  
+        <a href="#chat" onclick="closeMenu()">KOMUNITETI (CHAT)</a>  
+        <a href="#mission" onclick="closeMenu()">MISIONI</a>  
+        <a href="#order" class="nav-button" onclick="closeMenu()">POROSIT</a>  
+    </div>
+
+    <div class="menu-toggle" id="mobileMenuBtn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</nav>  
+
+<!-- HERO -->  
+<section class="hero" id="home">  
+    <div class="hero-content">  
+        <div class="small-title">  
+            SMART MOBILITY • ALBANIA  
+        </div>  
+        <h1>  
+            POLAR<span>I</span>S  
+        </h1>  
+        <p class="hero-description">  
+            Një shkop inteligjent i krijuar për të sjellë  
+            më shumë siguri, pavarësi dhe teknologji  
+            në lëvizjen e përditshme.  
+        </p>  
+        <div class="hero-buttons">  
+            <a href="#technology" class="primary-btn">MËSO MË SHUMË</a>  
+            <a href="#order" class="secondary-btn">POROSIT POLARIS</a>  
+        </div>  
+    </div>  
+
+    <div class="hero-image">  
+        <img src="polaris.jpg" alt="POLARIS Smart Cane">  
+    </div>  
+
+    <div class="scroll">  
+        SCROLL ↓  
+    </div>
+</section>  
+
+<!-- INTRO -->  
+<section class="intro">  
+    <div class="intro-label">  
+        JO THJESHT NJË SHKOP  
+    </div>  
+    <h2>  
+        Teknologji që të jep  
+        <span>më shumë kontroll.</span>  
+    </h2>
+</section>  
+
+<!-- TECHNOLOGY -->  
+<section class="features" id="technology">  
+    <div class="section-head">  
+        <small>TEKNOLOGJIA</small>  
+        <h2>  
+            E NDËRTUAR PËR<br>  
+            BOTËN REALE.  
+        </h2>  
+    </div>  
+
+    <div class="feature">  
+        <div class="feature-number">01</div>  
+        <div>  
+            <h3>Sensorë inteligjentë</h3>  
+            <p>POLARIS përdor sensorë ultrasonikë për të identifikuar pengesat përpara përdoruesit dhe për të matur distancën në kohë reale.</p>  
+        </div>  
+    </div>  
+
+    <div class="feature">  
+        <div class="feature-number">02</div>  
+        <div>  
+            <h3>Reagim me vibrim</h3>  
+            <p>Kur një pengesë afrohet, sistemi jep feedback përmes vibrimit. Intensiteti ndryshon sipas distancës së objektit.</p>  
+        </div>  
+    </div>  
+
+    <div class="feature">  
+        <div class="feature-number">03</div>  
+        <div>  
+            <h3>Projektuar për përdorim të thjeshtë</h3>  
+            <p>POLARIS është konceptuar me një ndërfaqe intuitive, në mënyrë që përdoruesi të përqendrohet te lëvizja dhe jo te pajisja.</p>  
+        </div>  
+    </div>  
+
+    <div class="feature">  
+        <div class="feature-number">04</div>  
+        <div>  
+            <h3>Teknologji portative</h3>  
+            <p>Elektronika është integruar në një pajisje kompakte dhe të përshtatshme për përdorim të përditshëm.</p>  
+        </div>  
+    </div>
+</section>  
+
+<!-- PRODUCT -->  
+<section class="product" id="product">  
+    <div class="product-inner">  
+        <div class="product-image">  
+            <img src="polaris.jpg" alt="POLARIS">  
+        </div>  
+        <div class="product-text">  
+            <small>POLARIS / 01</small>  
+            <h2>  
+                SMART.<br>  
+                SIMPLE.<br>  
+                POLARIS.  
+            </h2>  
+            <p>  
+                Një kombinim i dizajnit modern dhe elektronikës së integruar. POLARIS është krijuar për të ndihmuar përdoruesin të perceptojë më mirë hapësirën përreth.  
+            </p>  
+            <div class="specs">  
+                <div class="spec">  
+                    <strong>360°</strong>  
+                    <span>QASJE E MENÇUR</span>  
+                </div>  
+                <div class="spec">  
+                    <strong>USB</strong>  
+                    <span>KARIKIM</span>  
+                </div>  
+                <div class="spec">  
+                    <strong>REAL</strong>  
+                    <span>FEEDBACK</span>  
+                </div>  
+                <div class="spec">  
+                    <strong>SMART</strong>  
+                    <span>TECHNOLOGY</span>  
+                </div>  
+            </div>  
+        </div>  
+    </div>
+</section>  
+
+<!-- PUBLIC CHAT -->
+<section class="community-chat" id="chat">
+    <div class="section-head">
+        <small>KOMUNITETI</small>
+        <h2>CHAT PUBLIK</h2>
+    </div>
+    <p style="color: #888; max-width: 600px; margin-bottom: 20px;">
+        Bisedoni me klientët e tjerë, ndani eksperiencat tuaja me pajisjen POLARIS ose bëni pyetje në komunitet.
+    </p>
+
+    <div class="chat-container">
+        <div class="chat-box" id="chatBox">
+            <div class="chat-message">
+                <div class="user-name">Ledjan (Admin)</div>
+                <div class="msg-text">Përshëndetje! Mirësevini në chat-in zyrtar të komunitetit POLARIS. Si mund t'ju ndihmojmë?</div>
+            </div>
         </div>
-
-        <div class="loader-line"></div>
-
-    </div>
-
-</div>
-
-
-<!-- ======================================================
-     NAVIGATION
-     ====================================================== -->
-
-<nav class="nav" id="navbar">
-
-    <a href="#home" class="logo">
-        POLAR<span>I</span>S
-    </a>
-
-    <div class="nav-menu">
-
-        <a href="#technology">
-            TEKNOLOGJIA
-        </a>
-
-        <a href="#product">
-            POLARIS
-        </a>
-
-        <a href="#mission">
-            MISIONI
-        </a>
-
-        <a href="#gallery">
-            GALERIA
-        </a>
-
-        <a href="#contact">
-            KONTAKT
-        </a>
-
-        <a href="#order" class="nav-cta">
-            POROSIT
-        </a>
-
-    </div>
-
-    <button
-        class="mobile-menu"
-        onclick="mobileScroll()">
-        ☰
-    </button>
-
-</nav>
-
-
-<!-- ======================================================
-     HERO
-     ====================================================== -->
-
-<section class="hero" id="home">
-
-    <div class="hero-content reveal">
-
-        <div class="eyebrow">
-            SMART MOBILITY • ALBANIA
+        <div class="chat-input-area">
+            <input type="text" id="chatUser" placeholder="Emri juaj..." style="max-width: 150px;">
+            <input type="text" id="chatMessageInput" placeholder="Shkruaj një mesazh...">
+            <button onclick="sendMessage()">DËRGO</button>
         </div>
-
-        <h1>
-            POLAR<span>I</span>S
-        </h1>
-
-        <p class="hero-subtitle">
-
-            Teknologji inteligjente e integruar në një
-            shkop modern, i konceptuar për të sjellë
-            më shumë informacion, kontroll dhe siguri
-            gjatë lëvizjes.
-
-        </p>
-
-        <div class="hero-actions">
-
-            <a
-                href="#technology"
-                class="btn btn-orange">
-
-                MËSO MË SHUMË
-
-            </a>
-
-            <a
-                href="#order"
-                class="btn btn-outline">
-
-                POROSIT POLARIS
-
-            </a>
-
-        </div>
-
     </div>
-
-
-    <div class="hero-visual reveal">
-
-        <img
-            src="polaris.jpg"
-            alt="POLARIS Smart Cane">
-
-    </div>
-
-
-    <div class="scroll-indicator">
-
-        <span>SCROLL TO EXPLORE</span>
-
-        <div class="scroll-line"></div>
-
-    </div>
-
 </section>
 
+<!-- MISSION -->  
+<section class="mission" id="mission">  
+    <div class="intro-label">  
+        MISIONI YNË  
+    </div>  
+    <h2>  
+        TË BËJMË  
+        LËVIZJEN  
+        <span>MË TË SIGURT.</span>  
+    </h2>  
+    <p>  
+        POLARIS është një projekt i fokusuar te inovacioni social dhe teknologjia e aksesueshme. Qëllimi është të sjellim një zgjidhje moderne për personat me dëmtime të shikimit dhe të kontribuojmë në një lëvizje më të pavarur.  
+    </p>
+</section>  
 
-<!-- ======================================================
-     INTRO
-     ====================================================== -->
-
-<section class="intro">
-
-    <div class="reveal">
-
-        <div class="intro-label">
-            JO THJESHT NJË SHKOP
-        </div>
-
-        <h2>
-            Një pajisje që
-            <span>percepton.</span>
-            Një teknologji që
-            <span>reagon.</span>
-        </h2>
-
-        <p class="intro-description">
-
-            POLARIS bashkon dizajnin modern me elektronikën
-            e integruar për të krijuar një mënyrë më intuitive
-            të ndërveprimit me hapësirën përreth.
-
-        </p>
-
+<!-- HOW IT WORKS -->  
+<section class="how">  
+    <div class="section-head">  
+        <small>SI FUNKSIONON</small>  
+        <h2>  
+            TRE HAPA.<br>  
+            NJË SISTEM.  
+        </h2>  
+    </div>  
+    <div class="steps">  
+        <div class="step">  
+            <div class="step-number">01</div>  
+            <div>  
+                <h3>NDEZ</h3>  
+                <p>Aktivizo POLARIS me butonin Power. Sistemi nis automatikisht monitorimin.</p>  
+            </div>  
+        </div>  
+        <div class="step">  
+            <div class="step-number">02</div>  
+            <div>  
+                <h3>EC</h3>  
+                <p>Mbaje shkopin në pozicion natyral dhe sensori do të monitorojë hapësirën përpara.</p>  
+            </div>  
+        </div>  
+        <div class="step">  
+            <div class="step-number">03</div>  
+            <div>  
+                <h3>NDJEJ</h3>  
+                <p>Vibrimet të japin informacion për afrimin e pengesave.</p>  
+            </div>  
+        </div>  
     </div>
+</section>  
 
-</section>
-
-
-<!-- ======================================================
-     TECHNOLOGY
-     ====================================================== -->
-
-<section class="technology" id="technology">
-
-    <div class="reveal">
-
-        <div class="section-label">
-            EXPLORE POLARIS
-        </div>
-
-        <h2 class="section-title">
-            NJIH<br>
-            <span>TEKNOLOGJINË.</span>
-        </h2>
-
-        <p class="tech-intro">
-
-            Çdo funksion i POLARIS është menduar që
-            përdoruesi të marrë informacion në mënyrë
-            sa më të drejtpërdrejtë dhe intuitive.
-
-        </p>
-
+<!-- ORDER -->  
+<section class="order" id="order">  
+    <div class="order-box">  
+        <small>POROSIA</small>  
+        <h2>  
+            POLARIS<br>  
+            MUND TË JETË<br>  
+            I YTI.  
+        </h2>  
+        <div class="price">  
+            <span>160€</span>  
+        </div>  
+        <p>  
+            Çmimi përfshin pajisjen e kompletuar. Transport falas në Tiranë. Për Kosovë dhe rrethe, transporti llogaritet sipas destinacionit.  
+        </p>  
+        <a href="https://wa.me/355682673885" target="_blank" class="primary-btn">  
+            POROSIT NË WHATSAPP  
+        </a>  
     </div>
-
-
-    <div class="feature-list">
-
-
-        <!-- 01 -->
-
-        <div class="feature reveal">
-
-            <button
-                class="feature-button"
-                onclick="toggleFeature(this)">
-
-                <div class="feature-number">
-                    01
-                </div>
-
-                <div>
-
-                    <div class="feature-name">
-                        NDEZ
-                    </div>
-
-                    <span class="feature-short">
-                        Aktivizimi i sistemit
-                    </span>
-
-                </div>
-
-                <div class="feature-arrow">
-                    +
-                </div>
-
-            </button>
-
-            <div class="feature-description">
-
-                <div class="feature-description-inner">
-
-                    Me një veprim të vetëm, përdoruesi aktivizon
-                    sistemin POLARIS. Pas ndezjes, elektronika
-                    fillon procesin e monitorimit të informacionit
-                    të marrë nga sensorët.
-
-                    <br><br>
-
-                    Qëllimi është që aktivizimi të jetë i thjeshtë
-                    dhe të mos kërkojë ndërveprime të komplikuara.
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- 02 -->
-
-        <div class="feature reveal">
-
-            <button
-                class="feature-button"
-                onclick="toggleFeature(this)">
-
-                <div class="feature-number">
-                    02
-                </div>
-
-                <div>
-
-                    <div class="feature-name">
-                        EC
-                    </div>
-
-                    <span class="feature-short">
-                        Lëvizje natyrale
-                    </span>
-
-                </div>
-
-                <div class="feature-arrow">
-                    +
-                </div>
-
-            </button>
-
-            <div class="feature-description">
-
-                <div class="feature-description-inner">
-
-                    POLARIS është konceptuar që përdoruesi
-                    të vazhdojë të ecë në mënyrë natyrale.
-                    Sensori monitoron hapësirën përpara,
-                    ndërsa elektronika përpunon informacionin.
-
-                    <br><br>
-
-                    Ideja kryesore është që teknologjia të
-                    punojë në sfond pa e komplikuar përdorimin
-                    e shkopit.
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- 03 -->
-
-        <div class="feature reveal">
-
-            <button
-                class="feature-button"
-                onclick="toggleFeature(this)">
-
-                <div class="feature-number">
-                    03
-                </div>
-
-                <div>
-
-                    <div class="feature-name">
-                        NDJEJ
-                    </div>
-
-                    <span class="feature-short">
-                        Feedback haptik
-                    </span>
-
-                </div>
-
-                <div class="feature-arrow">
-                    +
-                </div>
-
-            </button>
-
-            <div class="feature-description">
-
-                <div class="feature-description-inner">
-
-                    Kur sistemi identifikon informacion relevant,
-                    POLARIS mund ta transmetojë atë përmes
-                    feedback-ut haptik.
-
-                    <br><br>
-
-                    Vibrimi krijon një kanal komunikimi të
-                    drejtpërdrejtë mes pajisjes dhe përdoruesit,
-                    pa pasur nevojë që përdoruesi të shikojë
-                    ekran apo ndërfaqe.
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- 04 -->
-
-        <div class="feature reveal">
-
-            <button
-                class="feature-button"
-                onclick="toggleFeature(this)">
-
-                <div class="feature-number">
-                    04
-                </div>
-
-                <div>
-
-                    <div class="feature-name">
-                        360° QASJE E MENÇUR
-                    </div>
-
-                    <span class="feature-short">
-                        Perceptim i hapësirës
-                    </span>
-
-                </div>
-
-                <div class="feature-arrow">
-                    +
-                </div>
-
-            </button>
-
-            <div class="feature-description">
-
-                <div class="feature-description-inner">
-
-                    Koncepti 360° përfaqëson synimin që POLARIS
-                    të ofrojë një perceptim sa më të gjerë të
-                    ambientit.
-
-                    <br><br>
-
-                    Sensorët mund të përdoren për të marrë
-                    informacion mbi objektet dhe pengesat
-                    përreth dhe për ta kthyer këtë informacion
-                    në sinjale të kuptueshme për përdoruesin.
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- 05 -->
-
-        <div class="feature reveal">
-
-            <button
-                class="feature-button"
-                onclick="toggleFeature(this)">
-
-                <div class="feature-number">
-                    05
-                </div>
-
-                <div>
-
-                    <div class="feature-name">
-                        USB • KARIKIM
-                    </div>
-
-                    <span class="feature-short">
-                        Energji praktike
-                    </span>
-
-                </div>
-
-                <div class="feature-arrow">
-                    +
-                </div>
-
-            </button>
-
-            <div class="feature-description">
-
-                <div class="feature-description-inner">
-
-                    Karikimi USB e bën sistemin më praktik
-                    për përdorim të përditshëm.
-
-                    <br><br>
-
-                    Pajisja mund të karikohet duke përdorur
-                    një burim standard USB, duke shmangur
-                    nevojën për pajisje të komplikuara
-                    karikimi.
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- 06 -->
-
-        <div class="feature reveal">
-
-            <button
-                class="feature-button"
-                onclick="toggleFeature(this)">
-
-                <div class="feature-number">
-                    06
-                </div>
-
-                <div>
-
-                    <div class="feature-name">
-                        REAL FEEDBACK
-                    </div>
-
-                    <span class="feature-short">
-                        Informacion në kohë reale
-                    </span>
-
-                </div>
-
-                <div class="feature-arrow">
-                    +
-                </div>
-
-            </button>
-
-            <div class="feature-description">
-
-                <div class="feature-description-inner">
-
-                    Feedback-u në kohë reale është një nga
-                    elementët kryesorë të konceptit POLARIS.
-
-                    <br><br>
-
-                    Në vend që përdoruesi të kontrollojë
-                    vazhdimisht pajisjen, informacioni mund
-                    të komunikohet përmes reagimeve të
-                    menjëhershme të sistemit.
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- 07 -->
-
-        <div class="feature reveal">
-
-            <button
-                class="feature-button"
-                onclick="toggleFeature(this)">
-
-                <div class="feature-number">
-                    07
-                </div>
-
-                <div>
-
-                    <div class="feature-name">
-                        SMART TECHNOLOGY
-                    </div>
-
-                    <span class="feature-short">
-                        Elektronikë e integruar
-                    </span>
-
-                </div>
-
-                <div class="feature-arrow">
-                    +
-                </div>
-
-            </button>
-
-            <div class="feature-description">
-
-                <div class="feature-description-inner">
-
-                    POLARIS kombinon sensorë, elektronikë,
-                    përpunim sinjali dhe feedback haptik
-                    në një pajisje të vetme.
-
-                    <br><br>
-
-                    Synimi është të krijohet një produkt
-                    modern ku teknologjia të jetë e pranishme,
-                    por përdorimi të mbetet sa më intuitiv.
-
-                </div>
-
-            </div>
-
-        </div>
-
+</section>  
+
+<!-- CONTACT -->  
+<section class="contact">  
+    <h2>KE PYETJE?</h2>  
+    <p>Për informacion teknik, porosi ose bashkëpunim, kontakto ekipin e POLARIS.</p>  
+    <div class="contact-buttons">  
+        <a href="https://wa.me/355682673885" target="_blank" class="primary-btn">WHATSAPP</a>  
+        <a href="mailto:ecisigurt@gmail.com" class="secondary-btn">EMAIL</a>  
     </div>
-
-</section>
-
-
-<!-- ======================================================
-     PRODUCT
-     ====================================================== -->
-
-<section class="product" id="product">
-
-    <div class="product-grid">
-
-
-        <div class="product-image reveal">
-
-            <img
-                src="polaris-detail.jpg"
-                alt="POLARIS">
-
-        </div>
-
-
-        <div class="reveal">
-
-            <div class="product-label">
-                POLARIS / SMART CANE
-            </div>
-
-            <h2 class="product-title">
-
-                SMART.<br>
-
-                SIMPLE.<br>
-
-                <span>POLARIS.</span>
-
-            </h2>
-
-            <p class="product-description">
-
-                Një kombinim i dizajnit modern dhe
-                elektronikës së integruar. POLARIS
-                është krijuar për ta bërë teknologjinë
-                më të dobishme, më intuitive dhe më
-                të aksesueshme.
-
-            </p>
-
-
-            <div class="spec-grid">
-
-                <div class="spec">
-
-                    <strong>
-                        360°
-                    </strong>
-
-                    <span>
-                        QASJE E MENÇUR
-                    </span>
-
-                </div>
-
-
-                <div class="spec">
-
-                    <strong>
-                        USB
-                    </strong>
-
-                    <span>
-                        KARIKIM
-                    </span>
-
-                </div>
-
-
-                <div class="spec">
-
-                    <strong>
-                        REAL
-                    </strong>
-
-                    <span>
-                        FEEDBACK
-                    </span>
-
-                </div>
-
-
-                <div class="spec">
-
-                    <strong>
-                        SMART
-                    </strong>
-
-                    <span>
-                        TECHNOLOGY
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     GALLERY
-     ====================================================== -->
-
-<section class="gallery" id="gallery">
-
-    <div class="gallery-header reveal">
-
-        <div>
-
-            <div class="section-label">
-                POLARIS / VISUAL
-            </div>
-
-            <h2 class="section-title">
-                SHIKO<br>
-                <span>POLARIS.</span>
-            </h2>
-
-        </div>
-
-        <p class="gallery-note">
-
-            Dizajn i fokusuar në kombinimin e
-            funksionalitetit, teknologjisë dhe
-            një pamjeje moderne.
-
-        </p>
-
-    </div>
-
-
-    <div class="gallery-grid">
-
-
-        <div class="gallery-item reveal">
-
-            <img
-                src="polaris.jpg"
-                alt="POLARIS Smart Cane">
-
-            <div class="gallery-caption">
-                POLARIS
-            </div>
-
-        </div>
-
-
-        <div class="gallery-item reveal">
-
-            <img
-                src="polaris-detail.jpg"
-                alt="POLARIS Detail">
-
-            <div class="gallery-caption">
-                DETAIL
-            </div>
-
-        </div>
-
-
-        <div class="gallery-item reveal">
-
-            <img
-                src="shkopi.jpg"
-                alt="Smart Cane">
-
-            <div class="gallery-caption">
-                SMART CANE
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     MISSION
-     ====================================================== -->
-
-<section class="mission" id="mission">
-
-    <div class="reveal">
-
-        <div class="mission-label">
-            MISIONI YNË
-        </div>
-
-        <h2 class="mission-title">
-
-            TË BËJMË
-            LËVIZJEN
-            <span>MË TË SIGURT.</span>
-
-        </h2>
-
-        <p class="mission-text">
-
-            POLARIS është një projekt i fokusuar
-            në inovacionin social dhe përdorimin
-            e teknologjisë për të krijuar zgjidhje
-            më moderne për lëvizshmërinë.
-
-            <br><br>
-
-            Qëllimi është që teknologjia të mos jetë
-            thjesht një element dekorativ, por një
-            mjet praktik që mund të ndihmojë
-            përdoruesin të marrë më shumë informacion
-            nga ambienti përreth.
-
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     HOW TO USE
-     ====================================================== -->
-
-<section class="how">
-
-    <div class="reveal">
-
-        <div class="section-label">
-            UDHËZUESI
-        </div>
-
-        <h2 class="section-title">
-            TRE HAPA.<br>
-            <span>NJË SISTEM.</span>
-        </h2>
-
-    </div>
-
-
-    <div class="steps">
-
-
-        <div class="step reveal">
-
-            <div class="step-number">
-                01
-            </div>
-
-            <div>
-
-                <h3>
-                    NDEZ
-                </h3>
-
-                <p>
-
-                    Shtyp butonin Power për të aktivizuar
-                    sistemin. Pas aktivizimit, elektronika
-                    fillon të funksionojë.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="step reveal">
-
-            <div class="step-number">
-                02
-            </div>
-
-            <div>
-
-                <h3>
-                    EC
-                </h3>
-
-                <p>
-
-                    Mbaje POLARIS në pozicion natyral
-                    dhe ec normalisht. Sensori duhet
-                    të jetë i orientuar në drejtimin
-                    përpara.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="step reveal">
-
-            <div class="step-number">
-                03
-            </div>
-
-            <div>
-
-                <h3>
-                    NDJEJ
-                </h3>
-
-                <p>
-
-                    Sistemi përdor feedback-un për të
-                    komunikuar informacion mbi ambientin
-                    përmes vibrimeve.
-
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     ORDER
-     ====================================================== -->
-
-<section class="order" id="order">
-
-    <div class="order-content reveal">
-
-        <div class="eyebrow">
-            POROSIA
-        </div>
-
-        <h2 class="section-title">
-            POLARIS<br>
-            MUND TË JETË<br>
-            <span>I YTI.</span>
-        </h2>
-
-        <div class="order-price">
-            160€
-        </div>
-
-        <div class="order-details">
-
-            <div class="order-tag">
-                PAJISJE E KOMPLETUAR
-            </div>
-
-            <div class="order-tag">
-                TRANSPORT TIRANË
-            </div>
-
-            <div class="order-tag">
-                ASISTENCË TEKNIKE
-            </div>
-
-        </div>
-
-        <p class="order-description">
-
-            Çmimi i pajisjes është 160€.
-            Transporti është falas në Tiranë.
-            Për Kosovë dhe rrethe, transporti
-            llogaritet sipas destinacionit.
-
-        </p>
-
-        <a
-            href="https://wa.me/355682673885"
-            target="_blank"
-            class="btn btn-orange">
-
-            POROSIT NË WHATSAPP
-
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     CONTACT
-     ====================================================== -->
-
-<section class="contact" id="contact">
-
-    <div class="contact-grid">
-
-
-        <div class="reveal">
-
-            <div class="section-label">
-                KONTAKT
-            </div>
-
-            <h2 class="contact-title">
-
-                FLISNI<br>
-                ME<br>
-                <span>NE.</span>
-
-            </h2>
-
-            <p class="contact-description">
-
-                Për pyetje rreth POLARIS, porosi,
-                bashkëpunime ose informacion teknik,
-                mund të na kontaktoni direkt.
-
-            </p>
-
-        </div>
-
-
-        <div class="contact-info reveal">
-
-
-            <div class="contact-box">
-
-                <small>
-                    WHATSAPP
-                </small>
-
-                <a
-                    href="https://wa.me/355682673885"
-                    target="_blank">
-
-                    +355 68 267 3885
-
-                </a>
-
-            </div>
-
-
-            <div class="contact-box">
-
-                <small>
-                    EMAIL
-                </small>
-
-                <a href="mailto:ecisigurt@gmail.com">
-
-                    ecisigurt@gmail.com
-
-                </a>
-
-            </div>
-
-
-            <div class="contact-box">
-
-                <small>
-                    PROJEKTI
-                </small>
-
-                <a href="#home">
-
-                    POLARIS — SMART CANE
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     FEEDBACK
-     ====================================================== -->
-
-<section class="feedback" id="feedback">
-
-    <div class="feedback-inner reveal">
-
-        <div class="section-label">
-            FEEDBACK
-        </div>
-
-        <h2>
-
-            MENDIMI<br>
-            <span>YUAJ.</span>
-
-        </h2>
-
-        <p>
-
-            Sugjerimet, pyetjet dhe përshtypjet tuaja
-            janë të rëndësishme për zhvillimin e POLARIS.
-
-        </p>
-
-
-        <!--
-             KY FORMULAR ËSHTË GATI PËR NETLIFY FORMS.
-             PËR CHAT PRIVAT DO TË SHTOHET BACKEND VEÇ.
-        -->
-
-        <form
-            class="feedback-form"
-            name="polaris-feedback"
-            method="POST"
-            data-netlify="true">
-
-            <input
-                type="hidden"
-                name="form-name"
-                value="polaris-feedback">
-
-            <input
-                type="text"
-                name="name"
-                placeholder="Emri juaj"
-                required>
-
-            <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                required>
-
-            <textarea
-                name="message"
-                placeholder="Shkruani mesazhin tuaj..."
-                required></textarea>
-
-            <button
-                type="submit"
-                class="btn btn-orange">
-
-                DËRGO FEEDBACK
-
-            </button>
-
-        </form>
-
-        <div
-            class="feedback-status"
-            id="feedbackStatus">
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     FOOTER
-     ====================================================== -->
-
-<footer>
-
-    <div class="footer-logo">
-
-        POLAR<span>I</span>S
-
-    </div>
-
-
-    <div class="footer-right">
-
-        © 2026 — TË GJITHA TË DREJTAT TË REZERVUARA
-        <br>
-        Vetëm nga Ledjan Bitri
-
-    </div>
-
-</footer>
-
-
-<!-- ======================================================
-     DETAIL SCREEN
-     ====================================================== -->
-
-<div
-    class="detail-screen"
-    id="detailScreen">
-
-    <button
-        class="detail-close"
-        onclick="closeDetail()">
-
-        ×
-
-    </button>
-
-
-    <div class="detail-wrapper">
-
-
-        <div
-            class="detail-number"
-            id="detailNumber">
-
-            POLARIS
-
-        </div>
-
-
-        <h2
-            class="detail-title"
-            id="detailTitle">
-
-            POLARIS
-
-        </h2>
-
-
-        <p
-            class="detail-description"
-            id="detailDescription">
-
-        </p>
-
-
-        <img
-            id="detailImage"
-            class="detail-image"
-            src="polaris-detail.jpg"
-            alt="POLARIS">
-
-
-        <div
-            class="detail-extra"
-            id="detailExtra">
-
-        </div>
-
-
-        <a
-            href="#order"
-            onclick="closeDetail()"
-            class="btn btn-orange">
-
-            POROSIT POLARIS
-
-        </a>
-
-    </div>
-
-</div>
-
-
-<!-- ======================================================
-     TOP BUTTON
-     ====================================================== -->
-
-<button
-    class="top-button"
-    id="topButton"
-    onclick="window.scrollTo({top:0,behavior:'smooth'})">
-
-    ↑
-
-</button>
-
-
+</section>  
+
+<!-- FOOTER -->  
+<footer>  
+    <strong>POLARIS</strong>  
+    <span>© 2026 POLARIS — Smart Mobility Albania</span>  
+    <span>Project Director: Ledjan Bitri</span>
+</footer>  
+
+<!-- JAVASCRIPT PËR MENU DHE CHAT -->
 <script>
-
-
-/* =========================================================
-   LOADER
-   ========================================================= */
-
-window.addEventListener("load", function(){
-
-    setTimeout(function(){
-
-        document
-            .getElementById("loader")
-            .classList.add("hide");
-
-    },700);
-
-});
-
-
-/* =========================================================
-   NAVBAR
-   ========================================================= */
-
-window.addEventListener("scroll",function(){
-
-    const nav =
-        document.getElementById("navbar");
-
-    const top =
-        document.getElementById("topButton");
-
-    if(window.scrollY > 60){
-
-        nav.classList.add("scrolled");
-
-        top.classList.add("show");
-
-    }else{
-
-        nav.classList.remove("scrolled");
-
-        top.classList.remove("show");
-
+    // Funksioni i Menusë Hamburger (për celularet)
+    function toggleMenu() {
+        const navLinks = document.getElementById('navLinks');
+        navLinks.classList.toggle('active');
     }
 
-});
-
-
-/* =========================================================
-   MOBILE MENU
-   ========================================================= */
-
-function mobileScroll(){
-
-    const target =
-        document.getElementById("technology");
-
-    target.scrollIntoView({
-        behavior:"smooth"
-    });
-
-}
-
-
-/* =========================================================
-   FEATURE ACCORDION
-   ========================================================= */
-
-function toggleFeature(button){
-
-    const feature =
-        button.closest(".feature");
-
-    const all =
-        document.querySelectorAll(".feature");
-
-    all.forEach(function(item){
-
-        if(item !== feature){
-
-            item.classList.remove("open");
-
-        }
-
-    });
-
-    feature.classList.toggle("open");
-
-}
-
-
-/* =========================================================
-   DETAIL DATA
-   ========================================================= */
-
-const detailData = {
-
-    ndez:{
-
-        number:"01 / AKTIVIZIMI",
-
-        title:'NDEZ<br><span>POLARIS.</span>',
-
-        image:"polaris-detail.jpg",
-
-        description:`
-
-            Aktivizimi është pika e parë e ndërveprimit
-            me POLARIS. Sistemi është projektuar që
-            përdoruesi të mund të ndezë pajisjen përmes
-            një kontrolli të vetëm.
-
-            <br><br>
-
-            Pas ndezjes, komponentët elektronikë fillojnë
-            të marrin dhe përpunojnë informacion nga
-            sensorët e integruar.
-
-        `,
-
-        extras:[
-
-            ["01","POWER","Aktivizim i drejtpërdrejtë"],
-
-            ["02","SYSTEM","Elektronikë e integruar"],
-
-            ["03","READY","Sistem aktiv për përdorim"]
-
-        ]
-
-    },
-
-
-    ec:{
-
-        number:"02 / LËVIZJA",
-
-        title:'EC<br><span>NATYRSHEM.</span>',
-
-        image:"shkopi.jpg",
-
-        description:`
-
-            POLARIS është konceptuar që të mos ndryshojë
-            mënyrën natyrale të ecjes.
-
-            <br><br>
-
-            Përdoruesi mban shkopin dhe vazhdon lëvizjen,
-            ndërsa sistemi punon në sfond duke analizuar
-            informacionin e marrë nga sensorët.
-
-        `,
-
-        extras:[
-
-            ["01","MOVE","Lëvizje natyrale"],
-
-            ["02","SCAN","Monitorim i hapësirës"],
-
-            ["03","SMART","Teknologji në sfond"]
-
-        ]
-
-    },
-
-
-    ndjej:{
-
-        number:"03 / FEEDBACK",
-
-        title:'NDJEJ<br><span>AFRIMIN.</span>',
-
-        image:"polaris-detail.jpg",
-
-        description:`
-
-            POLARIS përdor feedback haptik si një mënyrë
-            komunikimi me përdoruesin.
-
-            <br><br>
-
-            Vibrimi mund të përdoret për të transmetuar
-            informacion mbi afrimin e një pengese,
-            duke krijuar një ndërveprim fizik dhe intuitiv
-            me sistemin.
-
-        `,
-
-        extras:[
-
-            ["01","VIBRATION","Feedback haptik"],
-
-            ["02","REAL TIME","Reagim i menjëhershëm"],
-
-            ["03","INTUITIVE","Ndërveprim i thjeshtë"]
-
-        ]
-
-    },
-
-
-    360:{
-
-        number:"04 / PERCEPTIMI",
-
-        title:'360°<br><span>SMART VIEW.</span>',
-
-        image:"shkopi.jpg",
-
-        description:`
-
-            360° përfaqëson vizionin e një sistemi që
-            synon të marrë informacion sa më të gjerë
-            nga ambienti përreth përdoruesit.
-
-            <br><br>
-
-            Nëpërmjet kombinimit të sensorëve dhe
-            elektronikës, POLARIS mund të analizojë
-            informacionin dhe ta shndërrojë atë në
-            sinjale të kuptueshme.
-
-        `,
-
-        extras:[
-
-            ["01","360°","Perceptim i zgjeruar"],
-
-            ["02","SENSORS","Detektim informacioni"],
-
-            ["03","AWARE","Më shumë informacion"]
-
-        ]
-
-    },
-
-
-    usb:{
-
-        number:"05 / ENERGJIA",
-
-        title:'USB<br><span>CHARGE.</span>',
-
-        image:"polaris-detail.jpg",
-
-        description:`
-
-            Sistemi i karikimit USB është menduar për
-            ta bërë POLARIS sa më praktik në përdorim
-            të përditshëm.
-
-            <br><br>
-
-            Një standard i njohur karikimi e bën më të
-            lehtë menaxhimin e energjisë së pajisjes.
-
-        `,
-
-        extras:[
-
-            ["01","USB","Karikim praktik"],
-
-            ["02","POWER","Menaxhim energjie"],
-
-            ["03","DAILY","I përshtatshëm për përdorim"]
-
-        ]
-
-    },
-
-
-    feedback:{
-
-        number:"06 / INFORMACIONI",
-
-        title:'REAL<br><span>FEEDBACK.</span>',
-
-        image:"shkopi.jpg",
-
-        description:`
-
-            Feedback-u në kohë reale është një nga
-            komponentët kryesorë të konceptit POLARIS.
-
-            <br><br>
-
-            Në vend që përdoruesi të kontrollojë
-            vazhdimisht pajisjen, sistemi synon të
-            transmetojë informacion përmes reagimeve
-            të menjëhershme.
-
-        `,
-
-        extras:[
-
-            ["01","REAL","Informacion në kohë reale"],
-
-            ["02","HAPTIC","Feedback fizik"],
-
-            ["03","FAST","Reagim i shpejtë"]
-
-        ]
-
-    },
-
-
-    smart:{
-
-        number:"07 / TEKNOLOGJIA",
-
-        title:'SMART<br><span>TECHNOLOGY.</span>',
-
-        image:"polaris-detail.jpg",
-
-        description:`
-
-            POLARIS bashkon disa komponentë teknologjikë
-            në një pajisje të vetme.
-
-            <br><br>
-
-            Sensorët, elektronika dhe feedback-u
-            bashkëpunojnë për të krijuar një sistem
-            më të integruar dhe më intuitiv.
-
-        `,
-
-        extras:[
-
-            ["01","SMART","Teknologji inteligjente"],
-
-            ["02","INTEGRATED","Elektronikë e integruar"],
-
-            ["03","FUTURE","Koncept modern"]
-
-        ]
-
+    function closeMenu() {
+        const navLinks = document.getElementById('navLinks');
+        navLinks.classList.remove('active');
     }
 
-};
+    // Funksioni i Chat-it Publik
+    function sendMessage() {
+        const userInput = document.getElementById('chatUser');
+        const messageInput = document.getElementById('chatMessageInput');
+        const chatBox = document.getElementById('chatBox');
 
+        let userName = userInput.value.trim() || "Përdorues Anonim";
+        let messageText = messageInput.value.trim();
 
-/* =========================================================
-   OPEN DETAIL
-   ========================================================= */
+        if(messageText === "") return;
 
-function openDetail(type){
+        // Krijimi i elementit të mesazhit
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('chat-message');
 
-    const data =
-        detailData[type];
+        const nameDiv = document.createElement('div');
+        nameDiv.classList.add('user-name');
+        nameDiv.textContent = userName;
 
-    if(!data) return;
+        const textDiv = document.createElement('div');
+        textDiv.classList.add('msg-text');
+        textDiv.textContent = messageText;
 
+        messageDiv.appendChild(nameDiv);
+        messageDiv.appendChild(textDiv);
+        chatBox.appendChild(messageDiv);
 
-    document
-        .getElementById("detailNumber")
-        .innerHTML = data.number;
-
-
-    document
-        .getElementById("detailTitle")
-        .innerHTML = data.title;
-
-
-    document
-        .getElementById("detailDescription")
-        .innerHTML = data.description;
-
-
-    document
-        .getElementById("detailImage")
-        .src = data.image;
-
-
-    const extra =
-        document.getElementById("detailExtra");
-
-    extra.innerHTML = "";
-
-
-    data.extras.forEach(function(item){
-
-        const box =
-            document.createElement("div");
-
-        box.className = "extra-box";
-
-        box.innerHTML = `
-
-            <strong>
-                ${item[0]}
-            </strong>
-
-            <span>
-                ${item[1]} — ${item[2]}
-            </span>
-
-        `;
-
-        extra.appendChild(box);
-
-    });
-
-
-    document
-        .getElementById("detailScreen")
-        .classList.add("active");
-
-
-    document.body.classList.add("locked");
-
-}
-
-
-/* =========================================================
-   CONNECT FEATURE BUTTONS TO DETAIL PAGES
-   ========================================================= */
-
-document
-    .querySelectorAll(".feature-button")
-    .forEach(function(button){
-
-        button.addEventListener("dblclick",function(){
-
-            const name =
-                button
-                .querySelector(".feature-name")
-                .innerText
-                .toLowerCase();
-
-
-            if(name.includes("ndez")){
-                openDetail("ndez");
-            }
-
-            else if(name === "ec"){
-                openDetail("ec");
-            }
-
-            else if(name.includes("ndjej")){
-                openDetail("ndjej");
-            }
-
-            else if(name.includes("360")){
-                openDetail("360");
-            }
-
-            else if(name.includes("usb")){
-                openDetail("usb");
-            }
-
-            else if(name.includes("real")){
-                openDetail("feedback");
-            }
-
-            else if(name.includes("smart")){
-                openDetail("smart");
-            }
-
-        });
-
-    });
-
-
-/*
-   Single click:
-   opens accordion.
-   Double click:
-   opens full detail screen.
-*/
-
-
-/* =========================================================
-   CLOSE DETAIL
-   ========================================================= */
-
-function closeDetail(){
-
-    document
-        .getElementById("detailScreen")
-        .classList.remove("active");
-
-    document.body.classList.remove("locked");
-
-}
-
-
-/* =========================================================
-   ESC KEY
-   ========================================================= */
-
-document.addEventListener("keydown",function(e){
-
-    if(e.key === "Escape"){
-
-        closeDetail();
-
+        // Pastro inputin e mesazhit dhe shko tek mesazhi i fundit
+        messageInput.value = "";
+        chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-});
-
-
-/* =========================================================
-   REVEAL ANIMATIONS
-   ========================================================= */
-
-const observer =
-    new IntersectionObserver(
-
-        function(entries){
-
-            entries.forEach(function(entry){
-
-                if(entry.isIntersecting){
-
-                    entry.target
-                        .classList
-                        .add("visible");
-
-                }
-
-            });
-
-        },
-
-        {
-            threshold:.12
+    // Lejon dërgimin e mesazhit edhe me tastin 'Enter'
+    document.getElementById('chatMessageInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            sendMessage();
         }
-
-    );
-
-
-document
-    .querySelectorAll(".reveal")
-    .forEach(function(element){
-
-        observer.observe(element);
-
     });
-
-
-/* =========================================================
-   NETLIFY FORM FEEDBACK
-   ========================================================= */
-
-const feedbackForm =
-    document.getElementById("feedbackForm");
-
-if(feedbackForm){
-
-    feedbackForm.addEventListener(
-        "submit",
-        function(){
-
-            document
-                .getElementById("feedbackStatus")
-                .innerText =
-                "Mesazhi po dërgohet...";
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   FIX DETAIL IMAGE ERROR
-   ========================================================= */
-
-document
-    .getElementById("detailImage")
-    .addEventListener("error",function(){
-
-        this.src="polaris.jpg";
-
-    });
-
-
-/* =========================================================
-   INITIAL REVEAL
-   ========================================================= */
-
-setTimeout(function(){
-
-    document
-        .querySelectorAll(".hero .reveal")
-        .forEach(function(el){
-
-            el.classList.add("visible");
-
-        });
-
-},900);
-
-
 </script>
 
-</body>
-                        </html>
+</body>  
+</html>
