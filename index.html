@@ -5,790 +5,138 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">  
 <title>POLARIS — Smart Cane</title>  
 <style>  
-  
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');  
   
-*{  
-    margin:0;  
-    padding:0;  
-    box-sizing:border-box;  
-    scroll-behavior:smooth;  
-}  
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}  
+:root{--black:#070707;--black2:#101010;--orange:#b84a13;--orange2:#e06a25;--light:#f3eee8;--gray:#a5a5a5;}  
+body{background:var(--black);color:white;font-family:'Inter',sans-serif;overflow-x:hidden;}  
+a{text-decoration:none;color:inherit;}  
   
-:root{  
-    --black:#070707;  
-    --black2:#101010;  
-    --orange:#b84a13;  
-    --orange2:#e06a25;  
-    --light:#f3eee8;  
-    --gray:#a5a5a5;  
-}  
+.loader{position:fixed;inset:0;background:#070707;z-index:99999;display:flex;align-items:center;justify-content:center;animation:loaderOut 1s ease 1.5s forwards;}  
+.loader h1{font-size:42px;letter-spacing:8px;font-weight:900;}  
+.loader span{color:var(--orange2);}  
+@keyframes loaderOut{to{opacity:0;visibility:hidden;}}  
   
-body{  
-    background:var(--black);  
-    color:white;  
-    font-family:'Inter',sans-serif;  
-    overflow-x:hidden;  
-}  
-  
-a{  
-    text-decoration:none;  
-    color:inherit;  
-}  
-  
-/* LOADER */  
-.loader{  
-    position:fixed;  
-    inset:0;  
-    background:#070707;  
-    z-index:99999;  
-    display:flex;  
-    align-items:center;  
-    justify-content:center;  
-    animation:loaderOut 1s ease 1.5s forwards;  
-}  
-  
-.loader h1{  
-    font-size:42px;  
-    letter-spacing:8px;  
-    font-weight:900;  
-}  
-  
-.loader span{  
-    color:var(--orange2);  
-}  
-  
-@keyframes loaderOut{  
-    to{  
-        opacity:0;  
-        visibility:hidden;  
-    }  
-}  
-  
-/* NAVBAR */  
-nav{  
-    position:fixed;  
-    top:0;  
-    left:0;  
-    width:100%;  
-    height:80px;  
-    z-index:5000;  
-    display:flex;  
-    align-items:center;  
-    justify-content:space-between;  
-    padding:0 6%;  
-    background:rgba(7,7,7,.85);  
-    backdrop-filter:blur(18px);  
-    border-bottom:1px solid rgba(255,255,255,.06);  
-}  
-  
-.logo{  
-    font-size:24px;  
-    font-weight:900;  
-    letter-spacing:5px;  
-}  
-  
-.logo span{  
-    color:var(--orange2);  
-}  
-  
-.nav-links{  
-    display:flex;  
-    gap:35px;  
-    align-items:center;  
-}  
-  
-.nav-links a{  
-    font-size:13px;  
-    font-weight:700;  
-    letter-spacing:1px;  
-    color:#ddd;  
-    transition:.3s;  
-}  
-  
-.nav-links a:hover{  
-    color:var(--orange2);  
-}  
-  
-.nav-button{  
-    border:1px solid var(--orange);  
-    padding:11px 20px;  
-    border-radius:30px;  
-}  
+nav{position:fixed;top:0;left:0;width:100%;height:80px;z-index:5000;display:flex;align-items:center;justify-content:space-between;padding:0 6%;background:rgba(7,7,7,.85);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.06);}  
+.logo{font-size:24px;font-weight:900;letter-spacing:5px;}  
+.logo span{color:var(--orange2);}  
+.nav-links{display:flex;gap:35px;align-items:center;}  
+.nav-links a{font-size:13px;font-weight:700;letter-spacing:1px;color:#ddd;transition:.3s;}  
+.nav-links a:hover{color:var(--orange2);}  
+.nav-button{border:1px solid var(--orange);padding:11px 20px;border-radius:30px;}  
 
-/* HAMBURGER MENU BUTTON */
-.menu-toggle{
-    display:none;
-    flex-direction:column;
-    cursor:pointer;
-    gap:6px;
-    z-index:6000;
-}
-
-.menu-toggle span{
-    width:30px;
-    height:3px;
-    background:white;
-    transition:.3s;
-}
+.menu-toggle{display:none;flex-direction:column;cursor:pointer;gap:6px;z-index:6000;}  
+.menu-toggle span{width:30px;height:3px;background:white;transition:.3s;}  
   
-/* HERO */  
-.hero{  
-    min-height:100vh;  
-    position:relative;  
-    display:flex;  
-    align-items:center;  
-    overflow:hidden;  
-    padding:120px 7% 70px;  
-}  
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;padding:120px 7% 70px;}  
+.hero::before{content:"";position:absolute;width:600px;height:600px;background:rgba(184,74,19,.16);filter:blur(120px);border-radius:50%;right:-150px;top:100px;}  
+.hero-content{width:50%;position:relative;z-index:2;}  
+.small-title{color:var(--orange2);font-size:13px;font-weight:800;letter-spacing:4px;margin-bottom:25px;}  
+.hero h1{font-size:clamp(65px,9vw,145px);line-height:.86;font-weight:900;letter-spacing:-7px;}  
+.hero h1 span{color:var(--orange2);}  
+.hero-description{max-width:540px;color:#aaa;font-size:17px;line-height:1.8;margin:35px 0;}  
+.hero-buttons{display:flex;gap:15px;flex-wrap:wrap;}  
+.primary-btn,.secondary-btn{padding:17px 30px;border-radius:4px;font-weight:800;font-size:13px;letter-spacing:1px;transition:.3s;cursor:pointer;}  
+.primary-btn{background:var(--orange2);color:white;border:none;}  
+.primary-btn:hover{transform:translateY(-4px);box-shadow:0 15px 40px rgba(224,106,37,.25);}  
+.secondary-btn{border:1px solid #444;color:#eee;background:transparent;}  
+.secondary-btn:hover{border-color:var(--orange2);}  
   
-.hero::before{  
-    content:"";  
-    position:absolute;  
-    width:600px;  
-    height:600px;  
-    background:rgba(184,74,19,.16);  
-    filter:blur(120px);  
-    border-radius:50%;  
-    right:-150px;  
-    top:100px;  
-}  
+.hero-image{position:absolute;right:4%;width:50%;height:80%;display:flex;align-items:center;justify-content:center;}  
+.hero-image::after{content:"";position:absolute;width:70%;height:70%;background:var(--orange);filter:blur(130px);opacity:.18;}  
+.hero-image img{position:relative;z-index:2;width:min(75%,620px);max-height:750px;object-fit:contain;filter:drop-shadow(0 30px 50px rgba(0,0,0,.8));animation:float 5s ease-in-out infinite;}  
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}  
+.scroll{position:absolute;bottom:35px;left:7%;color:#666;font-size:11px;letter-spacing:3px;}  
   
-.hero-content{  
-    width:50%;  
-    position:relative;  
-    z-index:2;  
-}  
+.intro{padding:140px 8%;background:var(--light);color:#0b0b0b;}  
+.intro-label{color:var(--orange);font-weight:900;letter-spacing:3px;font-size:12px;}  
+.intro h2{font-size:clamp(40px,6vw,82px);line-height:1;max-width:1000px;margin-top:25px;font-weight:900;letter-spacing:-4px;}  
+.intro h2 span{color:var(--orange);}  
   
-.small-title{  
-    color:var(--orange2);  
-    font-size:13px;  
-    font-weight:800;  
-    letter-spacing:4px;  
-    margin-bottom:25px;  
-}  
+.features{padding:130px 8%;background:#0b0b0b;}  
+.section-head{margin-bottom:70px;}  
+.section-head small{color:var(--orange2);font-weight:800;letter-spacing:3px;}  
+.section-head h2{font-size:clamp(42px,6vw,80px);font-weight:900;margin-top:15px;letter-spacing:-3px;}  
+.feature{display:grid;grid-template-columns:100px 1fr;gap:30px;padding:45px 0;border-top:1px solid #242424;transition:.4s;}  
+.feature:hover{padding-left:20px;border-color:var(--orange);}  
+.feature-number{font-size:18px;color:var(--orange2);font-weight:900;}  
+.feature h3{font-size:32px;margin-bottom:12px;font-weight:900;}  
+.feature p{max-width:800px;color:#888;line-height:1.8;}  
   
-.hero h1{  
-    font-size:clamp(65px,9vw,145px);  
-    line-height:.86;  
-    font-weight:900;  
-    letter-spacing:-7px;  
-}  
-  
-.hero h1 span{  
-    color:var(--orange2);  
-}  
-  
-.hero-description{  
-    max-width:540px;  
-    color:#aaa;  
-    font-size:17px;  
-    line-height:1.8;  
-    margin:35px 0;  
-}  
-  
-.hero-buttons{  
-    display:flex;  
-    gap:15px;  
-    flex-wrap:wrap;  
-}  
-  
-.primary-btn,  
-.secondary-btn{  
-    padding:17px 30px;  
-    border-radius:4px;  
-    font-weight:800;  
-    font-size:13px;  
-    letter-spacing:1px;  
-    transition:.3s;  
-    cursor: pointer;
-}  
-  
-.primary-btn{  
-    background:var(--orange2);  
-    color:white;  
-    border: none;
-}  
-  
-.primary-btn:hover{  
-    transform:translateY(-4px);  
-    box-shadow:0 15px 40px rgba(224,106,37,.25);  
-}  
-  
-.secondary-btn{  
-    border:1px solid #444;  
-    color:#eee;  
-    background: transparent;
-}  
-  
-.secondary-btn:hover{  
-    border-color:var(--orange2);  
-}  
-  
-/* HERO IMAGE */  
-.hero-image{  
-    position:absolute;  
-    right:4%;  
-    width:50%;  
-    height:80%;  
-    display:flex;  
-    align-items:center;  
-    justify-content:center;  
-}  
-  
-.hero-image::after{  
-    content:"";  
-    position:absolute;  
-    width:70%;  
-    height:70%;  
-    background:var(--orange);  
-    filter:blur(130px);  
-    opacity:.18;  
-}  
-  
-.hero-image img{  
-    position:relative;  
-    z-index:2;  
-    width:min(75%,620px);  
-    max-height:750px;  
-    object-fit:contain;  
-    filter:drop-shadow(0 30px 50px rgba(0,0,0,.8));  
-    animation:float 5s ease-in-out infinite;  
-}  
-  
-@keyframes float{  
-    0%,100%{transform:translateY(0)}  
-    50%{transform:translateY(-15px)}  
-}  
-  
-.scroll{  
-    position:absolute;  
-    bottom:35px;  
-    left:7%;  
-    color:#666;  
-    font-size:11px;  
-    letter-spacing:3px;  
-}  
-  
-/* INTRO */  
-.intro{  
-    padding:140px 8%;  
-    background:var(--light);  
-    color:#0b0b0b;  
-}  
-  
-.intro-label{  
-    color:var(--orange);  
-    font-weight:900;  
-    letter-spacing:3px;  
-    font-size:12px;  
-}  
-  
-.intro h2{  
-    font-size:clamp(40px,6vw,82px);  
-    line-height:1;  
-    max-width:1000px;  
-    margin-top:25px;  
-    font-weight:900;  
-    letter-spacing:-4px;  
-}  
-  
-.intro h2 span{  
-    color:var(--orange);  
-}  
-  
-/* FEATURES */  
-.features{  
-    padding:130px 8%;  
-    background:#0b0b0b;  
-}  
-  
-.section-head{  
-    margin-bottom:70px;  
-}  
-  
-.section-head small{  
-    color:var(--orange2);  
-    font-weight:800;  
-    letter-spacing:3px;  
-}  
-  
-.section-head h2{  
-    font-size:clamp(42px,6vw,80px);  
-    font-weight:900;  
-    margin-top:15px;  
-    letter-spacing:-3px;  
-}  
-  
-.feature{  
-    display:grid;  
-    grid-template-columns:100px 1fr;  
-    gap:30px;  
-    padding:45px 0;  
-    border-top:1px solid #242424;  
-    transition:.4s;  
-}  
-  
-.feature:hover{  
-    padding-left:20px;  
-    border-color:var(--orange);  
-}  
-  
-.feature-number{  
-    font-size:18px;  
-    color:var(--orange2);  
-    font-weight:900;  
-}  
-  
-.feature h3{  
-    font-size:32px;  
-    margin-bottom:12px;  
-    font-weight:900;  
-}  
-  
-.feature p{  
-    max-width:800px;  
-    color:#888;  
-    line-height:1.8;  
-}  
-  
-/* PRODUCT */  
-.product{  
-    min-height:90vh;  
-    padding:130px 8%;  
-    background:radial-gradient(circle at 80% 50%,rgba(184,74,19,.15),transparent 35%), #111;  
-    display:flex;  
-    align-items:center;  
-}  
-  
-.product-inner{  
-    width:100%;  
-    display:grid;  
-    grid-template-columns:1fr 1fr;  
-    gap:80px;  
-    align-items:center;  
-}  
-  
-.product-image{  
-    min-height:550px;  
-    display:flex;  
-    align-items:center;  
-    justify-content:center;  
-}  
-  
-.product-image img{  
-    width:85%;  
-    max-width:600px;  
-    max-height:650px;  
-    object-fit:contain;  
-    filter:drop-shadow(0 35px 50px rgba(0,0,0,.8));  
-}  
-  
-.product-text small{  
-    color:var(--orange2);  
-    letter-spacing:3px;  
-    font-weight:800;  
-}  
-  
-.product-text h2{  
-    font-size:clamp(50px,6vw,90px);  
-    line-height:.9;  
-    font-weight:900;  
-    margin:20px 0 30px;  
-    letter-spacing:-4px;  
-}  
-  
-.product-text p{  
-    color:#999;  
-    line-height:1.8;  
-    max-width:600px;  
-}  
-  
-.specs{  
-    display:grid;  
-    grid-template-columns:1fr 1fr;  
-    gap:20px;  
-    margin-top:40px;  
-}  
-  
-.spec{  
-    padding:22px;  
-    background:#171717;  
-    border:1px solid #242424;  
-}  
-  
-.spec strong{  
-    display:block;  
-    font-size:23px;  
-    color:white;  
-}  
-  
-.spec span{  
-    color:#777;  
-    font-size:12px;  
-}  
-  
-/* MISSION */  
-.mission{  
-    padding:150px 8%;  
-    background:#f3eee8;  
-    color:#080808;  
-}  
-  
-.mission h2{  
-    max-width:1000px;  
-    font-size:clamp(45px,7vw,100px);  
-    line-height:.95;  
-    font-weight:900;  
-    letter-spacing:-5px;  
-}  
-  
-.mission h2 span{  
-    color:var(--orange);  
-}  
-  
-.mission p{  
-    margin-top:45px;  
-    max-width:750px;  
-    font-size:18px;  
-    line-height:1.9;  
-    color:#555;  
-}  
-  
-/* HOW */  
-.how{  
-    padding:140px 8%;  
-    background:#080808;  
-}  
-  
-.steps{  
-    margin-top:60px;  
-}  
-  
-.step{  
-    display:flex;  
-    align-items:flex-start;  
-    gap:40px;  
-    padding:40px 0;  
-    border-top:1px solid #222;  
-}  
-  
-.step-number{  
-    width:60px;  
-    height:60px;  
-    border:1px solid var(--orange);  
-    border-radius:50%;  
-    display:flex;  
-    align-items:center;  
-    justify-content:center;  
-    color:var(--orange2);  
-    font-weight:900;  
-    flex-shrink:0;  
-}  
-  
-.step h3{  
-    font-size:27px;  
-    margin-bottom:8px;  
-}  
-  
-.step p{  
-    color:#888;  
-    line-height:1.7;  
-}  
+.product{min-height:90vh;padding:130px 8%;background:radial-gradient(circle at 80% 50%,rgba(184,74,19,.15),transparent 35%),#111;display:flex;align-items:center;}  
+.product-inner{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}  
+.product-image{min-height:550px;display:flex;align-items:center;justify-content:center;}  
+.product-image img{width:85%;max-width:600px;max-height:650px;object-fit:contain;filter:drop-shadow(0 35px 50px rgba(0,0,0,.8));}  
+.product-text small{color:var(--orange2);letter-spacing:3px;font-weight:800;}  
+.product-text h2{font-size:clamp(50px,6vw,90px);line-height:.9;font-weight:900;margin:20px 0 30px;letter-spacing:-4px;}  
+.product-text p{color:#999;line-height:1.8;max-width:600px;}  
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px;}  
+.spec{padding:22px;background:#171717;border:1px solid #242424;}  
+.spec strong{display:block;font-size:23px;color:white;}  
+.spec span{color:#777;font-size:12px;}  
 
 /* PUBLIC CHAT SECTION */
-.community-chat{
-    padding:130px 8%;
-    background:#0e0e0e;
-    border-top: 1px solid #222;
-}
-
-.chat-container{
-    max-width:800px;
-    margin: 40px auto 0;
-    background:#141414;
-    border: 1px solid #262626;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    height: 500px;
-}
-
-.chat-box{
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.chat-message{
-    background: #1c1c1c;
-    padding: 12px 16px;
-    border-radius: 6px;
-    max-width: 80%;
-    border-left: 3px solid var(--orange2);
-    position: relative;
-}
-
-.chat-message .user-name{
-    font-size: 11px;
-    color: var(--orange2);
-    font-weight: 700;
-    margin-bottom: 4px;
-    letter-spacing: 1px;
-}
-
-.chat-message .msg-text{
-    font-size: 14px;
-    color: #ddd;
-    line-height: 1.5;
-}
-
-.delete-btn {
-    position: absolute;
-    top: 10px;
-    right: 12px;
-    background: transparent;
-    border: none;
-    color: #ff4d4d;
-    font-size: 14px;
-    cursor: pointer;
-    font-weight: 900;
-    opacity: 0.6;
-    transition: .2s;
-}
-
-.delete-btn:hover {
-    opacity: 1;
-}
-
-.chat-input-area{
-    display: flex;
-    padding: 15px;
-    background: #101010;
-    border-top: 1px solid #262626;
-    gap: 10px;
-}
-
-.chat-input-area input{
-    flex: 1;
-    background: #1c1c1c;
-    border: 1px solid #333;
-    padding: 12px 15px;
-    border-radius: 4px;
-    color: white;
-    font-family: 'Inter', sans-serif;
-    outline: none;
-}
-
-.chat-input-area input:focus{
-    border-color: var(--orange2);
-}
-
-.chat-input-area button{
-    padding: 0 25px;
-    background: var(--orange2);
-    color: white;
-    border: none;
-    font-weight: 800;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: .3s;
-}
-
-.chat-input-area button:hover{
-    opacity: .85;
-}
+.community-chat{padding:130px 8%;background:#0e0e0e;border-top:1px solid #222;}  
+.chat-container{max-width:800px;margin:40px auto 0;background:#141414;border:1px solid #262626;border-radius:8px;display:flex;flex-direction:column;height:500px;}  
+.chat-box{flex:1;padding:20px;overflow-y:auto;display:flex;flex-direction:column;gap:15px;}  
+.chat-message{background:#1c1c1c;padding:12px 16px;border-radius:6px;max-width:80%;border-left:3px solid var(--orange2);position:relative;}  
+.chat-message .user-name{font-size:11px;color:var(--orange2);font-weight:700;margin-bottom:4px;letter-spacing:1px;}  
+.chat-message .msg-text{font-size:14px;color:#ddd;line-height:1.5;}  
+.delete-btn{position:absolute;top:10px;right:12px;background:transparent;border:none;color:#ff4d4d;font-size:14px;cursor:pointer;font-weight:900;opacity:0.6;transition:.2s;}  
+.delete-btn:hover{opacity:1;}  
+.chat-input-area{display:flex;padding:15px;background:#101010;border-top:1px solid #262626;gap:10px;}  
+.chat-input-area input{flex:1;background:#1c1c1c;border:1px solid #333;padding:12px 15px;border-radius:4px;color:white;font-family:'Inter',sans-serif;outline:none;}  
+.chat-input-area input:focus{border-color:var(--orange2);}  
+.chat-input-area button{padding:0 25px;background:var(--orange2);color:white;border:none;font-weight:800;border-radius:4px;cursor:pointer;transition:.3s;}  
+.chat-input-area button:hover{opacity:.85;}  
   
-/* ORDER */  
-.order{  
-    padding:140px 8%;  
-    background:linear-gradient(rgba(0,0,0,.86),rgba(0,0,0,.95)), url('polaris.jpg') center/cover;  
-}  
+.mission{padding:150px 8%;background:#f3eee8;color:#080808;}  
+.mission h2{max-width:1000px;font-size:clamp(45px,7vw,100px);line-height:.95;font-weight:900;letter-spacing:-5px;}  
+.mission h2 span{color:var(--orange);}  
+.mission p{margin-top:45px;max-width:750px;font-size:18px;line-height:1.9;color:#555;}  
   
-.order-box{  
-    max-width:850px;  
-}  
+.how{padding:140px 8%;background:#080808;}  
+.steps{margin-top:60px;}  
+.step{display:flex;align-items:flex-start;gap:40px;padding:40px 0;border-top:1px solid #222;}  
+.step-number{width:60px;height:60px;border:1px solid var(--orange);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--orange2);font-weight:900;flex-shrink:0;}  
+.step h3{font-size:27px;margin-bottom:8px;}  
+.step p{color:#888;line-height:1.7;}  
   
-.order small{  
-    color:var(--orange2);  
-    font-weight:900;  
-    letter-spacing:3px;  
-}  
+.order{padding:140px 8%;background:linear-gradient(rgba(0,0,0,.86),rgba(0,0,0,.95)),url('polaris.jpg') center/cover;}  
+.order-box{max-width:850px;}  
+.order small{color:var(--orange2);font-weight:900;letter-spacing:3px;}  
+.order h2{font-size:clamp(50px,7vw,100px);font-weight:900;line-height:.9;letter-spacing:-5px;margin:20px 0 30px;}  
+.price{font-size:45px;font-weight:900;margin-bottom:15px;}  
+.price span{color:var(--orange2);}  
+.order p{color:#999;line-height:1.8;max-width:650px;margin-bottom:35px;}  
   
-.order h2{  
-    font-size:clamp(50px,7vw,100px);  
-    font-weight:900;  
-    line-height:.9;  
-    letter-spacing:-5px;  
-    margin:20px 0 30px;  
-}  
+.contact{padding:130px 8%;background:#111;text-align:center;}  
+.contact h2{font-size:clamp(45px,7vw,90px);font-weight:900;letter-spacing:-4px;}  
+.contact p{color:#888;max-width:600px;margin:25px auto 40px;}  
+.contact-buttons{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;}  
   
-.price{  
-    font-size:45px;  
-    font-weight:900;  
-    margin-bottom:15px;  
-}  
+footer{padding:45px 8%;background:#050505;border-top:1px solid #181818;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;}  
+footer strong{letter-spacing:4px;}  
+footer span{color:#666;font-size:13px;}  
   
-.price span{  
-    color:var(--orange2);  
-}  
-  
-.order p{  
-    color:#999;  
-    line-height:1.8;  
-    max-width:650px;  
-    margin-bottom:35px;  
-}  
-  
-/* CONTACT */  
-.contact{  
-    padding:130px 8%;  
-    background:#111;  
-    text-align:center;  
-}  
-  
-.contact h2{  
-    font-size:clamp(45px,7vw,90px);  
-    font-weight:900;  
-    letter-spacing:-4px;  
-}  
-  
-.contact p{  
-    color:#888;  
-    max-width:600px;  
-    margin:25px auto 40px;  
-}  
-  
-.contact-buttons{  
-    display:flex;  
-    justify-content:center;  
-    gap:15px;  
-    flex-wrap:wrap;  
-}  
-  
-/* FOOTER */  
-footer{  
-    padding:45px 8%;  
-    background:#050505;  
-    border-top:1px solid #181818;  
-    display:flex;  
-    justify-content:space-between;  
-    gap:20px;  
-    flex-wrap:wrap;  
-}  
-  
-footer strong{  
-    letter-spacing:4px;  
-}  
-  
-footer span{  
-    color:#666;  
-    font-size:13px;  
-}  
-  
-/* MOBILE */  
 @media(max-width:850px){  
-    nav{  
-        padding:0 5%;  
-    }  
-  
-    .nav-links{  
-        position: fixed;
-        top: 80px;
-        left: 0;
-        width: 100%;
-        background: rgba(7,7,7,.98);
-        flex-direction: column;
-        align-items: center;
-        padding: 40px 0;
-        gap: 25px;
-        border-bottom: 1px solid #222;
-        transform: translateY(-150%);
-        transition: transform .4s ease;
-    }  
-
-    .nav-links.active{
-        transform: translateY(0);
-    }
-
-    .menu-toggle{
-        display: flex;
-    }
-  
-    .hero{  
-        min-height:100vh;  
-        padding:120px 7% 80px;  
-        display:block;  
-    }  
-  
-    .hero-content{  
-        width:100%;  
-        padding-top:30px;  
-    }  
-  
-    .hero h1{  
-        font-size:75px;  
-        letter-spacing:-5px;  
-    }  
-  
-    .hero-image{  
-        position:relative;  
-        right:auto;  
-        width:100%;  
-        height:430px;  
-        margin-top:20px;  
-    }  
-  
-    .hero-image img{  
-        width:90%;  
-        max-height:420px;  
-    }  
-  
-    .intro,  
-    .features,  
-    .product,  
-    .mission,  
-    .how,  
-    .community-chat,
-    .order,  
-    .contact{  
-        padding:90px 7%;  
-    }  
-  
-    .product-inner{  
-        grid-template-columns:1fr;  
-        gap:40px;  
-    }  
-  
-    .product-image{  
-        min-height:350px;  
-    }  
-  
-    .feature{  
-        grid-template-columns:45px 1fr;  
-        gap:15px;  
-    }  
-  
-    .feature h3{  
-        font-size:25px;  
-    }  
-  
-    .step{  
-        gap:20px;  
-    }  
-  
-    .mission h2,  
-    .order h2{  
-        letter-spacing:-3px;  
-    }  
-  
-    footer{  
-        text-align:center;  
-        justify-content:center;  
-    }  
+    nav{padding:0 5%;}  
+    .nav-links{position:fixed;top:80px;left:0;width:100%;background:rgba(7,7,7,.98);flex-direction:column;align-items:center;padding:40px 0;gap:25px;border-bottom:1px solid #222;transform:translateY(-150%);transition:transform .4s ease;}  
+    .nav-links.active{transform:translateY(0);}  
+    .menu-toggle{display:flex;}  
+    .hero{min-height:100vh;padding:120px 7% 80px;display:block;}  
+    .hero-content{width:100%;padding-top:30px;}  
+    .hero h1{font-size:75px;letter-spacing:-5px;}  
+    .hero-image{position:relative;right:auto;width:100%;height:430px;margin-top:20px;}  
+    .hero-image img{width:90%;max-height:420px;}  
+    .intro,.features,.product,.mission,.how,.community-chat,.order,.contact{padding:90px 7%;}  
+    .product-inner{grid-template-columns:1fr;gap:40px;}  
+    .product-image{min-height:350px;}  
+    .feature{grid-template-columns:45px 1fr;gap:15px;}  
+    .feature h3{font-size:25px;}  
+    .step{gap:20px;}  
+    .mission h2,.order h2{letter-spacing:-3px;}  
+    footer{text-align:center;justify-content:center;}  
 }  
 </style>  
 </head>  
@@ -798,77 +146,46 @@ footer span{
     <h1>POLAR<span>I</span>S</h1>  
 </div>  
 
-<!-- NAVIGATION -->  
 <nav>  
-    <a href="#home" class="logo">  
-        POLAR<span>I</span>S  
-    </a>  
-
+    <a href="#home" class="logo">POLAR<span>I</span>S</a>  
     <div class="nav-links" id="navLinks">  
         <a href="#technology" onclick="closeMenu()">TEKNOLOGJIA</a>  
         <a href="#product" onclick="closeMenu()">POLARIS</a>  
         <a href="#chat" onclick="closeMenu()">KOMUNITETI (CHAT)</a>  
         <a href="#mission" onclick="closeMenu()">MISIONI</a>  
         <a href="#order" class="nav-button" onclick="closeMenu()">POROSIT</a>  
-    </div>
-
-    <div class="menu-toggle" id="mobileMenuBtn" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
+    </div>  
+    <div class="menu-toggle" id="mobileMenuBtn" onclick="toggleMenu()">  
+        <span></span><span></span><span></span>  
+    </div>  
 </nav>  
 
-<!-- HERO -->  
 <section class="hero" id="home">  
     <div class="hero-content">  
-        <div class="small-title">  
-            SMART MOBILITY • ALBANIA  
-        </div>  
-        <h1>  
-            POLAR<span>I</span>S  
-        </h1>  
-        <p class="hero-description">  
-            Një shkop inteligjent i krijuar për të sjellë  
-            më shumë siguri, pavarësi dhe teknologji  
-            në lëvizjen e përditshme.  
-        </p>  
+        <div class="small-title">SMART MOBILITY • ALBANIA</div>  
+        <h1>POLAR<span>I</span>S</h1>  
+        <p class="hero-description">Një shkop inteligjent i krijuar për të sjellë më shumë siguri, pavarësi dhe teknologji në lëvizjen e përditshme.</p>  
         <div class="hero-buttons">  
             <a href="#technology" class="primary-btn">MËSO MË SHUMË</a>  
             <a href="#order" class="secondary-btn">POROSIT POLARIS</a>  
         </div>  
     </div>  
-
     <div class="hero-image">  
         <img src="polaris.jpg" alt="POLARIS Smart Cane">  
     </div>  
-
-    <div class="scroll">  
-        SCROLL ↓  
-    </div>
+    <div class="scroll">SCROLL ↓</div>  
 </section>  
 
-<!-- INTRO -->  
 <section class="intro">  
-    <div class="intro-label">  
-        JO THJESHT NJË SHKOP  
-    </div>  
-    <h2>  
-        Teknologji që të jep  
-        <span>më shumë kontroll.</span>  
-    </h2>
+    <div class="intro-label">JO THJESHT NJË SHKOP</div>  
+    <h2>Teknologji që të jep <span>më shumë kontroll.</span></h2>  
 </section>  
 
-<!-- TECHNOLOGY -->  
 <section class="features" id="technology">  
     <div class="section-head">  
         <small>TEKNOLOGJIA</small>  
-        <h2>  
-            E NDËRTUAR PËR<br>  
-            BOTËN REALE.  
-        </h2>  
+        <h2>E NDËRTUAR PËR<br>BOTËN REALE.</h2>  
     </div>  
-
     <div class="feature">  
         <div class="feature-number">01</div>  
         <div>  
@@ -876,7 +193,6 @@ footer span{
             <p>POLARIS përdor sensorë ultrasonikë për të identifikuar pengesat përpara përdoruesit dhe për të matur distancën në kohë reale.</p>  
         </div>  
     </div>  
-
     <div class="feature">  
         <div class="feature-number">02</div>  
         <div>  
@@ -884,7 +200,6 @@ footer span{
             <p>Kur një pengesë afrohet, sistemi jep feedback përmes vibrimit. Intensiteti ndryshon sipas distancës së objektit.</p>  
         </div>  
     </div>  
-
     <div class="feature">  
         <div class="feature-number">03</div>  
         <div>  
@@ -892,17 +207,15 @@ footer span{
             <p>POLARIS është konceptuar me një ndërfaqe intuitive, në mënyrë që përdoruesi të përqendrohet te lëvizja dhe jo te pajisja.</p>  
         </div>  
     </div>  
-
     <div class="feature">  
         <div class="feature-number">04</div>  
         <div>  
             <h3>Teknologji portative</h3>  
             <p>Elektronika është integruar në një pajisje kompakte dhe të përshtatshme për përdorim të përditshëm.</p>  
         </div>  
-    </div>
+    </div>  
 </section>  
 
-<!-- PRODUCT -->  
 <section class="product" id="product">  
     <div class="product-inner">  
         <div class="product-image">  
@@ -910,85 +223,47 @@ footer span{
         </div>  
         <div class="product-text">  
             <small>POLARIS / 01</small>  
-            <h2>  
-                SMART.<br>  
-                SIMPLE.<br>  
-                POLARIS.  
-            </h2>  
-            <p>  
-                Një kombinim i dizajnit modern dhe elektronikës së integruar. POLARIS është krijuar për të ndihmuar përdoruesin të perceptojë më mirë hapësirën përreth.  
-            </p>  
+            <h2>SMART.<br>SIMPLE.<br>POLARIS.</h2>  
+            <p>Një kombinim i dizajnit modern dhe elektronikës së integruar. POLARIS është krijuar për të ndihmuar përdoruesin të perceptojë më mirë hapësirën përreth.</p>  
             <div class="specs">  
-                <div class="spec">  
-                    <strong>360°</strong>  
-                    <span>QASJE E MENÇUR</span>  
-                </div>  
-                <div class="spec">  
-                    <strong>USB</strong>  
-                    <span>KARIKIM</span>  
-                </div>  
-                <div class="spec">  
-                    <strong>REAL</strong>  
-                    <span>FEEDBACK</span>  
-                </div>  
-                <div class="spec">  
-                    <strong>SMART</strong>  
-                    <span>TECHNOLOGY</span>  
-                </div>  
+                <div class="spec"><strong>360°</strong><span>QASJE E MENÇUR</span></div>  
+                <div class="spec"><strong>USB</strong><span>KARIKIM</span></div>  
+                <div class="spec"><strong>REAL</strong><span>FEEDBACK</span></div>  
+                <div class="spec"><strong>SMART</strong><span>TECHNOLOGY</span></div>  
             </div>  
         </div>  
-    </div>
-</section>  
-
-<!-- PUBLIC CHAT -->
-<section class="community-chat" id="chat">
-    <div class="section-head">
-        <small>KOMUNITETI</small>
-        <h2>CHAT PUBLIK</h2>
-    </div>
-    <p style="color: #888; max-width: 600px; margin-bottom: 20px;">
-        Bisedoni me klientët e tjerë, ndani eksperiencat tuaja me pajisjen POLARIS ose bëni pyetje në komunitet.
-    </p>
-
-    <div class="chat-container">
-        <div class="chat-box" id="chatBox">
-            <div class="chat-message">
-                <div class="user-name">Ledjan (Admin)</div>
-                <div class="msg-text">Përshëndetje! Mirësevini në chat-in zyrtar të komunitetit POLARIS. Si mund t'ju ndihmojmë?</div>
-                <button class="delete-btn" onclick="this.parentElement.remove()" title="Fshi mesazhin">&times;</button>
-            </div>
-        </div>
-        <div class="chat-input-area">
-            <input type="text" id="chatUser" placeholder="Emri juaj..." style="max-width: 150px;">
-            <input type="text" id="chatMessageInput" placeholder="Shkruaj një mesazh...">
-            <button onclick="sendMessage()">DËRGO</button>
-        </div>
-    </div>
-</section>
-
-<!-- MISSION -->  
-<section class="mission" id="mission">  
-    <div class="intro-label">  
-        MISIONI YNË  
     </div>  
-    <h2>  
-        TË BËJMË  
-        LËVIZJEN  
-        <span>MË TË SIGURT.</span>  
-    </h2>  
-    <p>  
-        POLARIS është një projekt i fokusuar te inovacioni social dhe teknologjia e aksesueshme. Qëllimi është të sjellim një zgjidhje moderne për personat me dëmtime të shikimit dhe të kontribuojmë në një lëvizje më të pavarur.  
-    </p>
 </section>  
 
-<!-- HOW IT WORKS -->  
+<!-- PUBLIC CHAT FIRESTORE -->
+<section class="community-chat" id="chat">  
+    <div class="section-head">  
+        <small>KOMUNITETI</small>  
+        <h2>CHAT PUBLIK</h2>  
+    </div>  
+    <p style="color: #888; max-width: 600px; margin-bottom: 20px;">  
+        Bisedoni me klientët e tjerë në kohë reale, ndani eksperiencat tuaja ose bëni pyetje në komunitet.  
+    </p>  
+    <div class="chat-container">  
+        <div class="chat-box" id="chatBox"></div>  
+        <div class="chat-input-area">  
+            <input type="text" id="chatUser" placeholder="Emri juaj..." style="max-width: 150px;">  
+            <input type="text" id="chatMessageInput" placeholder="Shkruaj një mesazh...">  
+            <button onclick="sendMessage()">DËRGO</button>  
+        </div>  
+    </div>  
+</section>  
+
+<section class="mission" id="mission">  
+    <div class="intro-label">MISIONI YNË</div>  
+    <h2>TË BËJMË LËVIZJEN <span>MË TË SIGURT.</span></h2>  
+    <p>POLARIS është një projekt i fokusuar te inovacioni social dhe teknologjia e aksesueshme. Qëllimi është të sjellim një zgjidhje moderne për personat me dëmtime të shikimit dhe të kontribuojmë në një lëvizje më të pavarur.</p>  
+</section>  
+
 <section class="how">  
     <div class="section-head">  
         <small>SI FUNKSIONON</small>  
-        <h2>  
-            TRE HAPA.<br>  
-            NJË SISTEM.  
-        </h2>  
+        <h2>TRE HAPA.<br>NJË SISTEM.</h2>  
     </div>  
     <div class="steps">  
         <div class="step">  
@@ -1012,109 +287,124 @@ footer span{
                 <p>Vibrimet të japin informacion për afrimin e pengesave.</p>  
             </div>  
         </div>  
-    </div>
+    </div>  
 </section>  
 
-<!-- ORDER -->  
 <section class="order" id="order">  
     <div class="order-box">  
         <small>POROSIA</small>  
-        <h2>  
-            POLARIS<br>  
-            MUND TË JETË<br>  
-            I YTI.  
-        </h2>  
-        <div class="price">  
-            <span>160€</span>  
-        </div>  
-        <p>  
-            Çmimi përfshin pajisjen e kompletuar. Transport falas në Tiranë. Për Kosovë dhe rrethe, transporti llogaritet sipas destinacionit.  
-        </p>  
-        <a href="https://wa.me/355682673885" target="_blank" class="primary-btn">  
-            POROSIT NË WHATSAPP  
-        </a>  
-    </div>
+        <h2>POLARIS<br>MUND TË JETË<br>I YTI.</h2>  
+        <div class="price"><span>160€</span></div>  
+        <p>Çmimi përfshin pajisjen e kompletuar. Transport falas në Tiranë. Për Kosovë dhe rrethe, transporti llogaritet sipas destinacionit.</p>  
+        <a href="https://wa.me/355682673885" target="_blank" class="primary-btn">POROSIT NË WHATSAPP</a>  
+    </div>  
 </section>  
 
-<!-- CONTACT -->  
 <section class="contact">  
     <h2>KE PYETJE?</h2>  
     <p>Për informacion teknik, porosi ose bashkëpunim, kontakto ekipin e POLARIS.</p>  
     <div class="contact-buttons">  
         <a href="https://wa.me/355682673885" target="_blank" class="primary-btn">WHATSAPP</a>  
         <a href="mailto:ecisigurt@gmail.com" class="secondary-btn">EMAIL</a>  
-    </div>
+    </div>  
 </section>  
 
-<!-- FOOTER -->  
 <footer>  
     <strong>POLARIS</strong>  
     <span>© 2026 POLARIS — Smart Mobility Albania</span>  
-    <span>Project Director: Ledjan Bitri</span>
+    <span>Project Director: Ledjan Bitri</span>  
 </footer>  
 
-<!-- JAVASCRIPT -->
-<script>
-    // Funksioni i Menusë Hamburger
-    function toggleMenu() {
-        const navLinks = document.getElementById('navLinks');
-        navLinks.classList.toggle('active');
-    }
+<!-- FIREBASE SDKs & REALTIME CHAT SCRIPT -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    function closeMenu() {
-        const navLinks = document.getElementById('navLinks');
-        navLinks.classList.remove('active');
-    }
+    const firebaseConfig = {
+      apiKey: "AIzaSyCaLRpsCDoo_rWygqLUWZWSbGksbvMdflw",
+      authDomain: "polarisd-f1309.firebaseapp.com",
+      projectId: "polarisd-f1309",
+      storageBucket: "polarisd-f1309.firebasestorage.app",
+      messagingSenderId: "630083759421",
+      appId: "1:630083759421:web:d3f423dc7f17fe7c5fe954"
+    };
 
-    // Funksioni i Chat-it dhe Fshirjes për Admin
-    function sendMessage() {
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.toggleMenu = function() {  
+        document.getElementById('navLinks').classList.toggle('active');  
+    }  
+    window.closeMenu = function() {  
+        document.getElementById('navLinks').classList.remove('active');  
+    }  
+
+    window.sendMessage = async function() {
         const userInput = document.getElementById('chatUser');
-        const messageInput = document.getElementById('chatMessageInput');
-        const chatBox = document.getElementById('chatBox');
+        const messageInput = document.getElementById('chatMessageInput');  
+        let userName = userInput.value.trim() || "Përdorues Anonim";  
+        let messageText = messageInput.value.trim();  
 
-        let userName = userInput.value.trim() || "Përdorues Anonim";
-        let messageText = messageInput.value.trim();
+        if(messageText === "") return;  
 
-        if(messageText === "") return;
-
-        // Krijimi i mesazhit
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('chat-message');
-
-        const nameDiv = document.createElement('div');
-        nameDiv.classList.add('user-name');
-        nameDiv.textContent = userName;
-
-        const textDiv = document.createElement('div');
-        textDiv.classList.add('msg-text');
-        textDiv.textContent = messageText;
-
-        // Butoni i fshirjes [×]
-        const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('delete-btn');
-        deleteBtn.innerHTML = '&times;'; 
-        deleteBtn.title = "Fshi mesazhin";
-        deleteBtn.onclick = function() {
-            messageDiv.remove();
-        };
-
-        messageDiv.appendChild(nameDiv);
-        messageDiv.appendChild(textDiv);
-        messageDiv.appendChild(deleteBtn);
-        chatBox.appendChild(messageDiv);
-
-        // Pastro inputin e mesazhit
-        messageInput.value = "";
-        chatBox.scrollTop = chatBox.scrollHeight;
+        try {
+            await addDoc(collection(db, "messages"), {
+                user: userName,
+                text: messageText,
+                createdAt: serverTimestamp()
+            });
+            messageInput.value = "";  
+        } catch (e) {
+            console.error("Gabim në dërgimin e mesazhit: ", e);
+        }
     }
 
     // Dërgo me butonin Enter
-    document.getElementById('chatMessageInput').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            sendMessage();
-        }
+    document.getElementById('chatMessageInput').addEventListener('keypress', function (e) {  
+        if (e.key === 'Enter') { window.sendMessage(); }  
     });
-</script>
 
+    // Dëgjo mesazhet në kohë reale nga Firestore
+    const q = query(collection(db, "messages"), orderBy("createdAt", "asc"));
+    onSnapshot(q, (snapshot) => {
+        const chatBox = document.getElementById('chatBox');
+        chatBox.innerHTML = ""; // Pastro listën për të shmangur dublikimet
+        
+        snapshot.forEach((document) => {
+            const data = document.data();
+            const messageId = document.id;
+
+            const messageDiv = document.createElement('div');  
+            messageDiv.classList.add('chat-message');  
+
+            const nameDiv = document.createElement('div');  
+            nameDiv.classList.add('user-name');  
+            nameDiv.textContent = data.user;  
+
+            const textDiv = document.createElement('div');  
+            textDiv.classList.add('msg-text');  
+            textDiv.textContent = data.text;  
+
+            // Butoni i fshirjes për admin (fshin nga Firestore direkt)
+            const deleteBtn = document.createElement('button');  
+            deleteBtn.classList.add('delete-btn');  
+            deleteBtn.innerHTML = '&times;';  
+            deleteBtn.title = "Fshi mesazhin";  
+            deleteBtn.onclick = async function() {  
+                try {
+                    await deleteDoc(doc(db, "messages", messageId));
+                } catch(e) {
+                    console.error("Gabim në fshirje:", e);
+                }
+            };  
+
+            messageDiv.appendChild(nameDiv);  
+            messageDiv.appendChild(textDiv);  
+            messageDiv.appendChild(deleteBtn);  
+            chatBox.appendChild(messageDiv);  
+        });
+        chatBox.scrollTop = chatBox.scrollHeight;  
+    });
+</script>  
 </body>  
 </html>
