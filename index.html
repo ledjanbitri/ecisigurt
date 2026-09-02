@@ -235,7 +235,7 @@ footer span{color:#666;font-size:13px;}
     </div>  
 </section>  
 
-<!-- PUBLIC CHAT FIRESTORE -->
+<!-- PUBLIC CHAT SECTION -->
 <section class="community-chat" id="chat">  
     <div class="section-head">  
         <small>KOMUNITETI</small>  
@@ -317,7 +317,7 @@ footer span{color:#666;font-size:13px;}
 
 <!-- FIREBASE SDKs & REALTIME CHAT SCRIPT -->
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -329,7 +329,7 @@ footer span{color:#666;font-size:13px;}
       appId: "1:630083759421:web:d3f423dc7f17fe7c5fe954"
     };
 
-    const app = initializeApp(firebaseConfig);
+    const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
     const db = getFirestore(app);
 
     window.toggleMenu = function() {  
@@ -342,7 +342,7 @@ footer span{color:#666;font-size:13px;}
     window.sendMessage = async function() {
         const userInput = document.getElementById('chatUser');
         const messageInput = document.getElementById('chatMessageInput');  
-        let userName = userInput.value.trim() || "Përdorues Anonim";  
+        let userName = userInput.value.trim() || "Ledjan Admin";  
         let messageText = messageInput.value.trim();  
 
         if(messageText === "") return;  
@@ -356,19 +356,18 @@ footer span{color:#666;font-size:13px;}
             messageInput.value = "";  
         } catch (e) {
             console.error("Gabim në dërgimin e mesazhit: ", e);
+            alert("Dërgimi dështoi. Kontrollo rregullat e Firestore.");
         }
     }
 
-    // Dërgo me butonin Enter
     document.getElementById('chatMessageInput').addEventListener('keypress', function (e) {  
         if (e.key === 'Enter') { window.sendMessage(); }  
     });
 
-    // Dëgjo mesazhet në kohë reale nga Firestore
     const q = query(collection(db, "messages"), orderBy("createdAt", "asc"));
     onSnapshot(q, (snapshot) => {
         const chatBox = document.getElementById('chatBox');
-        chatBox.innerHTML = ""; // Pastro listën për të shmangur dublikimet
+        chatBox.innerHTML = ""; 
         
         snapshot.forEach((document) => {
             const data = document.data();
@@ -385,7 +384,6 @@ footer span{color:#666;font-size:13px;}
             textDiv.classList.add('msg-text');  
             textDiv.textContent = data.text;  
 
-            // Butoni i fshirjes për admin (fshin nga Firestore direkt)
             const deleteBtn = document.createElement('button');  
             deleteBtn.classList.add('delete-btn');  
             deleteBtn.innerHTML = '&times;';  
@@ -404,6 +402,8 @@ footer span{color:#666;font-size:13px;}
             chatBox.appendChild(messageDiv);  
         });
         chatBox.scrollTop = chatBox.scrollHeight;  
+    }, (error) => {
+        console.error("Gabim te marrja e mesazheve:", error);
     });
 </script>  
 </body>  
