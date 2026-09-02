@@ -529,6 +529,7 @@ nav{
     border-radius: 6px;
     max-width: 80%;
     border-left: 3px solid var(--orange2);
+    position: relative;
 }
 
 .chat-message .user-name{
@@ -543,6 +544,24 @@ nav{
     font-size: 14px;
     color: #ddd;
     line-height: 1.5;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    color: #ff4d4d;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 900;
+    opacity: 0.6;
+    transition: .2s;
+}
+
+.delete-btn:hover {
+    opacity: 1;
 }
 
 .chat-input-area{
@@ -936,6 +955,7 @@ footer span{
             <div class="chat-message">
                 <div class="user-name">Ledjan (Admin)</div>
                 <div class="msg-text">Përshëndetje! Mirësevini në chat-in zyrtar të komunitetit POLARIS. Si mund t'ju ndihmojmë?</div>
+                <button class="delete-btn" onclick="this.parentElement.remove()" title="Fshi mesazhin">&times;</button>
             </div>
         </div>
         <div class="chat-input-area">
@@ -1033,9 +1053,9 @@ footer span{
     <span>Project Director: Ledjan Bitri</span>
 </footer>  
 
-<!-- JAVASCRIPT PËR MENU DHE CHAT -->
+<!-- JAVASCRIPT -->
 <script>
-    // Funksioni i Menusë Hamburger (për celularet)
+    // Funksioni i Menusë Hamburger
     function toggleMenu() {
         const navLinks = document.getElementById('navLinks');
         navLinks.classList.toggle('active');
@@ -1046,7 +1066,7 @@ footer span{
         navLinks.classList.remove('active');
     }
 
-    // Funksioni i Chat-it Publik
+    // Funksioni i Chat-it dhe Fshirjes për Admin
     function sendMessage() {
         const userInput = document.getElementById('chatUser');
         const messageInput = document.getElementById('chatMessageInput');
@@ -1057,7 +1077,7 @@ footer span{
 
         if(messageText === "") return;
 
-        // Krijimi i elementit të mesazhit
+        // Krijimi i mesazhit
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('chat-message');
 
@@ -1069,16 +1089,26 @@ footer span{
         textDiv.classList.add('msg-text');
         textDiv.textContent = messageText;
 
+        // Butoni i fshirjes [×]
+        const deleteBtn = document.createElement('button');
+        deleteBtn.classList.add('delete-btn');
+        deleteBtn.innerHTML = '&times;'; 
+        deleteBtn.title = "Fshi mesazhin";
+        deleteBtn.onclick = function() {
+            messageDiv.remove();
+        };
+
         messageDiv.appendChild(nameDiv);
         messageDiv.appendChild(textDiv);
+        messageDiv.appendChild(deleteBtn);
         chatBox.appendChild(messageDiv);
 
-        // Pastro inputin e mesazhit dhe shko tek mesazhi i fundit
+        // Pastro inputin e mesazhit
         messageInput.value = "";
         chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    // Lejon dërgimin e mesazhit edhe me tastin 'Enter'
+    // Dërgo me butonin Enter
     document.getElementById('chatMessageInput').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
             sendMessage();
