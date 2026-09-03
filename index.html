@@ -47,12 +47,18 @@ img{
   display:block;
 }
 
+button,
+textarea,
+input{
+  font-family:inherit;
+}
+
 .container{
   width:min(1160px,92%);
   margin:auto;
 }
 
-/* NAVIGATION */
+/* NAV */
 
 nav{
   position:fixed;
@@ -363,20 +369,20 @@ footer .container{
   gap:20px;
 }
 
-/* =========================
-   PUBLIC CHAT
-========================= */
+/* =====================================================
+   CHAT BUTTON
+===================================================== */
 
 .chat-launch{
   position:fixed;
   right:22px;
   bottom:22px;
-  z-index:1100;
+  z-index:5000;
 
   width:64px;
   height:64px;
 
-  border:none;
+  border:0;
   border-radius:50%;
 
   background:var(--orange2);
@@ -388,18 +394,22 @@ footer .container{
   cursor:pointer;
 
   box-shadow:0 12px 40px rgba(0,0,0,.55);
+
+  transition:.2s;
 }
 
 .chat-launch:hover{
-  transform:scale(1.05);
+  transform:scale(1.06);
 }
 
-/* CHAT WINDOW */
+/* =====================================================
+   CHAT WINDOW
+===================================================== */
 
 .chat-panel{
   position:fixed;
 
-  z-index:1090;
+  z-index:4999;
 
   right:22px;
   bottom:98px;
@@ -423,7 +433,7 @@ footer .container{
   display:flex;
 }
 
-/* CHAT HEADER */
+/* HEADER */
 
 .chat-head{
   padding:17px;
@@ -633,14 +643,14 @@ footer .container{
   opacity:.5;
 }
 
-/* ADMIN PASSWORD MODAL */
+/* ADMIN MODAL */
 
 .modal{
   position:fixed;
 
   inset:0;
 
-  z-index:2000;
+  z-index:6000;
 
   background:rgba(0,0,0,.78);
 
@@ -797,15 +807,16 @@ footer .container{
   .price{
     font-size:52px;
   }
+
+  .chat-launch{
+    right:15px;
+    bottom:15px;
+  }
 }
 </style>
 </head>
 
 <body>
-
-<!-- =========================
-     NAVIGATION
-========================= -->
 
 <nav>
   <div class="container navin">
@@ -823,10 +834,6 @@ footer .container{
 
   </div>
 </nav>
-
-<!-- =========================
-     HERO
-========================= -->
 
 <header class="hero">
 
@@ -863,10 +870,6 @@ footer .container{
 
 </header>
 
-<!-- =========================
-     INTRO
-========================= -->
-
 <section class="intro">
 
   <div class="container">
@@ -889,10 +892,6 @@ footer .container{
 
 </section>
 
-<!-- =========================
-     TECHNOLOGY
-========================= -->
-
 <section id="technology">
 
   <div class="container">
@@ -910,71 +909,39 @@ footer .container{
     <div class="darkgrid">
 
       <article class="card">
-
-        <div class="num">
-          01
-        </div>
-
-        <h3>
-          Sensorë inteligjentë
-        </h3>
-
+        <div class="num">01</div>
+        <h3>Sensorë inteligjentë</h3>
         <p>
           Sensorë ultrasonikë identifikojnë pengesat
           dhe matin distancën në kohë reale.
         </p>
-
       </article>
 
       <article class="card">
-
-        <div class="num">
-          02
-        </div>
-
-        <h3>
-          Reagim me vibrim
-        </h3>
-
+        <div class="num">02</div>
+        <h3>Reagim me vibrim</h3>
         <p>
           Vibrimi ndryshon sipas distancës së pengesës
           për një reagim intuitiv.
         </p>
-
       </article>
 
       <article class="card">
-
-        <div class="num">
-          03
-        </div>
-
-        <h3>
-          Përdorim i thjeshtë
-        </h3>
-
+        <div class="num">03</div>
+        <h3>Përdorim i thjeshtë</h3>
         <p>
           Ndërfaqe minimale dhe kontroll i drejtpërdrejtë,
           pa komplikime të panevojshme.
         </p>
-
       </article>
 
       <article class="card">
-
-        <div class="num">
-          04
-        </div>
-
-        <h3>
-          Teknologji portative
-        </h3>
-
+        <div class="num">04</div>
+        <h3>Teknologji portative</h3>
         <p>
           Elektronika është integruar në një pajisje
           praktike për përdorim të përditshëm.
         </p>
-
       </article>
 
     </div>
@@ -983,18 +950,11 @@ footer .container{
 
 </section>
 
-<!-- =========================
-     PRODUCT
-========================= -->
-
 <section id="product" class="product">
 
   <div class="container productgrid">
 
-    <img
-      src="polaris.jpg"
-      alt="POLARIS Smart Cane"
-    >
+    <img src="polaris.jpg" alt="POLARIS Smart Cane">
 
     <div>
 
@@ -1011,10 +971,8 @@ footer .container{
       </h2>
 
       <p style="color:#aaa;margin-top:24px">
-
         Një pajisje e projektuar për të ndihmuar përdoruesin
         të perceptojë pengesat përpara tij përmes feedback-ut fizik.
-
       </p>
 
       <div class="specs">
@@ -1047,10 +1005,6 @@ footer .container{
 
 </section>
 
-<!-- =========================
-     MISSION
-========================= -->
-
 <section id="mission" class="mission">
 
   <div class="container">
@@ -1075,10 +1029,6 @@ footer .container{
   </div>
 
 </section>
-
-<!-- =========================
-     HOW IT WORKS
-========================= -->
 
 <section>
 
@@ -1126,10 +1076,6 @@ footer .container{
 
 </section>
 
-<!-- =========================
-     ORDER
-========================= -->
-
 <section id="order" class="order">
 
   <div class="container">
@@ -1152,6 +1098,7 @@ footer .container{
       class="btn primary"
       href="https://wa.me/355682673885"
       target="_blank"
+      rel="noopener"
     >
       POROSIT NË WHATSAPP
     </a>
@@ -1159,10 +1106,6 @@ footer .container{
   </div>
 
 </section>
-
-<!-- =========================
-     CONTACT
-========================= -->
 
 <section class="contact">
 
@@ -1190,6 +1133,7 @@ footer .container{
         class="btn primary"
         href="https://wa.me/355682673885"
         target="_blank"
+        rel="noopener"
       >
         WHATSAPP
       </a>
@@ -1206,10 +1150,6 @@ footer .container{
   </div>
 
 </section>
-
-<!-- =========================
-     FOOTER
-========================= -->
 
 <footer>
 
@@ -1229,31 +1169,32 @@ footer .container{
 
 
 <!-- =====================================================
-     PUBLIC CHAT
+     CHAT BUTTON
 ===================================================== -->
 
 <button
   class="chat-launch"
   id="chatLaunch"
+  type="button"
 >
   CHAT
 </button>
 
+
+<!-- =====================================================
+     CHAT WINDOW
+===================================================== -->
 
 <div
   class="chat-panel"
   id="chatPanel"
 >
 
-  <!-- HEADER -->
-
   <div class="chat-head">
 
     <div class="chat-title">
 
-      <b>
-        POLARIS COMMUNITY
-      </b>
+      <b>POLARIS COMMUNITY</b>
 
       <span id="chatStatus">
         Chat për përdoruesit
@@ -1263,11 +1204,10 @@ footer .container{
 
     <div class="head-actions">
 
-      <!-- PRIVATE ADMIN -->
-
       <button
         class="iconbtn"
         id="adminBtn"
+        type="button"
         title="Admin"
       >
         🔒
@@ -1276,6 +1216,7 @@ footer .container{
       <button
         class="iconbtn"
         id="closeChat"
+        type="button"
       >
         ×
       </button>
@@ -1284,8 +1225,6 @@ footer .container{
 
   </div>
 
-
-  <!-- ADMIN STATUS -->
 
   <div
     class="adminbar"
@@ -1300,14 +1239,13 @@ footer .container{
     <button
       class="iconbtn"
       id="logoutAdmin"
+      type="button"
     >
       DAL
     </button>
 
   </div>
 
-
-  <!-- ALL MESSAGES -->
 
   <div
     class="messages"
@@ -1327,8 +1265,6 @@ footer .container{
 
   </div>
 
-
-  <!-- MESSAGE INPUT -->
 
   <div class="chat-compose">
 
@@ -1351,6 +1287,7 @@ footer .container{
       <button
         class="send"
         id="sendBtn"
+        type="button"
       >
         DËRGO
       </button>
@@ -1363,7 +1300,7 @@ footer .container{
 
 
 <!-- =====================================================
-     ADMIN PASSWORD WINDOW
+     ADMIN LOGIN
 ===================================================== -->
 
 <div
@@ -1396,13 +1333,17 @@ footer .container{
 
     <div class="modal-actions">
 
-      <button id="cancelAdmin">
+      <button
+        id="cancelAdmin"
+        type="button"
+      >
         ANULO
       </button>
 
       <button
         class="confirm"
         id="loginAdmin"
+        type="button"
       >
         HYR SI ADMIN
       </button>
@@ -1415,27 +1356,17 @@ footer .container{
 
 
 <!-- =====================================================
-     SUPABASE + CHAT
+     SUPABASE
 ===================================================== -->
 
-<script type="module">
-
-import {
-  createClient
-} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
-/*
-===========================================================
-SUPABASE
-===========================================================
+<script>
 
-Ky është projekti yt Supabase.
-
-MOS vendos service_role key këtu.
-
-===========================================================
-*/
+/* =====================================================
+   CONFIGURATION
+===================================================== */
 
 const SUPABASE_URL =
   "https://lvixkzjepgbqnkpgybfo.supabase.co";
@@ -1443,77 +1374,45 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
   "sb_publishable_B_6rtcuU7J5kKTttBb9RIQ_PErm6nbh";
 
-
-/*
-===========================================================
-ADMIN EMAIL
-===========================================================
-
-SHUMË E RËNDËSISHME:
-
-Zëvendëso këtë me email-in që ke te:
-
-Supabase
-→ Authentication
-→ Users
-
-Passwordi #32# NUK vendoset këtu.
-===========================================================
-*/
-
 const ADMIN_EMAIL =
-  "VENDOS_EMAILIN_TEND";
+  "Ledjanbitri15@gmail.com";
 
 
-/*
-===========================================================
-SUPABASE CLIENT
-===========================================================
-*/
+/* =====================================================
+   SUPABASE CLIENT
+===================================================== */
 
-const supabase =
-  createClient(
+const polarisSupabase =
+  window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY,
     {
       auth:{
-        /*
-        Session nuk ruhet në localStorage.
-
-        Kështu kur del nga chat-i,
-        admin-session mbyllet.
-        */
         persistSession:false,
-
         autoRefreshToken:true,
-
         detectSessionInUrl:false
       }
     }
   );
 
 
-/*
-===========================================================
-STATE
-===========================================================
-*/
+/* =====================================================
+   STATE
+===================================================== */
 
 let adminMode = false;
-
 let anonymousName = null;
-
 let realtimeChannel = null;
+let initialized = false;
 
 
-/*
-===========================================================
-HELPERS
-===========================================================
-*/
+/* =====================================================
+   HELPERS
+===================================================== */
 
-const $ = id =>
-  document.getElementById(id);
+function $(id){
+  return document.getElementById(id);
+}
 
 
 function escapeHtml(value){
@@ -1521,29 +1420,25 @@ function escapeHtml(value){
   return String(value)
     .replace(
       /[&<>"']/g,
-      character => ({
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#039;"
-      }[character])
+      function(character){
+
+        return {
+          "&":"&amp;",
+          "<":"&lt;",
+          ">":"&gt;",
+          '"':"&quot;",
+          "'":"&#039;"
+        }[character];
+
+      }
     );
 
 }
 
 
-/*
-===========================================================
-ANONYMOUS USER NUMBER
-===========================================================
-
-Përdor RPC të Supabase.
-
-Nëse RPC nuk ekziston,
-krijon një numër fallback.
-===========================================================
-*/
+/* =====================================================
+   GET ANONYMOUS NUMBER
+===================================================== */
 
 async function getAnonymousName(){
 
@@ -1557,31 +1452,43 @@ async function getAnonymousName(){
   }
 
 
-  const {
-    data,
-    error
-  } =
-    await supabase.rpc(
-      "next_chat_anon"
+  try{
+
+    const result =
+      await polarisSupabase.rpc(
+        "next_polaris_chat_anon"
+      );
+
+    if(
+      !result.error &&
+      result.data !== null &&
+      result.data !== undefined
+    ){
+
+      const name =
+        String(result.data);
+
+      sessionStorage.setItem(
+        "polaris_anon_name",
+        name
+      );
+
+      return name;
+    }
+
+  }catch(error){
+
+    console.error(
+      "Anonymous ID error:",
+      error
     );
 
-
-  if(!error && data !== null){
-
-    const name =
-      String(data);
-
-    sessionStorage.setItem(
-      "polaris_anon_name",
-      name
-    );
-
-    return name;
   }
 
 
   /*
-  Fallback.
+    Nëse RPC dështon,
+    krijohet një ID lokale.
   */
 
   const fallback =
@@ -1600,11 +1507,9 @@ async function getAnonymousName(){
 }
 
 
-/*
-===========================================================
-LOAD MESSAGES
-===========================================================
-*/
+/* =====================================================
+   LOAD MESSAGES
+===================================================== */
 
 async function loadMessages(){
 
@@ -1612,71 +1517,81 @@ async function loadMessages(){
     $("messages");
 
 
-  messages.innerHTML = `
-    <div
-      style="
-        color:#777;
-        font-size:12px;
-        text-align:center;
-        padding:20px;
-      "
-    >
-      Po ngarkohet...
-    </div>
-  `;
-
-
-  const {
-    data,
-    error
-  } =
-    await supabase
-      .from("messages")
-      .select(
-        "id,user_name,message,created_at"
-      )
-      .order(
-        "created_at",
-        {
-          ascending:true
-        }
-      );
-
-
-  if(error){
-
-    console.error(error);
-
-    messages.innerHTML = `
-      <div
-        style="
-          color:#ff7b5c;
-          font-size:12px;
-          text-align:center;
-          padding:20px;
-        "
-      >
-        Chat-i nuk u lidh me databazën.
-        Kontrollo tabelën messages dhe RLS.
-      </div>
-    `;
-
+  if(!messages){
     return;
   }
 
 
-  renderMessages(
-    data || []
-  );
+  try{
+
+    const {
+      data,
+      error
+    } =
+      await polarisSupabase
+        .from("polaris_messages")
+        .select(
+          "id,user_name,message,created_at"
+        )
+        .order(
+          "created_at",
+          {
+            ascending:true
+          }
+        );
+
+
+    if(error){
+
+      console.error(
+        "Load messages:",
+        error
+      );
+
+      messages.innerHTML = `
+        <div style="
+          color:#ff7b5c;
+          font-size:12px;
+          text-align:center;
+          padding:25px;
+        ">
+          Chat-i nuk mund të lidhet me Supabase.
+          <br><br>
+          ${escapeHtml(error.message)}
+        </div>
+      `;
+
+      return;
+    }
+
+
+    renderMessages(
+      data || []
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    messages.innerHTML = `
+      <div style="
+        color:#ff7b5c;
+        font-size:12px;
+        text-align:center;
+        padding:25px;
+      ">
+        Gabim në lidhjen me chat-in.
+      </div>
+    `;
+
+  }
 
 }
 
 
-/*
-===========================================================
-RENDER
-===========================================================
-*/
+/* =====================================================
+   RENDER
+===================================================== */
 
 function renderMessages(list){
 
@@ -1687,15 +1602,14 @@ function renderMessages(list){
   if(!list.length){
 
     messages.innerHTML = `
-      <div
-        style="
-          color:#777;
-          font-size:12px;
-          text-align:center;
-          padding:20px;
-        "
-      >
+      <div style="
+        color:#777;
+        font-size:12px;
+        text-align:center;
+        padding:25px;
+      ">
         Nuk ka ende mesazhe.
+        <br>
         Fillo bisedën.
       </div>
     `;
@@ -1705,85 +1619,80 @@ function renderMessages(list){
 
 
   messages.innerHTML =
-    list.map(
-      message => {
+    list.map(function(item){
 
-        const isAdmin =
-          message.user_name ===
-          "Ledjan Bitri";
-
-
-        const isMine =
-          adminMode
-            ? isAdmin
-            : message.user_name ===
-              anonymousName;
+      const isAdmin =
+        item.user_name ===
+        "Ledjan Bitri";
 
 
-        const time =
-          message.created_at
-            ? new Date(
-                message.created_at
-              ).toLocaleTimeString(
-                "sq-AL",
-                {
-                  hour:"2-digit",
-                  minute:"2-digit"
-                }
-              )
-            : "";
+      const isMine =
+        adminMode
+          ? isAdmin
+          : item.user_name ===
+            anonymousName;
 
 
-        return `
-
-          <div
-            class="
-              msg
-              ${isMine ? "mine" : ""}
-              ${isAdmin ? "admin" : ""}
-            "
-            data-id="${escapeHtml(message.id)}"
-          >
-
-            <div class="meta">
-
-              ${
-                isAdmin
-                  ? "Ledjan Bitri · ADMIN"
-                  : "Përdoruesi " +
-                    escapeHtml(
-                      message.user_name
-                    )
+      const time =
+        item.created_at
+          ? new Date(
+              item.created_at
+            ).toLocaleTimeString(
+              "sq-AL",
+              {
+                hour:"2-digit",
+                minute:"2-digit"
               }
-
-              · ${time}
-
-
-              ${
-                adminMode
-                  ? `
-                    <button
-                      class="delete-msg"
-                      data-delete="${escapeHtml(message.id)}"
-                    >
-                      Fshi
-                    </button>
-                  `
-                  : ""
-              }
-
-            </div>
+            )
+          : "";
 
 
-            <div class="text">
-              ${escapeHtml(message.message)}
-            </div>
+      return `
+        <div
+          class="
+            msg
+            ${isMine ? "mine" : ""}
+            ${isAdmin ? "admin" : ""}
+          "
+        >
+
+          <div class="meta">
+
+            ${
+              isAdmin
+                ? "Ledjan Bitri · ADMIN"
+                : "Përdoruesi " +
+                  escapeHtml(
+                    item.user_name
+                  )
+            }
+
+            · ${time}
+
+            ${
+              adminMode
+                ? `
+                  <button
+                    class="delete-msg"
+                    type="button"
+                    data-delete="${escapeHtml(item.id)}"
+                  >
+                    Fshi
+                  </button>
+                `
+                : ""
+            }
 
           </div>
 
-        `;
-      }
-    ).join("");
+          <div class="text">
+            ${escapeHtml(item.message)}
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
 
 
   messages.scrollTop =
@@ -1791,51 +1700,59 @@ function renderMessages(list){
 }
 
 
-/*
-===========================================================
-REALTIME
-===========================================================
-*/
+/* =====================================================
+   REALTIME
+===================================================== */
 
 async function setupRealtime(){
 
-  if(realtimeChannel){
+  try{
 
-    await supabase
-      .removeChannel(
-        realtimeChannel
-      );
+    if(realtimeChannel){
+
+      await polarisSupabase
+        .removeChannel(
+          realtimeChannel
+        );
+
+    }
+
+
+    realtimeChannel =
+      polarisSupabase
+        .channel(
+          "polaris-community-chat"
+        )
+        .on(
+          "postgres_changes",
+          {
+            event:"*",
+            schema:"public",
+            table:"polaris_messages"
+          },
+          function(){
+
+            loadMessages();
+
+          }
+        )
+        .subscribe();
+
+  }catch(error){
+
+    console.error(
+      "Realtime:",
+      error
+    );
+
   }
-
-
-  realtimeChannel =
-    supabase
-      .channel(
-        "polaris-community-chat"
-      )
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"messages"
-        },
-        () => {
-
-          loadMessages();
-
-        }
-      )
-      .subscribe();
 
 }
 
 
-/*
-===========================================================
-IDENTITY
-===========================================================
-*/
+/* =====================================================
+   IDENTITY
+===================================================== */
 
 async function refreshIdentity(){
 
@@ -1849,18 +1766,19 @@ async function refreshIdentity(){
         </strong>
       `;
 
-
     $("chatStatus").textContent =
       "Panel privat aktiv";
-
 
     return;
   }
 
 
-  anonymousName =
-    anonymousName ||
-    await getAnonymousName();
+  if(!anonymousName){
+
+    anonymousName =
+      await getAnonymousName();
+
+  }
 
 
   $("identity").innerHTML =
@@ -1879,16 +1797,17 @@ async function refreshIdentity(){
 }
 
 
-/*
-===========================================================
-SEND MESSAGE
-===========================================================
-*/
+/* =====================================================
+   SEND MESSAGE
+===================================================== */
 
 async function sendMessage(){
 
   const input =
     $("messageInput");
+
+  const sendButton =
+    $("sendBtn");
 
 
   const text =
@@ -1897,6 +1816,14 @@ async function sendMessage(){
 
   if(!text){
     return;
+  }
+
+
+  if(!anonymousName){
+
+    anonymousName =
+      await getAnonymousName();
+
   }
 
 
@@ -1911,57 +1838,56 @@ async function sendMessage(){
   }
 
 
-  $("sendBtn").disabled =
+  sendButton.disabled =
     true;
 
 
-  const {
-    error
-  } =
-    await supabase
-      .from("messages")
-      .insert({
-        user_name:userName,
-        message:text
-      });
+  try{
+
+    const {
+      error
+    } =
+      await polarisSupabase
+        .from("polaris_messages")
+        .insert({
+          user_name:userName,
+          message:text
+        });
 
 
-  $("sendBtn").disabled =
-    false;
+    if(error){
+
+      console.error(
+        "Send:",
+        error
+      );
+
+      alert(
+        "Mesazhi nuk u dërgua: " +
+        error.message
+      );
+
+      return;
+    }
 
 
-  if(error){
+    input.value = "";
 
-    console.error(error);
+    await loadMessages();
 
-    alert(
-      "Mesazhi nuk u dërgua. Kontrollo Supabase RLS."
-    );
+  }finally{
 
-    return;
+    sendButton.disabled =
+      false;
+
   }
-
-
-  input.value = "";
-
-
-  await loadMessages();
 
 }
 
 
-/*
-===========================================================
-ADMIN LOGIN
-===========================================================
-
-Passwordi futet vetëm nga përdoruesi.
-
-Kodi nuk e përmban #32#.
-
-Supabase Auth e verifikon.
-===========================================================
-*/
+/* =====================================================
+   ADMIN LOGIN
+===================================================== */
 
 async function loginAdmin(){
 
@@ -1982,81 +1908,102 @@ async function loginAdmin(){
   }
 
 
-  if(
-    !ADMIN_EMAIL ||
-    ADMIN_EMAIL ===
-      "VENDOS_EMAILIN_TEND"
-  ){
+  try{
 
-    $("adminError").textContent =
-      "Vendos email-in e adminit në kod.";
+    const {
+      data,
+      error
+    } =
+      await polarisSupabase
+        .auth
+        .signInWithPassword({
 
-    return;
-  }
+          email:ADMIN_EMAIL,
 
+          password:password
 
-  const {
-    error
-  } =
-    await supabase.auth.signInWithPassword({
-
-      email:ADMIN_EMAIL,
-
-      password:password
-
-    });
+        });
 
 
-  if(error){
+    if(error){
+
+      console.error(
+        "Admin login:",
+        error
+      );
+
+      $("adminError").textContent =
+        "Email-i ose passwordi nuk është i saktë.";
+
+      return;
+    }
+
+
+    /*
+      Verifikim shtesë:
+      vetëm email-i i adminit.
+    */
+
+    const loggedEmail =
+      data &&
+      data.user &&
+      data.user.email
+        ? data.user.email
+        : "";
+
+
+    if(
+      loggedEmail.toLowerCase() !==
+      ADMIN_EMAIL.toLowerCase()
+    ){
+
+      await polarisSupabase.auth.signOut();
+
+      $("adminError").textContent =
+        "Kjo llogari nuk ka akses admin.";
+
+      return;
+    }
+
+
+    adminMode =
+      true;
+
+
+    $("adminPassword").value =
+      "";
+
+
+    $("adminModal")
+      .classList
+      .remove("show");
+
+
+    $("adminBar")
+      .classList
+      .add("active");
+
+
+    await refreshIdentity();
+
+    await loadMessages();
+
+
+  }catch(error){
 
     console.error(error);
 
     $("adminError").textContent =
-      "Passwordi ose email-i nuk është i saktë.";
+      "Ndodhi një gabim gjatë hyrjes.";
 
-    return;
   }
-
-
-  /*
-  ADMIN AKTIV
-  */
-
-  adminMode =
-    true;
-
-
-  /*
-  Passwordi hiqet menjëherë
-  nga input-i.
-  */
-
-  $("adminPassword").value =
-    "";
-
-
-  $("adminModal")
-    .classList
-    .remove("show");
-
-
-  $("adminBar")
-    .classList
-    .add("active");
-
-
-  await refreshIdentity();
-
-  await loadMessages();
 
 }
 
 
-/*
-===========================================================
-LOGOUT ADMIN
-===========================================================
-*/
+/* =====================================================
+   LOGOUT
+===================================================== */
 
 async function logoutAdmin(){
 
@@ -2064,7 +2011,17 @@ async function logoutAdmin(){
     false;
 
 
-  await supabase.auth.signOut();
+  try{
+
+    await polarisSupabase
+      .auth
+      .signOut();
+
+  }catch(error){
+
+    console.error(error);
+
+  }
 
 
   $("adminBar")
@@ -2079,11 +2036,9 @@ async function logoutAdmin(){
 }
 
 
-/*
-===========================================================
-DELETE MESSAGE
-===========================================================
-*/
+/* =====================================================
+   DELETE
+===================================================== */
 
 async function deleteMessage(id){
 
@@ -2092,13 +2047,11 @@ async function deleteMessage(id){
   }
 
 
-  const confirmDelete =
-    confirm(
+  if(
+    !confirm(
       "Ta fshijmë këtë mesazh?"
-    );
-
-
-  if(!confirmDelete){
+    )
+  ){
     return;
   }
 
@@ -2106,18 +2059,22 @@ async function deleteMessage(id){
   const {
     error
   } =
-    await supabase
-      .from("messages")
+    await polarisSupabase
+      .from("polaris_messages")
       .delete()
       .eq("id",id);
 
 
   if(error){
 
-    console.error(error);
+    console.error(
+      "Delete:",
+      error
+    );
 
     alert(
-      "Mesazhi nuk u fshi. Kontrollo policy-n DELETE të adminit."
+      "Mesazhi nuk u fshi: " +
+      error.message
     );
 
     return;
@@ -2129,25 +2086,26 @@ async function deleteMessage(id){
 }
 
 
-/*
-===========================================================
-OPEN CHAT
-===========================================================
-*/
+/* =====================================================
+   OPEN CHAT
+===================================================== */
 
 $("chatLaunch")
   .addEventListener(
     "click",
-    async () => {
+    async function(){
 
       $("chatPanel")
         .classList
         .add("open");
 
 
-      anonymousName =
-        anonymousName ||
-        await getAnonymousName();
+      if(!anonymousName){
+
+        anonymousName =
+          await getAnonymousName();
+
+      }
 
 
       await refreshIdentity();
@@ -2158,16 +2116,14 @@ $("chatLaunch")
   );
 
 
-/*
-===========================================================
-CLOSE CHAT
-===========================================================
-*/
+/* =====================================================
+   CLOSE CHAT
+===================================================== */
 
 $("closeChat")
   .addEventListener(
     "click",
-    async () => {
+    async function(){
 
       $("chatPanel")
         .classList
@@ -2175,9 +2131,8 @@ $("closeChat")
 
 
       /*
-      Nëse admini del nga chat-i,
-      admin-session mbyllet.
-      Herën tjetër duhet password.
+        Nëse admini mbyll chat-in,
+        bëhet logout.
       */
 
       if(adminMode){
@@ -2190,16 +2145,14 @@ $("closeChat")
   );
 
 
-/*
-===========================================================
-ADMIN BUTTON
-===========================================================
-*/
+/* =====================================================
+   ADMIN BUTTON
+===================================================== */
 
 $("adminBtn")
   .addEventListener(
     "click",
-    () => {
+    function(){
 
       if(adminMode){
         return;
@@ -2220,8 +2173,11 @@ $("adminBtn")
 
 
       setTimeout(
-        () => {
-          $("adminPassword").focus();
+        function(){
+
+          $("adminPassword")
+            .focus();
+
         },
         50
       );
@@ -2230,16 +2186,14 @@ $("adminBtn")
   );
 
 
-/*
-===========================================================
-CANCEL
-===========================================================
-*/
+/* =====================================================
+   CANCEL ADMIN
+===================================================== */
 
 $("cancelAdmin")
   .addEventListener(
     "click",
-    () => {
+    function(){
 
       $("adminModal")
         .classList
@@ -2249,11 +2203,9 @@ $("cancelAdmin")
   );
 
 
-/*
-===========================================================
-LOGIN
-===========================================================
-*/
+/* =====================================================
+   LOGIN BUTTON
+===================================================== */
 
 $("loginAdmin")
   .addEventListener(
@@ -2262,11 +2214,9 @@ $("loginAdmin")
   );
 
 
-/*
-===========================================================
-LOGOUT
-===========================================================
-*/
+/* =====================================================
+   LOGOUT
+===================================================== */
 
 $("logoutAdmin")
   .addEventListener(
@@ -2275,11 +2225,9 @@ $("logoutAdmin")
   );
 
 
-/*
-===========================================================
-SEND
-===========================================================
-*/
+/* =====================================================
+   SEND
+===================================================== */
 
 $("sendBtn")
   .addEventListener(
@@ -2288,16 +2236,14 @@ $("sendBtn")
   );
 
 
-/*
-===========================================================
-ENTER SEND
-===========================================================
-*/
+/* =====================================================
+   ENTER MESSAGE
+===================================================== */
 
 $("messageInput")
   .addEventListener(
     "keydown",
-    event => {
+    function(event){
 
       if(
         event.key === "Enter" &&
@@ -2314,18 +2260,18 @@ $("messageInput")
   );
 
 
-/*
-===========================================================
-ADMIN ENTER
-===========================================================
-*/
+/* =====================================================
+   ENTER ADMIN PASSWORD
+===================================================== */
 
 $("adminPassword")
   .addEventListener(
     "keydown",
-    event => {
+    function(event){
 
       if(event.key === "Enter"){
+
+        event.preventDefault();
 
         loginAdmin();
 
@@ -2335,16 +2281,14 @@ $("adminPassword")
   );
 
 
-/*
-===========================================================
-DELETE BUTTONS
-===========================================================
-*/
+/* =====================================================
+   DELETE BUTTONS
+===================================================== */
 
 $("messages")
   .addEventListener(
     "click",
-    event => {
+    function(event){
 
       const button =
         event.target.closest(
@@ -2364,15 +2308,13 @@ $("messages")
   );
 
 
-/*
-===========================================================
-ESCAPE
-===========================================================
-*/
+/* =====================================================
+   ESCAPE
+===================================================== */
 
 document.addEventListener(
   "keydown",
-  event => {
+  function(event){
 
     if(event.key === "Escape"){
 
@@ -2386,25 +2328,49 @@ document.addEventListener(
 );
 
 
-/*
-===========================================================
-INITIALIZE
-===========================================================
-*/
+/* =====================================================
+   INITIALIZE
+===================================================== */
 
-(async function(){
+async function initializePolarisChat(){
 
-  anonymousName =
-    await getAnonymousName();
+  if(initialized){
+    return;
+  }
 
 
-  await refreshIdentity();
+  initialized = true;
 
-  await loadMessages();
 
-  await setupRealtime();
+  /*
+    Chat UI duhet të punojë
+    edhe nëse Supabase ka problem.
+  */
 
-})();
+  try{
+
+    anonymousName =
+      await getAnonymousName();
+
+    await refreshIdentity();
+
+    await loadMessages();
+
+    await setupRealtime();
+
+  }catch(error){
+
+    console.error(
+      "Chat initialization:",
+      error
+    );
+
+  }
+
+}
+
+
+initializePolarisChat();
 
 </script>
 
