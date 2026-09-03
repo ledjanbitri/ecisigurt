@@ -23,8 +23,6 @@ nav{position:fixed;top:0;left:0;width:100%;height:80px;z-index:5000;display:flex
 .logo{font-size:24px;font-weight:900;letter-spacing:5px;}  
 .logo span{color:var(--orange2);}  
 
-.nav-right{display:flex;align-items:center;gap:25px;}
-
 /* HAMBURGER MENU */
 .menu-toggle{display:flex;flex-direction:column;cursor:pointer;gap:6px;z-index:6000;}  
 .menu-toggle span{width:30px;height:3px;background:white;transition:.3s;}  
@@ -115,167 +113,6 @@ nav{position:fixed;top:0;left:0;width:100%;height:80px;z-index:5000;display:flex
 .contact p{color:#888;max-width:600px;margin:20px auto 40px;font-size:16px;line-height:1.7;}  
 
 /* FOOTER */  
-footer{padding:40px 8%;background:#040404;border-top:1px solid #161616;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}  
-footer strong{letter-spacing:4px;}  
-footer span{color:#666;font-size:13px;}  
-
-@media(max-width:900px){  
-    .hero{display:block;padding-top:140px;}  
-    .hero-content{width:100%;}  
-    .hero-image{position:relative;right:auto;width:100%;margin-top:40px;}  
-    .gallery-grid, .steps, .future-grid{grid-template-columns:1fr;}  
-}  
-</style>  
-</head>  
-<body>  
-
-<div class="loader">  
-    <h1>POLAR<span>I</span>S</h1>  
-</div>  
-
-<!-- LEFT FLOATING CHAT BUTTON (3 DOTS) -->
-<button class="left-chat-btn" onclick="toggleChatDrawer()" title="Free Chat & Komuniteti">
-    ⋮
-</button>
-
-<!-- FREE CHAT SIDEBAR DRAWER -->
-<div class="chat-drawer" id="chatDrawer">
-    <div class="chat-header">
-        <h3>FREE CHAT • KOMUNITETI</h3>
-        <button class="close-chat" onclick="toggleChatDrawer()">&times;</button>
-    </div>
-    <div style="padding: 15px 20px 0; font-size: 13px; color: #888; line-height: 1.5;">
-        Shprehni mendimet, problematikat dhe sugjerimet tuaja për shkopin inteligjent POLARIS.
-    </div>
-    <div class="chat-box" id="chatBox"></div>  
-    <div class="chat-input-area">  
-        <input type="text" id="chatUser" placeholder="Emri juaj..." value="Ledjan (Admin)">  
-        <input type="text" id="chatMessageInput" placeholder="Shkruaj një mesazh...">  
-        <button onclick="sendMessage()">DËRGO MESAZHIN</button>  
-    </div>  
-</div>
-
-<!-- NAVIGATION -->  
-<nav>  
-    <a href="#home" class="logo">POLAR<span>I</span>S</a>  
-    <div class="menu-toggle" onclick="toggleNavMenu()">  
-        <span></span><span></span><span></span>  
-    </div>  
-</nav>  
-
-<!-- FULLSCREEN MENU DRAWER (3 VIJAT) -->
-<div class="nav-menu-overlay" id="navMenuOverlay">
-    <div class="close-menu" onclick="toggleNavMenu()">&times;</div>
-    <a href="#product" onclick="toggleNavMenu()">Produktet (Fotot)</a>
-    <a href="#how" onclick="toggleNavMenu()">Si Funksionon</a>
-    <a href="#future" onclick="toggleNavMenu()">E Ardhmja & AI</a>
-    <a href="#contact" onclick="toggleNavMenu()">Komunikimi & Email</a>
-</div>
-
-<!-- HERO -->  
-<section class="hero" id="home">  
-    <div class="hero-content">  
-        <div class="small-title">SMART MOBILITY & AI • ALBANIA</div>  
-        <h1>POLAR<span>I</span>S</h1>  
-        <p class="hero-description">  
-            Një shkop inteligjent i gjeneratës së re, i dizajnuar për të sjellë liri absolute, siguri të lartë dhe teknologji të avancuar në lëvizjen e përditshme.  
-        </p>  
-        <div class="hero-buttons">  
-            <a href="#product" class="primary-btn">SHIKO PRODUKTIN</a>  
-            <a href="#contact" class="secondary-btn">NA KONTAKTONI</a>  
-        </div>  
-    </div>  
-    <div class="hero-image">  
-        <img src="polarisv1.jpg" alt="POLARIS Smart Cane v1">  
-    </div>  
-</section>  
-
-<!-- PRODUCT GALLERY (3 FOTOT) -->  
-<section class="product-gallery" id="product">  
-    <div class="section-head">  
-        <small>GALERIA E PRODUKTIT</small>  
-        <h2>modelet e serisë polaris</h2>  
-    </div>  
-    <div class="gallery-grid">  
-        <div class="gallery-card">  
-            <img src="polarisv1.jpg" alt="Polaris V1">  
-            <div class="gallery-info">  
-                <h3>POLARIS V1</h3>  
-                <p>Modeli bazë i pajisur me sensorë ultrasonikë me precizion të lartë dhe feedback haptik (vibrim) në kohë reale.</p>  
-            </div>  
-        </div>  
-        <div class="gallery-card">  
-            <img src="polarisv2.jpg" alt="Polaris V2">  
-            <div class="gallery-info">  
-                <h3>POLARIS V2 - ERGONOMIK</h3>  
-                <p>Strukturë e lehtë alumini dhe karboni, me bateri të zgjeruar dhe rezistencë ndaj kushteve atmosferike.</p>  
-            </div>  
-        </div>  
-        <div class="gallery-card">  
-            <img src="polarisv3.jpg" alt="Polaris V3">  
-            <div class="gallery-info">  
-                <h3>POLARIS V3 - PRO</h3>  
-                <p>Versioni më i avancuar i pajisur me module audio të integruara, lidhje të shpejtë USB-C dhe sensorë zgjerimi.</p>  
-            </div>  
-        </div>  
-    </div>  
-</section>  
-
-<!-- HOW IT WORKS -->  
-<section class="how" id="how">  
-    <div class="section-head">  
-        <small>TEKNOLOGJIA DHE FUNKSIONIMI</small>  
-        <h2>SI FUNKSIONON SHKOPI?</h2>  
-    </div>  
-    <div class="steps">  
-        <div class="step-card">  
-            <div class="step-num">01</div>  
-            <h3>Sistemi Ultrasonik</h3>  
-            <p>Sensorët e vendosur në trupin e shkopit dërgojnë valë për të skanuar hapësirën përreth dhe për të kapur pengesat vertikale apo horizontale para jush.</p>  
-        </div>  
-        <div class="step-card">  
-            <div class="step-num">02</div>  
-            <h3>Reagimi Haptik (Vibrimi)</h3>  
-            <p>Në varësi të distancës së objektit, pajisja lëshon sinjale dridhjeje me intensitet të ndryshueshëm, duke ju paralajmëruar në kohë reale pa pasur nevojë për kufje.</p>  
-        </div>  
-        <div class="step-card">  
-            <div class="step-num">03</div>  
-            <h3>Pavarësi Maksimale</h3>  
-            <p>Dizajni intuitiv dhe pesha e lehtë ju lejojnë të lëvizni me siguri të plotë në mjedise urbane, rrugë dhe ambiente të mbyllura.</p>  
-        </div>  
-    </div>  
-</section>  
-
-<!-- FUTURE OF POLARIS - AI & NAVIGATION (EXPANDED) -->  
-<section class="future" id="future">  
-    <div class="future-content">  
-        <small style="color:var(--orange2); font-weight:800; letter-spacing:3px;">E ARDHMJA E POLARIS</small>  
-        <h2>INTEGRIMI ME <span>AI DHE NAVIGIM SAKTËSI TË LARTË</span></h2>  
-        <p style="color: #999; line-height: 1.8; font-size: 16px;">  
-            E ardhmja e projektit POLARIS synon të kalojë kufijtë e një shkopi tradicional, duke e shndërruar atë në një asistjent personal inteligjent të mbështetur në Inteligjencën Artificiale (AI).  
-        </p>  
-        <div class="future-grid">  
-            <div class="future-box">  
-                <h4>Inteligjenca Artificiale (AI) & Klasifikimi i Objekteve</h4>  
-                <p>Në versionet e ardhshme, shkopi do të integrojë mikrokontrollerë dhe modele të avancuara të AI për të njohur llojet e pengesave (shkallë, gropa, sinjalistika, apo mjete lëvizëse) duke i dhënë përdoruesit përshkrim zanor të mjedisit.</p>  
-            </div>  
-            <div class="future-box">  
-                <h4>Navigimi Satelitor & Harta Haptike</h4>  
-                <p>Sistemi i integruar i navigimit do të udhëheqë përdoruesin hap pas hapi përmes komandave të zërit dhe sinjaleve të drejtuara haptike, duke lidhur destinacionet e preferuara direkt me lëvizjen e shkopit.</p>  
-            </div>  
-        </div>  
-    </div>  
-</section>  
-
-<!-- CONTACT & EMAIL -->  
-<section class="contact" id="contact">  
-    <small style="color:var(--orange2); font-weight:800; letter-spacing:3px;">KOMUNIKIMI</small>  
-    <h2>NA KONTAKTONI</h2>  
-    <p>Për bashkëpunime, pyetje rreth produkteve ose porosi të personalizuara, na shkruani direkt përmes email-it zyrtar.</p>  
-    <a href="mailto:ecisigurt@gmail.com" class="primary-btn">DËRGO NJË EMAIL</a>  
-</section>  
-
-<!-- FOOTER -->  
 <footer>  
     <strong>POLARIS</strong>  
     <span>© 2026 POLARIS — Smart Mobility Albania</span>  
@@ -309,13 +146,17 @@ footer span{color:#666;font-size:13px;}
         document.getElementById('chatDrawer').classList.toggle('active');
     }
 
-    // Send Message
+    // Send Message - rregulluar që secili përdorues ruan emrin e tij unik
     window.sendMessage = async function() {
         const userInput = document.getElementById('chatUser');
         const messageInput = document.getElementById('chatMessageInput');  
-        let userName = userInput.value.trim() || "Përdorues Anonim";  
-        let messageText = messageInput.value.trim();  
+        
+        let userName = userInput.value.trim();
+        if(userName === "") {
+            userName = "Vizitor";
+        }
 
+        let messageText = messageInput.value.trim();  
         if(messageText === "") return;  
 
         try {
@@ -327,7 +168,7 @@ footer span{color:#666;font-size:13px;}
             messageInput.value = "";  
         } catch (e) {
             console.error("Gabim në dërgim: ", e);
-            alert("Dërgimi dështoi. Ju lutemi kontrolloni lidhjen.");
+            alert("Dërgimi dështoi. Kontrollo rregullat e Firestore Rules në Firebase Console.");
         }
     }
 
@@ -390,6 +231,15 @@ footer span{color:#666;font-size:13px;}
     }, (error) => {
         console.error("Gabim në marrjen e mesazheve:", error);
     });
+            rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /messages/{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
+
 </script>  
 
 </body>  
