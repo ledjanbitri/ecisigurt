@@ -1,756 +1,2483 @@
 <!DOCTYPE html>
 <html lang="sq">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>POLARIS — Admin Panel</title>
+  <title>POLARIS — Smart Cane</title>
+  <meta name="description" content="POLARIS — Smart Mobility Albania. Teknologji inteligjente për lëvizje më të sigurt.">
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-body{
-    background:#070707;
-    color:white;
-    font-family:'Inter',sans-serif;
-    min-height:100vh;
-}
-
-/* LOGIN */
-
-#loginScreen{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:25px;
-}
-
-.login-box{
-    width:100%;
-    max-width:420px;
-    background:#111;
-    border:1px solid #292929;
-    border-radius:12px;
-    padding:40px;
-    box-shadow:0 30px 80px rgba(0,0,0,.5);
-}
-
-.logo{
-    font-size:28px;
-    font-weight:900;
-    letter-spacing:5px;
-    margin-bottom:8px;
-}
-
-.logo span{
-    color:#e06a25;
-}
-
-.login-box h2{
-    margin-top:30px;
-    margin-bottom:10px;
-    font-size:25px;
-}
-
-.login-box p{
-    color:#777;
-    font-size:14px;
-    margin-bottom:25px;
-}
-
-input{
-    width:100%;
-    background:#1a1a1a;
-    border:1px solid #333;
-    color:white;
-    padding:14px;
-    border-radius:6px;
-    margin-bottom:12px;
-    outline:none;
-}
-
-input:focus{
-    border-color:#e06a25;
-}
-
-button{
-    width:100%;
-    padding:14px;
-    border:0;
-    border-radius:6px;
-    background:#e06a25;
-    color:white;
-    font-weight:800;
-    cursor:pointer;
-}
-
-button:hover{
-    opacity:.85;
-}
-
-#error{
-    color:#ff5555;
-    font-size:13px;
-    margin-top:15px;
-    display:none;
-}
-
-/* ADMIN */
-
-#adminPanel{
-    display:none;
-    min-height:100vh;
-}
-
-header{
-    height:75px;
-    padding:0 5%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid #222;
-    background:#0c0c0c;
-    position:sticky;
-    top:0;
-    z-index:100;
-}
-
-header .title{
-    font-weight:900;
-    letter-spacing:3px;
-}
-
-header .title span{
-    color:#e06a25;
-}
-
-.logout{
-    width:auto;
-    padding:10px 18px;
-    background:#222;
-    font-size:12px;
-}
-
-.container{
-    width:100%;
-    max-width:1100px;
-    margin:auto;
-    padding:45px 5%;
-}
-
-.dashboard-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-    gap:20px;
-    margin-bottom:30px;
-}
-
-.dashboard-title h1{
-    font-size:clamp(35px,6vw,65px);
-    line-height:1;
-    font-weight:900;
-}
-
-.dashboard-title p{
-    color:#777;
-    margin-top:10px;
-}
-
-.refresh{
-    width:auto;
-    padding:12px 18px;
-    background:#181818;
-    border:1px solid #333;
-}
-
-.messages{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-}
-
-.message{
-    background:#111;
-    border:1px solid #242424;
-    border-radius:9px;
-    padding:20px;
-    position:relative;
-}
-
-.message:hover{
-    border-color:#e06a25;
-}
-
-.message-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    margin-bottom:10px;
-}
-
-.username{
-    color:#e06a25;
-    font-weight:800;
-    font-size:14px;
-}
-
-.date{
-    color:#555;
-    font-size:11px;
-}
-
-.message-text{
-    color:#ddd;
-    line-height:1.6;
-    font-size:14px;
-    padding-right:45px;
-}
-
-.delete{
-    position:absolute;
-    right:18px;
-    top:18px;
-    width:auto;
-    padding:7px 11px;
-    background:#261313;
-    color:#ff5555;
-    font-size:12px;
-}
-
-.empty{
-    text-align:center;
-    padding:70px 20px;
-    background:#111;
-    border:1px dashed #333;
-    border-radius:9px;
-    color:#666;
-}
-
-.status{
-    color:#777;
-    font-size:12px;
-    margin-top:10px;
-}
-
-@media(max-width:600px){
-
-    .login-box{
-        padding:30px 22px;
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    header{
-        padding:0 20px;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .container{
-        padding:30px 20px;
+    body {
+      font-family: "Inter", sans-serif;
+      background: #050505;
+      color: #fff;
+      overflow-x: hidden;
     }
 
-    .dashboard-title{
-        align-items:flex-start;
-        flex-direction:column;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .refresh{
-        width:100%;
+    button,
+    input,
+    textarea {
+      font-family: inherit;
     }
 
-    .message-top{
-        flex-direction:column;
-        align-items:flex-start;
+    /* NAVBAR */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 6%;
+      background: rgba(5,5,5,.82);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
-}
-</style>
+
+    .logo {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 3px;
+    }
+
+    .logo span {
+      color: #ff6a00;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+
+    nav ul a {
+      color: #aaa;
+      font-size: 13px;
+      font-weight: 600;
+      transition: .2s;
+    }
+
+    nav ul a:hover {
+      color: #ff6a00;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 50px;
+      padding: 130px 7% 80px;
+      background:
+        radial-gradient(circle at 75% 40%, rgba(255,106,0,.13), transparent 35%),
+        #050505;
+    }
+
+    .hero-small {
+      color: #ff6a00;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(65px, 10vw, 145px);
+      line-height: .82;
+      font-weight: 900;
+      letter-spacing: -7px;
+      margin-bottom: 30px;
+    }
+
+    .hero p {
+      color: #aaa;
+      font-size: 17px;
+      line-height: 1.7;
+      max-width: 550px;
+      margin-bottom: 35px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 23px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      border: 1px solid #ff6a00;
+      transition: .25s;
+    }
+
+    .btn-primary {
+      background: #ff6a00;
+      color: #000;
+    }
+
+    .btn-primary:hover {
+      background: #fff;
+      border-color: #fff;
+    }
+
+    .btn-outline {
+      color: #fff;
+    }
+
+    .btn-outline:hover {
+      background: #ff6a00;
+      color: #000;
+    }
+
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-image img {
+      width: min(100%, 580px);
+      max-height: 700px;
+      object-fit: contain;
+      filter: drop-shadow(0 25px 50px rgba(255,106,0,.18));
+    }
+
+    /* GENERAL */
+
+    section {
+      padding: 110px 7%;
+    }
+
+    .section-label {
+      color: #ff6a00;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: clamp(38px, 6vw, 78px);
+      line-height: .95;
+      letter-spacing: -3px;
+      font-weight: 900;
+      max-width: 900px;
+    }
+
+    .muted {
+      color: #888;
+    }
+
+    /* INTRO */
+
+    .intro {
+      background: #090909;
+    }
+
+    .intro-text {
+      max-width: 900px;
+      color: #aaa;
+      font-size: 21px;
+      line-height: 1.7;
+      margin-top: 30px;
+    }
+
+    /* FEATURES */
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 70px;
+      border-top: 1px solid #222;
+    }
+
+    .feature {
+      padding: 35px 25px;
+      border-right: 1px solid #222;
+    }
+
+    .feature:last-child {
+      border-right: 0;
+    }
+
+    .feature-number {
+      color: #ff6a00;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 35px;
+    }
+
+    .feature h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .feature p {
+      color: #888;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    /* PRODUCT */
+
+    .product {
+      background: #ff6a00;
+      color: #050505;
+    }
+
+    .product .section-label {
+      color: #050505;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+      margin-top: 60px;
+    }
+
+    .product-image img {
+      width: 100%;
+      max-width: 600px;
+      display: block;
+      margin: auto;
+    }
+
+    .product-info h3 {
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 25px;
+    }
+
+    .product-info p {
+      line-height: 1.7;
+      max-width: 550px;
+      margin-bottom: 30px;
+    }
+
+    .price {
+      font-size: 50px;
+      font-weight: 900;
+      margin-bottom: 30px;
+    }
+
+    .specs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: rgba(0,0,0,.2);
+      margin-bottom: 30px;
+    }
+
+    .spec {
+      background: #ff6a00;
+      border: 1px solid rgba(0,0,0,.15);
+      padding: 20px;
+    }
+
+    .spec strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .spec span {
+      font-size: 11px;
+      font-weight: 700;
+      opacity: .7;
+    }
+
+    .product .btn-primary {
+      background: #050505;
+      color: #fff;
+      border-color: #050505;
+    }
+
+    .product .btn-primary:hover {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    /* MISSION */
+
+    .mission {
+      background: #050505;
+    }
+
+    .mission-content {
+      max-width: 950px;
+    }
+
+    .mission-content p {
+      color: #999;
+      font-size: 20px;
+      line-height: 1.8;
+      margin-top: 30px;
+    }
+
+    /* HOW */
+
+    .how {
+      background: #090909;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 70px;
+      border-top: 1px solid #222;
+    }
+
+    .step {
+      padding: 35px;
+      border-right: 1px solid #222;
+    }
+
+    .step:last-child {
+      border-right: 0;
+    }
+
+    .step-number {
+      font-size: 60px;
+      color: #ff6a00;
+      font-weight: 900;
+      margin-bottom: 25px;
+    }
+
+    .step h3 {
+      margin-bottom: 12px;
+      font-size: 22px;
+    }
+
+    .step p {
+      color: #888;
+      line-height: 1.6;
+    }
+
+    /* ORDER */
+
+    .order {
+      text-align: center;
+      background:
+        radial-gradient(circle at center, rgba(255,106,0,.13), transparent 45%),
+        #050505;
+    }
+
+    .order p {
+      color: #888;
+      margin: 25px auto 30px;
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    /* CONTACT */
+
+    .contact {
+      background: #090909;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 50px;
+    }
+
+    .contact-box {
+      border: 1px solid #222;
+      padding: 30px;
+      transition: .2s;
+    }
+
+    .contact-box:hover {
+      border-color: #ff6a00;
+    }
+
+    .contact-box small {
+      color: #ff6a00;
+      font-weight: 800;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .contact-box strong {
+      font-size: 18px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 35px 7%;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      border-top: 1px solid #1d1d1d;
+      color: #666;
+      font-size: 12px;
+    }
+
+    footer strong {
+      color: #fff;
+    }
+
+    /* CHAT BUTTON */
+
+    #chatButton {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 5000;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      border: 0;
+      background: #ff6a00;
+      color: #050505;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 10px 35px rgba(0,0,0,.45);
+      transition: .2s;
+    }
+
+    #chatButton:hover {
+      transform: scale(1.07);
+      background: #fff;
+    }
+
+    /* CHAT WINDOW */
+
+    #chatWindow {
+      position: fixed;
+      right: 22px;
+      bottom: 95px;
+      z-index: 5001;
+      width: 390px;
+      max-width: calc(100vw - 30px);
+      height: 600px;
+      max-height: calc(100vh - 120px);
+      background: #0b0b0b;
+      border: 1px solid #292929;
+      border-radius: 14px;
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+      box-shadow: 0 25px 80px rgba(0,0,0,.7);
+    }
+
+    #chatWindow.active {
+      display: flex;
+    }
+
+    .chat-header {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      background: #101010;
+      border-bottom: 1px solid #242424;
+    }
+
+    .chat-header-title strong {
+      display: block;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .chat-header-title span {
+      color: #777;
+      font-size: 10px;
+    }
+
+    .chat-close {
+      background: none;
+      color: #aaa;
+      border: 0;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .chat-close:hover {
+      color: #ff6a00;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+    }
+
+    .chat-empty {
+      color: #666;
+      text-align: center;
+      font-size: 13px;
+      padding: 40px 10px;
+    }
+
+    .chat-message {
+      margin-bottom: 13px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .chat-message.mine {
+      align-items: flex-end;
+    }
+
+    .chat-name {
+      color: #777;
+      font-size: 10px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .chat-message.admin .chat-name {
+      color: #ff6a00;
+    }
+
+    .chat-bubble {
+      max-width: 84%;
+      padding: 10px 13px;
+      border-radius: 10px;
+      background: #181818;
+      color: #eee;
+      font-size: 13px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .chat-message.mine .chat-bubble {
+      background: #ff6a00;
+      color: #050505;
+    }
+
+    .chat-time {
+      color: #555;
+      font-size: 9px;
+      margin-top: 4px;
+    }
+
+    .chat-composer {
+      padding: 12px;
+      border-top: 1px solid #242424;
+      background: #101010;
+    }
+
+    .chat-composer-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    #chatInput {
+      flex: 1;
+      min-width: 0;
+      resize: none;
+      height: 43px;
+      border: 1px solid #292929;
+      background: #171717;
+      color: #fff;
+      border-radius: 8px;
+      padding: 12px;
+      outline: none;
+      font-size: 12px;
+    }
+
+    #chatInput:focus {
+      border-color: #ff6a00;
+    }
+
+    #sendChat {
+      width: 43px;
+      border: 0;
+      border-radius: 8px;
+      background: #ff6a00;
+      color: #000;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .chat-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .chat-user {
+      color: #666;
+      font-size: 9px;
+    }
+
+    #adminOpen {
+      border: 0;
+      background: transparent;
+      color: #555;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    #adminOpen:hover {
+      color: #ff6a00;
+    }
+
+    /* ADMIN LOGIN */
+
+    #adminLogin {
+      position: absolute;
+      inset: 68px 0 0;
+      z-index: 20;
+      background: #0b0b0b;
+      display: none;
+      padding: 25px;
+    }
+
+    #adminLogin.active {
+      display: block;
+    }
+
+    .admin-title {
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .admin-description {
+      color: #777;
+      font-size: 12px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    #adminPassword {
+      width: 100%;
+      height: 46px;
+      background: #171717;
+      border: 1px solid #292929;
+      border-radius: 8px;
+      color: #fff;
+      padding: 0 13px;
+      outline: none;
+      margin-bottom: 10px;
+    }
+
+    #adminPassword:focus {
+      border-color: #ff6a00;
+    }
+
+    #adminLoginButton {
+      width: 100%;
+      height: 46px;
+      background: #ff6a00;
+      border: 0;
+      border-radius: 8px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    #adminError {
+      color: #ff5c5c;
+      font-size: 11px;
+      margin-top: 10px;
+      min-height: 15px;
+    }
+
+    #cancelAdmin {
+      margin-top: 15px;
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: #666;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    /* ADMIN PANEL */
+
+    #adminPanel {
+      position: absolute;
+      inset: 68px 0 0;
+      z-index: 25;
+      background: #0b0b0b;
+      display: none;
+      flex-direction: column;
+    }
+
+    #adminPanel.active {
+      display: flex;
+    }
+
+    .admin-panel-header {
+      padding: 14px;
+      border-bottom: 1px solid #242424;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-panel-header strong {
+      color: #ff6a00;
+      font-size: 12px;
+    }
+
+    .admin-panel-actions {
+      display: flex;
+      gap: 7px;
+    }
+
+    .admin-small-btn {
+      border: 1px solid #292929;
+      background: #151515;
+      color: #aaa;
+      border-radius: 6px;
+      padding: 7px 9px;
+      cursor: pointer;
+      font-size: 10px;
+    }
+
+    .admin-small-btn:hover {
+      color: #fff;
+      border-color: #ff6a00;
+    }
+
+    #adminMessages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+    }
+
+    .admin-row {
+      border-bottom: 1px solid #1e1e1e;
+      padding: 12px 0;
+    }
+
+    .admin-row-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .admin-row-name {
+      font-size: 11px;
+      font-weight: 800;
+      color: #ff6a00;
+    }
+
+    .admin-row-name.normal {
+      color: #aaa;
+    }
+
+    .admin-row-time {
+      color: #555;
+      font-size: 9px;
+    }
+
+    .admin-row-message {
+      color: #ddd;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-top: 5px;
+      padding-right: 5px;
+      word-break: break-word;
+    }
+
+    .delete-message {
+      margin-top: 8px;
+      background: transparent;
+      border: 1px solid #382020;
+      color: #d66;
+      border-radius: 5px;
+      padding: 5px 8px;
+      font-size: 9px;
+      cursor: pointer;
+    }
+
+    .delete-message:hover {
+      border-color: #ff5c5c;
+      color: #ff5c5c;
+    }
+
+    .admin-panel-composer {
+      border-top: 1px solid #242424;
+      padding: 10px;
+    }
+
+    .admin-panel-composer-row {
+      display: flex;
+      gap: 7px;
+    }
+
+    #adminMessageInput {
+      flex: 1;
+      height: 40px;
+      background: #171717;
+      border: 1px solid #292929;
+      border-radius: 7px;
+      color: #fff;
+      padding: 0 10px;
+      outline: none;
+      font-size: 11px;
+    }
+
+    #adminSendButton {
+      width: 70px;
+      border: 0;
+      background: #ff6a00;
+      border-radius: 7px;
+      font-size: 10px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* MOBILE */
+
+    @media(max-width: 850px) {
+      nav ul {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 130px;
+      }
+
+      .hero h1 {
+        font-size: 80px;
+      }
+
+      .features {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .feature:nth-child(2) {
+        border-right: 0;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .step {
+        border-right: 0;
+        border-bottom: 1px solid #222;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media(max-width: 520px) {
+      section {
+        padding: 80px 6%;
+      }
+
+      .hero {
+        padding-left: 6%;
+        padding-right: 6%;
+      }
+
+      .hero h1 {
+        font-size: 65px;
+        letter-spacing: -4px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .feature {
+        border-right: 0;
+        border-bottom: 1px solid #222;
+      }
+
+      #chatWindow {
+        right: 10px;
+        bottom: 85px;
+        width: calc(100vw - 20px);
+        height: calc(100vh - 110px);
+      }
+
+      #chatButton {
+        right: 15px;
+        bottom: 15px;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
+  <!-- NAVBAR -->
 
-<div id="loginScreen">
+  <nav>
+    <a href="#home" class="logo">POLARIS<span>.</span></a>
 
-    <div class="login-box">
+    <ul>
+      <li><a href="#technology">TEKNOLOGJIA</a></li>
+      <li><a href="#product">PRODUKTI</a></li>
+      <li><a href="#mission">MISIONI</a></li>
+      <li><a href="#contact">KONTAKT</a></li>
+    </ul>
+  </nav>
 
-        <div class="logo">
-            POLARIS<span>.</span>
-        </div>
 
-        <h2>Admin Panel</h2>
+  <!-- HERO -->
 
-        <p>
-            Hyr vetëm me llogarinë e administratorit.
-        </p>
+  <section class="hero" id="home">
 
-        <input
-            type="email"
-            id="email"
-            placeholder="Email">
+    <div>
 
-        <input
-            type="password"
-            id="password"
-            placeholder="Password">
+      <div class="hero-small">
+        SMART MOBILITY • ALBANIA
+      </div>
 
-        <button onclick="login()">
-            HYR NË PANEL
-        </button>
+      <h1>POLARIS</h1>
 
-        <div id="error"></div>
+      <p>
+        Një shkop inteligjent i krijuar për të sjellë më shumë
+        siguri, pavarësi dhe teknologji në lëvizjen e përditshme.
+      </p>
+
+      <div class="buttons">
+        <a href="#technology" class="btn btn-primary">
+          MËSO MË SHUMË
+        </a>
+
+        <a href="#order" class="btn btn-outline">
+          POROSIT POLARIS
+        </a>
+      </div>
 
     </div>
 
-</div>
+    <div class="hero-image">
+      <img src="polaris.jpg" alt="POLARIS Smart Cane">
+    </div>
+
+  </section>
 
 
-<!-- ADMIN PANEL -->
+  <!-- INTRO -->
 
-<div id="adminPanel">
+  <section class="intro">
 
-    <header>
+    <div class="section-label">
+      01 / POLARIS
+    </div>
 
-        <div class="title">
-            POLARIS<span>.</span> ADMIN
+    <h2 class="section-title">
+      JO THJESHT NJË SHKOP.
+    </h2>
+
+    <p class="intro-text">
+      Teknologji që të jep më shumë kontroll.
+      POLARIS kombinon elektronikën moderne me një dizajn
+      të thjeshtë për ta bërë lëvizjen më të sigurt dhe më të pavarur.
+    </p>
+
+  </section>
+
+
+  <!-- TECHNOLOGY -->
+
+  <section id="technology">
+
+    <div class="section-label">
+      02 / TECHNOLOGY
+    </div>
+
+    <h2 class="section-title">
+      TEKNOLOGJI QË REAGON.
+    </h2>
+
+    <div class="features">
+
+      <div class="feature">
+        <div class="feature-number">01</div>
+        <h3>SENSORË INTELIGJENTË</h3>
+        <p>
+          Sensorët ultrasonikë identifikojnë pengesat
+          dhe matin distancën në kohë reale.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-number">02</div>
+        <h3>REAGIM ME VIBRIM</h3>
+        <p>
+          POLARIS jep feedback përmes vibrimit.
+          Intensiteti ndryshon sipas distancës së pengesës.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-number">03</div>
+        <h3>I THJESHTË</h3>
+        <p>
+          Teknologji e integruar në një sistem
+          intuitiv dhe të lehtë për përdorim.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-number">04</div>
+        <h3>PORTATIV</h3>
+        <p>
+          Elektronikë e integruar dhe dizajn portativ
+          për përdorim në përditshmëri.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PRODUCT -->
+
+  <section class="product" id="product">
+
+    <div class="section-label">
+      03 / PRODUCT
+    </div>
+
+    <h2 class="section-title">
+      SMART. SIMPLE. POLARIS.
+    </h2>
+
+    <div class="product-grid">
+
+      <div class="product-image">
+        <img src="polaris.jpg" alt="POLARIS">
+      </div>
+
+      <div class="product-info">
+
+        <h3>POLARIS SMART CANE</h3>
+
+        <p>
+          Një sistem inteligjent për orientim dhe
+          zbulim pengesash, i projektuar për të sjellë
+          teknologjinë më pranë përdoruesit.
+        </p>
+
+        <div class="specs">
+
+          <div class="spec">
+            <strong>360°</strong>
+            <span>APPROACH</span>
+          </div>
+
+          <div class="spec">
+            <strong>USB</strong>
+            <span>CHARGING</span>
+          </div>
+
+          <div class="spec">
+            <strong>REAL</strong>
+            <span>FEEDBACK</span>
+          </div>
+
+          <div class="spec">
+            <strong>SMART</strong>
+            <span>TECHNOLOGY</span>
+          </div>
+
         </div>
 
-        <button
-            class="logout"
-            onclick="logout()">
-            DIL
+        <div class="price">
+          160€
+        </div>
+
+        <a href="#order" class="btn btn-primary">
+          POROSIT TANI
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MISSION -->
+
+  <section class="mission" id="mission">
+
+    <div class="mission-content">
+
+      <div class="section-label">
+        04 / OUR MISSION
+      </div>
+
+      <h2 class="section-title">
+        TË BËJMË LËVIZJEN MË TË SIGURT.
+      </h2>
+
+      <p>
+        POLARIS është një projekt i fokusuar në inovacionin social
+        dhe në krijimin e teknologjive më të aksesueshme për personat
+        me dëmtime të shikimit.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- HOW IT WORKS -->
+
+  <section class="how">
+
+    <div class="section-label">
+      05 / HOW IT WORKS
+    </div>
+
+    <h2 class="section-title">
+      TRE HAPA.
+      <br>
+      NJË SISTEM.
+    </h2>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-number">01</div>
+        <h3>NDEZ</h3>
+        <p>
+          Aktivizo sistemin dhe POLARIS është gati
+          të monitorojë hapësirën përpara teje.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">02</div>
+        <h3>EC</h3>
+        <p>
+          Sensorët analizojnë distancën dhe
+          identifikojnë pengesat.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">03</div>
+        <h3>NDJEJ</h3>
+        <p>
+          Vibrimi të jep informacion për afërsinë
+          e pengesës.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ORDER -->
+
+  <section class="order" id="order">
+
+    <div class="section-label">
+      06 / ORDER
+    </div>
+
+    <h2 class="section-title">
+      GATI PËR POLARIS?
+    </h2>
+
+    <p>
+      POLARIS Smart Cane — 160€.
+      Kontakto direkt për porosi dhe informacion të mëtejshëm.
+    </p>
+
+    <a
+      href="https://wa.me/355682673885"
+      target="_blank"
+      class="btn btn-primary"
+    >
+      POROSIT NË WHATSAPP
+    </a>
+
+  </section>
+
+
+  <!-- CONTACT -->
+
+  <section class="contact" id="contact">
+
+    <div class="section-label">
+      07 / CONTACT
+    </div>
+
+    <h2 class="section-title">
+      KONTAKTO POLARIS.
+    </h2>
+
+    <div class="contact-grid">
+
+      <a
+        href="https://wa.me/355682673885"
+        target="_blank"
+        class="contact-box"
+      >
+        <small>WHATSAPP</small>
+        <strong>+355 68 267 3885</strong>
+      </a>
+
+      <a
+        href="mailto:ecisigurt@gmail.com"
+        class="contact-box"
+      >
+        <small>EMAIL</small>
+        <strong>ecisigurt@gmail.com</strong>
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div>
+      © 2026 POLARIS — Smart Mobility Albania
+    </div>
+
+    <div>
+      Project Director:
+      <strong>Ledjan Bitri</strong>
+    </div>
+
+  </footer>
+
+
+  <!-- CHAT BUTTON -->
+
+  <button id="chatButton" aria-label="Hap chat">
+    💬
+  </button>
+
+
+  <!-- CHAT WINDOW -->
+
+  <div id="chatWindow">
+
+    <div class="chat-header">
+
+      <div class="chat-header-title">
+        <strong>POLARIS COMMUNITY</strong>
+        <span>Chat publik • Real-time</span>
+      </div>
+
+      <button class="chat-close" id="chatClose">
+        ×
+      </button>
+
+    </div>
+
+
+    <!-- PUBLIC CHAT -->
+
+    <div class="chat-messages" id="chatMessages">
+
+      <div class="chat-empty">
+        Duke ngarkuar chat-in...
+      </div>
+
+    </div>
+
+
+    <div class="chat-composer">
+
+      <div class="chat-composer-row">
+
+        <textarea
+          id="chatInput"
+          maxlength="500"
+          placeholder="Shkruaj një mesazh..."
+        ></textarea>
+
+        <button id="sendChat">
+          ➤
         </button>
 
-    </header>
+      </div>
+
+      <div class="chat-bottom">
+
+        <span class="chat-user" id="chatUser">
+          I Panjohur
+        </span>
+
+        <button id="adminOpen" title="Admin">
+          🔒
+        </button>
+
+      </div>
+
+    </div>
 
 
-    <main class="container">
+    <!-- ADMIN LOGIN -->
 
-        <div class="dashboard-title">
+    <div id="adminLogin">
 
-            <div>
+      <div class="admin-title">
+        ADMIN
+      </div>
 
-                <h1>
-                    MESAZHET
-                </h1>
+      <div class="admin-description">
+        Hyrja është vetëm për administratorin e POLARIS.
+        Sesioni nuk ruhet kur chat-i mbyllet.
+      </div>
 
-                <p>
-                    Menaxho Community Chat të POLARIS.
-                </p>
+      <input
+        type="password"
+        id="adminPassword"
+        placeholder="Fjalëkalimi"
+        autocomplete="off"
+      >
 
-                <div
-                    class="status"
-                    id="status">
-                    Duke ngarkuar...
-                </div>
+      <button id="adminLoginButton">
+        HYR
+      </button>
 
-            </div>
+      <div id="adminError"></div>
 
-            <button
-                class="refresh"
-                onclick="loadMessages()">
-                ↻ RIFRESKO
-            </button>
+      <button id="cancelAdmin">
+        ANULO
+      </button>
+
+    </div>
+
+
+    <!-- ADMIN PANEL -->
+
+    <div id="adminPanel">
+
+      <div class="admin-panel-header">
+
+        <strong>
+          ADMIN • LEDJAN BITRI
+        </strong>
+
+        <div class="admin-panel-actions">
+
+          <button
+            class="admin-small-btn"
+            id="backToChat"
+          >
+            CHAT
+          </button>
+
+          <button
+            class="admin-small-btn"
+            id="adminLogout"
+          >
+            DIL
+          </button>
 
         </div>
 
+      </div>
 
-        <div
-            class="messages"
-            id="messages">
+
+      <div id="adminMessages">
+
+        <div class="chat-empty">
+          Duke ngarkuar mesazhet...
+        </div>
+
+      </div>
+
+
+      <div class="admin-panel-composer">
+
+        <div class="admin-panel-composer-row">
+
+          <input
+            type="text"
+            id="adminMessageInput"
+            maxlength="500"
+            placeholder="Përgjigju si Ledjan Bitri..."
+          >
+
+          <button id="adminSendButton">
+            DËRGO
+          </button>
 
         </div>
 
-    </main>
+      </div>
 
-</div>
+    </div>
 
-
-<script type="module">
-
-import {
-    createClient
-} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+  </div>
 
 
-/*
-==================================================
-SUPABASE
-==================================================
+  <script>
 
-Përdor të njëjtin URL dhe ANON/PUBLISHABLE KEY
-që përdor index.html.
+    /* =====================================================
+       SUPABASE
+       ===================================================== */
 
-MOS vendos service_role key.
-*/
+    const SUPABASE_URL = "VENDOS_SUPABASE_URL";
+    const SUPABASE_ANON_KEY = "VENDOS_SUPABASE_ANON_KEY";
 
-const SUPABASE_URL =
-    "VENDOS_SUPABASE_URL";
-
-const SUPABASE_ANON_KEY =
-    "VENDOS_SUPABASE_ANON_KEY";
-
-
-const supabase =
-    createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
     );
 
 
-/* ELEMENTS */
+    /* =====================================================
+       STATE
+       ===================================================== */
 
-const loginScreen =
-    document.getElementById("loginScreen");
+    let visitorName = "I Panjohur";
+    let visitorToken = null;
 
-const adminPanel =
-    document.getElementById("adminPanel");
+    let adminToken = null;
+    let adminMode = false;
 
-const errorBox =
-    document.getElementById("error");
-
-
-/* LOGIN */
-
-window.login = async function(){
-
-    const email =
-        document
-        .getElementById("email")
-        .value
-        .trim();
-
-    const password =
-        document
-        .getElementById("password")
-        .value;
+    let realtimeChannel = null;
 
 
-    errorBox.style.display = "none";
+    /* =====================================================
+       ELEMENTS
+       ===================================================== */
+
+    const chatButton = document.getElementById("chatButton");
+    const chatWindow = document.getElementById("chatWindow");
+    const chatClose = document.getElementById("chatClose");
+
+    const chatMessages = document.getElementById("chatMessages");
+    const chatInput = document.getElementById("chatInput");
+    const sendChat = document.getElementById("sendChat");
+
+    const chatUser = document.getElementById("chatUser");
+
+    const adminOpen = document.getElementById("adminOpen");
+    const adminLogin = document.getElementById("adminLogin");
+    const adminPassword = document.getElementById("adminPassword");
+    const adminLoginButton = document.getElementById("adminLoginButton");
+    const adminError = document.getElementById("adminError");
+    const cancelAdmin = document.getElementById("cancelAdmin");
+
+    const adminPanel = document.getElementById("adminPanel");
+    const adminMessages = document.getElementById("adminMessages");
+
+    const backToChat = document.getElementById("backToChat");
+    const adminLogout = document.getElementById("adminLogout");
+
+    const adminMessageInput =
+      document.getElementById("adminMessageInput");
+
+    const adminSendButton =
+      document.getElementById("adminSendButton");
 
 
-    if(!email || !password){
+    /* =====================================================
+       EDGE FUNCTION
+       ===================================================== */
 
-        errorBox.textContent =
-            "Plotëso email-in dhe password-in.";
+    async function callAdminFunction(payload) {
 
-        errorBox.style.display = "block";
+      const response = await fetch(
+        `${SUPABASE_URL}/functions/v1/admin-chat`,
+        {
+          method: "POST",
 
-        return;
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": SUPABASE_ANON_KEY
+          },
+
+          body: JSON.stringify(payload)
+        }
+      );
+
+      let data = {};
+
+      try {
+        data = await response.json();
+      } catch (error) {
+        data = {};
+      }
+
+      if (!response.ok) {
+        const error = new Error(
+          data.error || "Gabim në server."
+        );
+
+        error.status = response.status;
+
+        throw error;
+      }
+
+      return data;
     }
 
 
-    const {
-        error
-    } =
-    await supabase.auth.signInWithPassword({
+    /* =====================================================
+       VISITOR REGISTRATION
+       ===================================================== */
 
-        email:email,
+    async function initializeVisitor() {
 
-        password:password
+      visitorToken = localStorage.getItem(
+        "polaris_visitor_token"
+      );
 
-    });
+      if (!visitorToken) {
+
+        visitorToken = crypto.randomUUID();
+
+        localStorage.setItem(
+          "polaris_visitor_token",
+          visitorToken
+        );
+      }
 
 
-    if(error){
+      try {
 
-        errorBox.textContent =
-            "Email ose password i gabuar.";
+        const result = await callAdminFunction({
+          action: "register",
+          visitor_token: visitorToken
+        });
 
-        errorBox.style.display = "block";
+        visitorName =
+          "I Panjohur " + result.anon_number;
 
-        return;
+      } catch (error) {
+
+        console.error(error);
+
+        visitorName = "I Panjohur";
+      }
+
+
+      chatUser.textContent = visitorName;
     }
 
 
-    showAdmin();
+    /* =====================================================
+       FORMAT DATE
+       ===================================================== */
 
-};
+    function formatTime(dateString) {
 
+      const date = new Date(dateString);
 
-/* LOGOUT */
-
-window.logout = async function(){
-
-    await supabase.auth.signOut();
-
-    adminPanel.style.display = "none";
-
-    loginScreen.style.display = "flex";
-
-};
-
-
-/* SHOW ADMIN */
-
-function showAdmin(){
-
-    loginScreen.style.display = "none";
-
-    adminPanel.style.display = "block";
-
-    loadMessages();
-
-}
+      return date.toLocaleTimeString(
+        "sq-AL",
+        {
+          hour: "2-digit",
+          minute: "2-digit"
+        }
+      );
+    }
 
 
-/* LOAD MESSAGES */
+    /* =====================================================
+       LOAD PUBLIC MESSAGES
+       ===================================================== */
 
-window.loadMessages = async function(){
+    async function loadMessages() {
 
-    const messagesContainer =
-        document.getElementById("messages");
-
-    const status =
-        document.getElementById("status");
-
-
-    status.textContent =
-        "Duke ngarkuar mesazhet...";
-
-
-    const {
+      const {
         data,
         error
-    } =
-    await supabase
+      } = await supabaseClient
         .from("messages")
-        .select("*")
+        .select(
+          "id,user_name,message,created_at,is_admin"
+        )
         .order(
-            "created_at",
-            {
-                ascending:false
-            }
-        );
+          "created_at",
+          {
+            ascending: true
+          }
+        )
+        .limit(500);
 
 
-    if(error){
+      if (error) {
 
         console.error(error);
 
-        status.textContent =
-            "Gabim në marrjen e mesazheve.";
+        chatMessages.innerHTML = `
+          <div class="chat-empty">
+            Chat-i nuk mund të ngarkohet.
+          </div>
+        `;
 
         return;
+      }
+
+
+      renderPublicMessages(data || []);
     }
 
 
-    messagesContainer.innerHTML = "";
+    /* =====================================================
+       RENDER PUBLIC
+       ===================================================== */
 
+    function renderPublicMessages(messages) {
 
-    if(!data || data.length === 0){
+      if (!messages.length) {
 
-        messagesContainer.innerHTML = `
-
-            <div class="empty">
-
-                Nuk ka mesazhe.
-
-            </div>
-
+        chatMessages.innerHTML = `
+          <div class="chat-empty">
+            Nuk ka ende mesazhe.<br>
+            Bëhu i pari që shkruan.
+          </div>
         `;
 
-        status.textContent =
-            "0 mesazhe";
-
         return;
+      }
+
+
+      chatMessages.innerHTML = "";
+
+
+      messages.forEach(msg => {
+
+        const wrapper =
+          document.createElement("div");
+
+        wrapper.className =
+          "chat-message" +
+          (
+            msg.user_name === visitorName
+              ? " mine"
+              : ""
+          ) +
+          (
+            msg.is_admin
+              ? " admin"
+              : ""
+          );
+
+
+        const name =
+          document.createElement("div");
+
+        name.className = "chat-name";
+
+        name.textContent =
+          msg.is_admin
+            ? "Ledjan Bitri"
+            : msg.user_name;
+
+
+        const bubble =
+          document.createElement("div");
+
+        bubble.className =
+          "chat-bubble";
+
+        bubble.textContent =
+          msg.message;
+
+
+        const time =
+          document.createElement("div");
+
+        time.className =
+          "chat-time";
+
+        time.textContent =
+          formatTime(msg.created_at);
+
+
+        wrapper.appendChild(name);
+        wrapper.appendChild(bubble);
+        wrapper.appendChild(time);
+
+        chatMessages.appendChild(wrapper);
+
+      });
+
+
+      chatMessages.scrollTop =
+        chatMessages.scrollHeight;
+    }
+
+
+    /* =====================================================
+       SEND PUBLIC MESSAGE
+       ===================================================== */
+
+    async function sendMessage() {
+
+      const text =
+        chatInput.value.trim();
+
+
+      if (!text) {
+        return;
+      }
+
+
+      if (text.length > 500) {
+        alert("Mesazhi është shumë i gjatë.");
+        return;
+      }
+
+
+      sendChat.disabled = true;
+
+
+      try {
+
+        /* ADMIN SEND */
+
+        if (adminMode && adminToken) {
+
+          await callAdminFunction({
+            action: "send",
+            token: adminToken,
+            message: text
+          });
+
+        }
+
+        /* NORMAL USER */
+
+        else {
+
+          const {
+            error
+          } = await supabaseClient
+            .from("messages")
+            .insert({
+              user_name: visitorName,
+              message: text,
+              is_admin: false
+            });
+
+
+          if (error) {
+            throw error;
+          }
+
+        }
+
+
+        chatInput.value = "";
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        if (error.status === 401) {
+
+          logoutAdmin();
+
+          alert(
+            "Sesioni admin ka skaduar."
+          );
+
+        } else {
+
+          alert(
+            "Mesazhi nuk u dërgua."
+          );
+        }
+
+      } finally {
+
+        sendChat.disabled = false;
+
+      }
+    }
+
+
+    /* =====================================================
+       OPEN CHAT
+       ===================================================== */
+
+    async function openChat() {
+
+      chatWindow.classList.add("active");
+
+      await loadMessages();
 
     }
 
 
-    status.textContent =
-        data.length +
-        " mesazhe";
+    /* =====================================================
+       CLOSE CHAT
+       ===================================================== */
+
+    function closeChat() {
+
+      chatWindow.classList.remove("active");
+
+      /*
+        Admin session is deliberately destroyed.
+        Password is never stored.
+      */
+
+      adminToken = null;
+      adminMode = false;
+
+      adminLogin.classList.remove("active");
+      adminPanel.classList.remove("active");
+
+      adminPassword.value = "";
+      adminError.textContent = "";
+
+      chatInput.placeholder =
+        "Shkruaj një mesazh...";
+
+      chatUser.textContent =
+        visitorName;
+
+    }
 
 
-    data.forEach(message => {
+    /* =====================================================
+       OPEN ADMIN LOGIN
+       ===================================================== */
 
-        const item =
-            document.createElement("div");
+    function openAdminLogin() {
 
-        item.className =
-            "message";
+      adminLogin.classList.add("active");
+
+      adminPanel.classList.remove("active");
+
+      adminPassword.value = "";
+
+      adminError.textContent = "";
+
+      setTimeout(() => {
+        adminPassword.focus();
+      }, 100);
+
+    }
 
 
-        const date =
-            message.created_at
-            ? new Date(
-                message.created_at
-              ).toLocaleString(
-                "sq-AL"
-              )
-            : "";
+    /* =====================================================
+       ADMIN LOGIN
+       ===================================================== */
+
+    async function loginAdmin() {
+
+      const password =
+        adminPassword.value;
 
 
-        item.innerHTML = `
+      if (!password) {
 
-            <div class="message-top">
+        adminError.textContent =
+          "Vendos fjalëkalimin.";
 
-                <div class="username">
-                    ${escapeHTML(
-                        message.user_name ||
-                        "Vizitor"
-                    )}
-                </div>
+        return;
+      }
 
-                <div class="date">
-                    ${date}
-                </div>
 
+      adminLoginButton.disabled = true;
+
+      adminError.textContent =
+        "Duke verifikuar...";
+
+
+      try {
+
+        const result =
+          await callAdminFunction({
+            action: "login",
+            password: password
+          });
+
+
+        if (
+          !result.success ||
+          !result.token
+        ) {
+
+          throw new Error(
+            "Fjalëkalim i gabuar."
+          );
+        }
+
+
+        /*
+          Token exists only in this JavaScript
+          variable. It is NOT stored in:
+          - database
+          - localStorage
+          - cookie
+          - GitHub
+        */
+
+        adminToken =
+          result.token;
+
+        adminMode = true;
+
+
+        adminPassword.value = "";
+
+        adminError.textContent = "";
+
+        adminLogin.classList.remove("active");
+
+        adminPanel.classList.add("active");
+
+        chatUser.textContent =
+          "Ledjan Bitri";
+
+        chatInput.placeholder =
+          "Shkruaj si Ledjan Bitri...";
+
+
+        await loadAdminMessages();
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        adminToken = null;
+        adminMode = false;
+
+        adminError.textContent =
+          "Fjalëkalim i gabuar ose gabim serveri.";
+
+      } finally {
+
+        adminLoginButton.disabled = false;
+
+      }
+    }
+
+
+    /* =====================================================
+       ADMIN LIST
+       ===================================================== */
+
+    async function loadAdminMessages() {
+
+      if (!adminToken) {
+        return;
+      }
+
+
+      try {
+
+        const result =
+          await callAdminFunction({
+            action: "list",
+            token: adminToken
+          });
+
+
+        renderAdminMessages(
+          result.messages || []
+        );
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        if (error.status === 401) {
+
+          logoutAdmin();
+
+          alert(
+            "Sesioni admin ka skaduar."
+          );
+
+        } else {
+
+          adminMessages.innerHTML = `
+            <div class="chat-empty">
+              Nuk mund të ngarkohen mesazhet.
             </div>
+          `;
+        }
+      }
+    }
 
-            <div class="message-text">
-                ${escapeHTML(
-                    message.message || ""
-                )}
-            </div>
 
-            <button
-                class="delete"
-                data-id="${message.id}">
-                FSHI
-            </button>
+    /* =====================================================
+       RENDER ADMIN
+       ===================================================== */
 
+    function renderAdminMessages(messages) {
+
+      if (!messages.length) {
+
+        adminMessages.innerHTML = `
+          <div class="chat-empty">
+            Nuk ka mesazhe.
+          </div>
         `;
 
-
-        item
-            .querySelector(".delete")
-            .addEventListener(
-                "click",
-                () => deleteMessage(message.id)
-            );
+        return;
+      }
 
 
-        messagesContainer.appendChild(item);
-
-    });
-
-}
+      adminMessages.innerHTML = "";
 
 
-/* DELETE */
+      messages.forEach(msg => {
 
-async function deleteMessage(id){
+        const row =
+          document.createElement("div");
 
-    const confirmed =
+        row.className =
+          "admin-row";
+
+
+        const top =
+          document.createElement("div");
+
+        top.className =
+          "admin-row-top";
+
+
+        const name =
+          document.createElement("div");
+
+        name.className =
+          "admin-row-name" +
+          (
+            msg.is_admin
+              ? ""
+              : " normal"
+          );
+
+        name.textContent =
+          msg.is_admin
+            ? "Ledjan Bitri"
+            : msg.user_name;
+
+
+        const time =
+          document.createElement("div");
+
+        time.className =
+          "admin-row-time";
+
+        time.textContent =
+          formatTime(msg.created_at);
+
+
+        top.appendChild(name);
+        top.appendChild(time);
+
+
+        const message =
+          document.createElement("div");
+
+        message.className =
+          "admin-row-message";
+
+        message.textContent =
+          msg.message;
+
+
+        const deleteButton =
+          document.createElement("button");
+
+        deleteButton.className =
+          "delete-message";
+
+        deleteButton.textContent =
+          "FSHI MESAZHIN";
+
+
+        deleteButton.addEventListener(
+          "click",
+          () => deleteMessage(msg.id)
+        );
+
+
+        row.appendChild(top);
+        row.appendChild(message);
+        row.appendChild(deleteButton);
+
+        adminMessages.appendChild(row);
+
+      });
+
+
+      adminMessages.scrollTop =
+        adminMessages.scrollHeight;
+    }
+
+
+    /* =====================================================
+       DELETE MESSAGE
+       ===================================================== */
+
+    async function deleteMessage(id) {
+
+      if (!adminToken) {
+        return;
+      }
+
+
+      const confirmed =
         confirm(
-            "Je i sigurt që do ta fshish këtë mesazh?"
+          "Je i sigurt që do ta fshish këtë mesazh?"
         );
 
 
-    if(!confirmed){
+      if (!confirmed) {
         return;
-    }
+      }
 
 
-    const {
-        error
-    } =
-    await supabase
-        .from("messages")
-        .delete()
-        .eq("id", id);
+      try {
+
+        await callAdminFunction({
+          action: "delete",
+          token: adminToken,
+          message_id: id
+        });
 
 
-    if(error){
+        await loadAdminMessages();
+        await loadMessages();
 
-        alert(
-            "Mesazhi nuk u fshi."
-        );
+
+      } catch (error) {
 
         console.error(error);
 
+        if (error.status === 401) {
+
+          logoutAdmin();
+
+          alert(
+            "Sesioni admin ka skaduar."
+          );
+
+        } else {
+
+          alert(
+            "Mesazhi nuk u fshi."
+          );
+        }
+      }
+    }
+
+
+    /* =====================================================
+       ADMIN SEND
+       ===================================================== */
+
+    async function sendAdminMessage() {
+
+      if (!adminToken) {
         return;
+      }
+
+
+      const text =
+        adminMessageInput.value.trim();
+
+
+      if (!text) {
+        return;
+      }
+
+
+      adminSendButton.disabled = true;
+
+
+      try {
+
+        await callAdminFunction({
+          action: "send",
+          token: adminToken,
+          message: text
+        });
+
+
+        adminMessageInput.value = "";
+
+        await loadAdminMessages();
+        await loadMessages();
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        if (error.status === 401) {
+
+          logoutAdmin();
+
+          alert(
+            "Sesioni admin ka skaduar."
+          );
+
+        } else {
+
+          alert(
+            "Mesazhi nuk u dërgua."
+          );
+        }
+
+      } finally {
+
+        adminSendButton.disabled = false;
+
+      }
+    }
+
+
+    /* =====================================================
+       LOGOUT ADMIN
+       ===================================================== */
+
+    function logoutAdmin() {
+
+      adminToken = null;
+      adminMode = false;
+
+      adminPanel.classList.remove("active");
+      adminLogin.classList.remove("active");
+
+      adminPassword.value = "";
+      adminError.textContent = "";
+
+      chatUser.textContent =
+        visitorName;
+
+      chatInput.placeholder =
+        "Shkruaj një mesazh...";
+
+      loadMessages();
 
     }
 
 
-    loadMessages();
+    /* =====================================================
+       REALTIME
+       ===================================================== */
 
-}
+    function startRealtime() {
 
+      realtimeChannel =
+        supabaseClient
+          .channel("polaris-community-chat")
 
-/* SECURITY */
+          .on(
+            "postgres_changes",
+            {
+              event: "*",
+              schema: "public",
+              table: "messages"
+            },
+            async () => {
 
-function escapeHTML(text){
+              await loadMessages();
 
-    return String(text)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+              if (
+                adminMode &&
+                adminToken
+              ) {
 
-}
+                await loadAdminMessages();
 
+              }
 
-/* SESSION CHECK */
+            }
+          )
 
-const {
-    data
-} =
-await supabase.auth.getSession();
-
-
-if(data.session){
-
-    showAdmin();
-
-}
-
-
-/* AUTH LISTENER */
-
-supabase.auth.onAuthStateChange(
-    (event, session) => {
-
-        if(session){
-
-            showAdmin();
-
-        }else{
-
-            adminPanel.style.display =
-                "none";
-
-            loginScreen.style.display =
-                "flex";
-
-        }
+          .subscribe();
 
     }
-);
 
 
-/* REALTIME */
+    /* =====================================================
+       EVENTS
+       ===================================================== */
 
-supabase
-    .channel("admin-messages")
-    .on(
-        "postgres_changes",
-        {
-            event:"*",
-            schema:"public",
-            table:"messages"
-        },
-        function(){
+    chatButton.addEventListener(
+      "click",
+      openChat
+    );
 
-            loadMessages();
+    chatClose.addEventListener(
+      "click",
+      closeChat
+    );
 
+
+    sendChat.addEventListener(
+      "click",
+      sendMessage
+    );
+
+
+    chatInput.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Enter" &&
+          !event.shiftKey
+        ) {
+
+          event.preventDefault();
+
+          sendMessage();
         }
-    )
-    .subscribe();
 
-</script>
+      }
+    );
+
+
+    adminOpen.addEventListener(
+      "click",
+      openAdminLogin
+    );
+
+
+    cancelAdmin.addEventListener(
+      "click",
+      () => {
+
+        adminLogin.classList.remove(
+          "active"
+        );
+
+      }
+    );
+
+
+    adminLoginButton.addEventListener(
+      "click",
+      loginAdmin
+    );
+
+
+    adminPassword.addEventListener(
+      "keydown",
+      event => {
+
+        if (event.key === "Enter") {
+          loginAdmin();
+        }
+
+      }
+    );
+
+
+    backToChat.addEventListener(
+      "click",
+      () => {
+
+        adminPanel.classList.remove(
+          "active"
+        );
+
+      }
+    );
+
+
+    adminLogout.addEventListener(
+      "click",
+      logoutAdmin
+    );
+
+
+    adminSendButton.addEventListener(
+      "click",
+      sendAdminMessage
+    );
+
+
+    adminMessageInput.addEventListener(
+      "keydown",
+      event => {
+
+        if (event.key === "Enter") {
+          sendAdminMessage();
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       INITIALIZE
+       ===================================================== */
+
+    async function initialize() {
+
+      await initializeVisitor();
+
+      await loadMessages();
+
+      startRealtime();
+
+    }
+
+
+    initialize();
+
+  </script>
 
 </body>
-</html>supabase login
-supabase init
-supabase link --project-ref odmahpwenzjhmupxzlhu
+            </html>
