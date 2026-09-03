@@ -19,9 +19,9 @@
   --gray:#a5a5a5;
   --line:rgba(255,255,255,.09);
 
-  /* CHAT */
   --green:#25d366;
   --green-dark:#128c7e;
+  --green-deep:#075e54;
   --chat-white:#f7f9f8;
   --chat-text:#18221e;
   --chat-muted:#748078;
@@ -53,7 +53,8 @@ a{
   color:inherit;
 }
 
-img{
+img,
+video{
   max-width:100%;
   display:block;
 }
@@ -62,6 +63,10 @@ button,
 textarea,
 input{
   font-family:inherit;
+}
+
+button{
+  -webkit-tap-highlight-color:transparent;
 }
 
 .container{
@@ -407,47 +412,59 @@ footer .container{
    POLARIS COMMUNITY CHAT
 ========================================================= */
 
-/* FLOATING BUTTON */
+/* LEFT CHAT TAB */
 
 .chat-launch{
   position:fixed;
-  right:24px;
-  bottom:24px;
+  left:0;
+  top:50%;
+  transform:translateY(-50%);
+
   z-index:1500;
 
-  width:66px;
-  height:66px;
+  height:58px;
+  min-width:108px;
 
   border:0;
-  border-radius:50%;
+  border-radius:0 18px 18px 0;
 
-  background:var(--green);
+  background:linear-gradient(
+    135deg,
+    #25d366,
+    #128c7e
+  );
+
   color:white;
 
   display:flex;
   align-items:center;
   justify-content:center;
+  gap:9px;
 
   cursor:pointer;
 
   box-shadow:
-    0 10px 35px rgba(0,0,0,.45),
-    0 0 0 5px rgba(37,211,102,.10);
+    5px 8px 30px rgba(0,0,0,.35);
 
   transition:.25s;
 }
 
 .chat-launch:hover{
-  transform:scale(1.08);
+  min-width:122px;
   box-shadow:
-    0 15px 45px rgba(0,0,0,.55),
-    0 0 0 8px rgba(37,211,102,.12);
+    8px 10px 35px rgba(0,0,0,.45);
 }
 
 .chat-launch svg{
-  width:30px;
-  height:30px;
+  width:22px;
+  height:22px;
   fill:white;
+}
+
+.chat-launch span{
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:1.5px;
 }
 
 
@@ -456,6 +473,7 @@ footer .container{
 .chat-panel{
   position:fixed;
   inset:0;
+
   z-index:1400;
 
   width:100%;
@@ -464,12 +482,7 @@ footer .container{
   display:none;
   flex-direction:column;
 
-  background:
-    linear-gradient(
-      rgba(0,0,0,.42),
-      rgba(0,0,0,.68)
-    ),
-    url("polaris.jpg") center/cover fixed;
+  background:#075e54;
 
   animation:chatIn .28s ease;
 }
@@ -481,7 +494,7 @@ footer .container{
 @keyframes chatIn{
   from{
     opacity:0;
-    transform:scale(.98);
+    transform:scale(.985);
   }
   to{
     opacity:1;
@@ -499,9 +512,7 @@ footer .container{
   display:flex;
   flex-direction:column;
 
-  background:rgba(247,249,248,.96);
-
-  backdrop-filter:blur(18px);
+  background:#075e54;
 }
 
 
@@ -516,7 +527,7 @@ footer .container{
   align-items:center;
   justify-content:space-between;
 
-  background:rgba(18,140,126,.96);
+  background:#075e54;
 
   color:white;
 
@@ -537,7 +548,7 @@ footer .container{
 
   border-radius:50%;
 
-  background:rgba(255,255,255,.18);
+  background:rgba(255,255,255,.16);
 
   display:flex;
   align-items:center;
@@ -591,12 +602,12 @@ footer .container{
 
 .iconbtn:hover{
   background:rgba(255,255,255,.23);
-  transform:translateY(-1px);
 }
 
 .iconbtn svg{
   width:20px;
   height:20px;
+
   fill:none;
   stroke:currentColor;
   stroke-width:2;
@@ -650,10 +661,14 @@ footer .container{
   min-height:0;
 
   display:flex;
+
+  background-color:#d9fdd3;
+
+  overflow:hidden;
 }
 
 
-/* MESSAGES */
+/* WHATSAPP-LIKE PATTERN */
 
 .messages{
   flex:1;
@@ -666,12 +681,31 @@ footer .container{
   flex-direction:column;
   gap:7px;
 
-  background:
-    linear-gradient(
-      rgba(236,242,239,.84),
-      rgba(236,242,239,.90)
+  background-color:#d9fdd3;
+
+  background-image:
+    radial-gradient(
+      circle at 10px 10px,
+      rgba(7,94,84,.055) 1.5px,
+      transparent 1.7px
     ),
-    url("polaris.jpg") center/cover fixed;
+    radial-gradient(
+      circle at 35px 35px,
+      rgba(7,94,84,.045) 1.5px,
+      transparent 1.7px
+    ),
+    linear-gradient(
+      45deg,
+      rgba(255,255,255,.10) 25%,
+      transparent 25%,
+      transparent 75%,
+      rgba(255,255,255,.10) 75%
+    );
+
+  background-size:
+    45px 45px,
+    55px 55px,
+    90px 90px;
 
   scroll-behavior:smooth;
 }
@@ -681,7 +715,7 @@ footer .container{
 }
 
 .messages::-webkit-scrollbar-thumb{
-  background:rgba(18,140,126,.25);
+  background:rgba(7,94,84,.25);
   border-radius:20px;
 }
 
@@ -697,9 +731,9 @@ footer .container{
 
   padding:14px 18px;
 
-  border-radius:15px;
+  border-radius:14px;
 
-  background:rgba(255,255,255,.80);
+  background:rgba(255,255,255,.82);
 
   color:#5b665f;
 
@@ -707,7 +741,7 @@ footer .container{
 
   font-size:12px;
 
-  box-shadow:0 4px 18px rgba(0,0,0,.06);
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
 
   backdrop-filter:blur(8px);
 }
@@ -717,23 +751,24 @@ footer .container{
 }
 
 
-/* MESSAGE */
+/* MESSAGE BUBBLE */
 
 .msg{
+  width:max-content;
   max-width:min(620px,78%);
 
-  padding:10px 14px 9px;
+  padding:8px 11px 7px;
 
-  background:white;
+  background:#fff;
 
   color:var(--chat-text);
 
   align-self:flex-start;
 
-  border-radius:5px 17px 17px 17px;
+  border-radius:4px 14px 14px 14px;
 
   box-shadow:
-    0 2px 10px rgba(25,55,42,.07);
+    0 1px 2px rgba(0,0,0,.12);
 
   animation:messageIn .2s ease;
 
@@ -754,23 +789,25 @@ footer .container{
 .msg.mine{
   align-self:flex-end;
 
-  background:#dcf8e7;
+  background:#dcf8c6;
 
-  border-radius:17px 5px 17px 17px;
+  border-radius:14px 4px 14px 14px;
 }
 
 .msg.admin{
-  background:#d6f6e4;
+  background:#c9f7d8;
 }
 
 .msg .meta{
-  font-size:10px;
+  font-size:9px;
 
   color:#718078;
 
   margin-bottom:3px;
 
   font-weight:600;
+
+  line-height:1.25;
 }
 
 .msg.admin .meta{
@@ -781,7 +818,7 @@ footer .container{
 .msg .text{
   font-size:14px;
 
-  line-height:1.48;
+  line-height:1.45;
 
   white-space:pre-wrap;
 
@@ -801,9 +838,42 @@ footer .container{
 
   cursor:pointer;
 
-  font-size:10px;
+  font-size:9px;
 
   font-weight:700;
+}
+
+
+/* MEDIA */
+
+.message-media{
+  margin-top:6px;
+
+  overflow:hidden;
+
+  border-radius:10px;
+
+  background:#edf4ef;
+
+  max-width:min(380px,72vw);
+}
+
+.message-media img,
+.message-media video{
+  width:100%;
+  height:auto;
+  max-height:430px;
+  object-fit:cover;
+}
+
+.message-media video{
+  background:#000;
+}
+
+.media-label{
+  font-size:9px;
+  color:#6f7d75;
+  padding:5px 7px;
 }
 
 
@@ -812,9 +882,9 @@ footer .container{
 .sent-status{
   display:block;
 
-  margin-top:5px;
+  margin-top:4px;
 
-  font-size:9px;
+  font-size:8px;
 
   color:#779186;
 
@@ -841,7 +911,7 @@ footer .container{
 .typing-bubble{
   background:white;
 
-  border-radius:5px 17px 17px 17px;
+  border-radius:4px 17px 17px 17px;
 
   padding:10px 13px;
 
@@ -876,6 +946,7 @@ footer .container{
     transform:translateY(0);
     opacity:.45;
   }
+
   30%{
     transform:translateY(-4px);
     opacity:1;
@@ -886,13 +957,13 @@ footer .container{
 /* COMPOSER */
 
 .chat-compose{
-  padding:12px 18px 16px;
+  padding:10px 18px 15px;
 
-  background:#f7f9f8;
+  background:#f0f5f2;
 
   border-top:1px solid rgba(20,80,55,.09);
 
-  box-shadow:0 -5px 20px rgba(0,0,0,.06);
+  box-shadow:0 -5px 20px rgba(0,0,0,.08);
 
   flex-shrink:0;
 }
@@ -914,10 +985,59 @@ footer .container{
 .compose-row{
   display:flex;
 
-  gap:9px;
+  gap:8px;
 
   align-items:flex-end;
 }
+
+
+/* ATTACH BUTTON */
+
+.attach{
+  width:47px;
+  height:47px;
+
+  flex-shrink:0;
+
+  border:0;
+
+  border-radius:50%;
+
+  background:white;
+
+  color:#128c7e;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+  transition:.2s;
+}
+
+.attach:hover{
+  background:#e8f8ee;
+  transform:scale(1.05);
+}
+
+.attach svg{
+  width:22px;
+  height:22px;
+
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+}
+
+.file-input{
+  display:none;
+}
+
+
+/* TEXT INPUT */
 
 .compose-row textarea{
   flex:1;
@@ -931,11 +1051,11 @@ footer .container{
 
   border:1px solid #dfe8e3;
 
-  border-radius:24px;
+  border-radius:22px;
 
   color:#18221e;
 
-  padding:13px 17px;
+  padding:13px 16px;
 
   font-size:13px;
 
@@ -957,9 +1077,12 @@ footer .container{
   color:#9aa69f;
 }
 
+
+/* SEND */
+
 .send{
-  width:48px;
-  height:48px;
+  width:47px;
+  height:47px;
 
   flex-shrink:0;
 
@@ -999,6 +1122,87 @@ footer .container{
   fill:none;
   stroke:white;
   stroke-width:2;
+}
+
+
+/* MEDIA PREVIEW */
+
+.media-preview{
+  display:none;
+
+  margin:0 0 8px 5px;
+
+  width:max-content;
+  max-width:100%;
+
+  position:relative;
+
+  padding:6px;
+
+  background:white;
+
+  border-radius:12px;
+
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.media-preview.show{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.media-preview img,
+.media-preview video{
+  width:75px;
+  height:58px;
+
+  object-fit:cover;
+
+  border-radius:8px;
+
+  background:#111;
+}
+
+.media-preview-info{
+  max-width:180px;
+
+  font-size:10px;
+  color:#526159;
+}
+
+.media-preview-info strong{
+  display:block;
+
+  color:#128c60;
+
+  font-size:10px;
+
+  margin-bottom:2px;
+}
+
+.remove-media{
+  position:absolute;
+
+  right:-7px;
+  top:-7px;
+
+  width:22px;
+  height:22px;
+
+  border:0;
+
+  border-radius:50%;
+
+  background:#e74c3c;
+
+  color:white;
+
+  font-size:14px;
+
+  line-height:22px;
+
+  cursor:pointer;
 }
 
 
@@ -1278,6 +1482,33 @@ footer .container{
 }
 
 
+/* SUCCESS MESSAGE */
+
+.success-message{
+  display:none;
+
+  text-align:center;
+
+  padding:15px;
+
+  margin-top:15px;
+
+  border-radius:12px;
+
+  background:#e7f8ee;
+
+  color:#17663e;
+
+  font-size:13px;
+
+  font-weight:800;
+}
+
+.success-message.show{
+  display:block;
+}
+
+
 /* ADMIN MODAL */
 
 .admin-modal-box{
@@ -1318,7 +1549,7 @@ footer .container{
 }
 
 
-/* MOBILE CHAT */
+/* MOBILE */
 
 @media(max-width:800px){
 
@@ -1356,10 +1587,22 @@ footer .container{
   }
 
   .chat-launch{
-    right:18px;
+    top:auto;
+    left:14px;
     bottom:18px;
-    width:60px;
-    height:60px;
+
+    transform:none;
+
+    min-width:100px;
+    height:50px;
+
+    border-radius:14px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.35);
+  }
+
+  .chat-launch:hover{
+    min-width:100px;
   }
 
   .chat-head{
@@ -1373,21 +1616,35 @@ footer .container{
   }
 
   .messages{
-    padding:22px 12px;
+    padding:22px 10px;
   }
 
   .msg{
     max-width:88%;
   }
 
+  .message-media{
+    max-width:75vw;
+  }
+
   .chat-compose{
-    padding:9px 10px 12px;
+    padding:8px 8px 12px;
   }
 
   .chat-menu{
     right:12px;
     top:60px;
     width:calc(100% - 24px);
+  }
+
+  .attach,
+  .send{
+    width:44px;
+    height:44px;
+  }
+
+  .compose-row textarea{
+    min-height:44px;
   }
 }
 
@@ -1425,22 +1682,20 @@ footer .container{
   .msg{
     max-width:91%;
   }
+
+  .chat-launch{
+    left:10px;
+    bottom:10px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     NAVIGATION
-========================= -->
-
 <nav>
   <div class="container navin">
-
-    <a class="logo" href="#">
-      POLARIS<span>.</span>
-    </a>
+    <a class="logo" href="#">POLARIS<span>.</span></a>
 
     <div class="navlinks">
       <a href="#technology">Teknologjia</a>
@@ -1448,17 +1703,11 @@ footer .container{
       <a href="#mission">Misioni</a>
       <a href="#order">Porosit</a>
     </div>
-
   </div>
 </nav>
 
 
-<!-- =========================
-     HERO
-========================= -->
-
 <header class="hero">
-
   <div class="container">
 
     <div class="eyebrow">
@@ -1477,28 +1726,15 @@ footer .container{
     </p>
 
     <div class="buttons">
-
-      <a class="btn primary" href="#product">
-        MËSO MË SHUMË
-      </a>
-
-      <a class="btn" href="#order">
-        POROSIT TANI
-      </a>
-
+      <a class="btn primary" href="#product">MËSO MË SHUMË</a>
+      <a class="btn" href="#order">POROSIT TANI</a>
     </div>
 
   </div>
-
 </header>
 
 
-<!-- =========================
-     INTRO
-========================= -->
-
 <section class="intro">
-
   <div class="container">
 
     <div class="eyebrow">
@@ -1516,16 +1752,10 @@ footer .container{
     </p>
 
   </div>
-
 </section>
 
 
-<!-- =========================
-     TECHNOLOGY
-========================= -->
-
 <section id="technology">
-
   <div class="container">
 
     <div class="eyebrow">
@@ -1541,67 +1771,46 @@ footer .container{
     <div class="darkgrid">
 
       <article class="card">
-
         <div class="num">01</div>
-
         <h3>Sensorë inteligjentë</h3>
-
         <p>
           Sensorë ultrasonikë identifikojnë pengesat
           dhe matin distancën në kohë reale.
         </p>
-
       </article>
 
       <article class="card">
-
         <div class="num">02</div>
-
         <h3>Reagim me vibrim</h3>
-
         <p>
           Vibrimi ndryshon sipas distancës së pengesës
           për një reagim intuitiv.
         </p>
-
       </article>
 
       <article class="card">
-
         <div class="num">03</div>
-
         <h3>Përdorim i thjeshtë</h3>
-
         <p>
           Ndërfaqe minimale dhe kontroll i drejtpërdrejtë,
           pa komplikime të panevojshme.
         </p>
-
       </article>
 
       <article class="card">
-
         <div class="num">04</div>
-
         <h3>Teknologji portative</h3>
-
         <p>
           Elektronika është integruar në një pajisje
           praktike për përdorim të përditshëm.
         </p>
-
       </article>
 
     </div>
 
   </div>
-
 </section>
 
-
-<!-- =========================
-     PRODUCT
-========================= -->
 
 <section id="product" class="product">
 
@@ -1662,10 +1871,6 @@ footer .container{
 </section>
 
 
-<!-- =========================
-     MISSION
-========================= -->
-
 <section id="mission" class="mission">
 
   <div class="container">
@@ -1691,10 +1896,6 @@ footer .container{
 
 </section>
 
-
-<!-- =========================
-     HOW IT WORKS
-========================= -->
 
 <section>
 
@@ -1743,10 +1944,6 @@ footer .container{
 </section>
 
 
-<!-- =========================
-     ORDER
-========================= -->
-
 <section id="order" class="order">
 
   <div class="container">
@@ -1777,10 +1974,6 @@ footer .container{
 
 </section>
 
-
-<!-- =========================
-     CONTACT
-========================= -->
 
 <section class="contact">
 
@@ -1826,10 +2019,6 @@ footer .container{
 </section>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
-
 <footer>
 
   <div class="container">
@@ -1848,7 +2037,7 @@ footer .container{
 
 
 <!-- =====================================================
-     FLOATING CHAT BUTTON
+     CHAT BUTTON
 ===================================================== -->
 
 <button
@@ -1857,16 +2046,16 @@ footer .container{
   type="button"
   aria-label="Hap POLARIS Community"
 >
-
   <svg viewBox="0 0 24 24" aria-hidden="true">
     <path d="M20 4.5A3.5 3.5 0 0 0 16.5 1h-9A3.5 3.5 0 0 0 4 4.5v7A3.5 3.5 0 0 0 7.5 15H9v3.2a.8.8 0 0 0 1.3.62L14.2 15h2.3a3.5 3.5 0 0 0 3.5-3.5v-7ZM8 8.2a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm4 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm4 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/>
   </svg>
 
+  <span>CHAT</span>
 </button>
 
 
 <!-- =====================================================
-     FULLSCREEN CHAT
+     CHAT
 ===================================================== -->
 
 <div
@@ -1876,28 +2065,21 @@ footer .container{
 
   <div class="chat-app">
 
-    <!-- HEADER -->
-
     <div class="chat-head">
 
       <div class="chat-brand">
 
         <div class="chat-brand-icon">
-
           <svg viewBox="0 0 24 24">
             <path d="M20 4.5A3.5 3.5 0 0 0 16.5 1h-9A3.5 3.5 0 0 0 4 4.5v7A3.5 3.5 0 0 0 7.5 15H9v3.2a.8.8 0 0 0 1.3.62L14.2 15h2.3a3.5 3.5 0 0 0 3.5-3.5v-7Z"/>
           </svg>
-
         </div>
 
         <div class="chat-title">
-
           <b>POLARIS COMMUNITY</b>
-
           <span id="chatStatus">
             Komuniteti i POLARIS
           </span>
-
         </div>
 
       </div>
@@ -1905,35 +2087,36 @@ footer .container{
 
       <div class="head-actions">
 
-        <!-- MENU -->
-
         <button
           class="iconbtn"
           id="menuBtn"
           type="button"
           aria-label="Menu"
         >
-
           <svg viewBox="0 0 24 24">
             <path d="M4 7h16M4 12h16M4 17h16"/>
           </svg>
-
         </button>
 
 
-        <!-- CLOSE -->
+        <!-- ARROW CLOSE -->
 
         <button
           class="iconbtn"
           id="closeChat"
           type="button"
           aria-label="Mbyll chatin"
+          title="Kthehu"
         >
-
-          <svg viewBox="0 0 24 24">
-            <path d="M6 6l12 12M18 6L6 18"/>
-          </svg>
-
+          <span
+            style="
+              font-size:24px;
+              line-height:1;
+              font-weight:700;
+            "
+          >
+            ⬅
+          </span>
         </button>
 
       </div>
@@ -1941,13 +2124,12 @@ footer .container{
     </div>
 
 
-    <!-- ADMIN BAR -->
+    <!-- ADMIN -->
 
     <div
       class="adminbar"
       id="adminBar"
     >
-
       <span>
         <b>ADMIN MODE</b> — Ledjan Bitri
       </span>
@@ -1958,11 +2140,8 @@ footer .container{
       >
         LOG OUT
       </button>
-
     </div>
 
-
-    <!-- BODY -->
 
     <div class="chat-body">
 
@@ -2029,16 +2208,15 @@ footer .container{
           Shkruani pyetjet, idetë, sugjerimet ose mendimet tuaja.
         </div>
 
-        <div class="typing-wrap" id="typingIndicator">
-
+        <div
+          class="typing-wrap"
+          id="typingIndicator"
+        >
           <div class="typing-bubble">
-
             <span class="typing-dot"></span>
             <span class="typing-dot"></span>
             <span class="typing-dot"></span>
-
           </div>
-
         </div>
 
       </div>
@@ -2057,7 +2235,58 @@ footer .container{
         Po shkruan si <strong>...</strong>
       </div>
 
+
+      <!-- MEDIA PREVIEW -->
+
+      <div
+        class="media-preview"
+        id="mediaPreview"
+      >
+
+        <div id="mediaPreviewContent"></div>
+
+        <div
+          class="media-preview-info"
+          id="mediaPreviewInfo"
+        ></div>
+
+        <button
+          class="remove-media"
+          id="removeMedia"
+          type="button"
+          aria-label="Hiq median"
+        >
+          ×
+        </button>
+
+      </div>
+
+
       <div class="compose-row">
+
+        <!-- MEDIA -->
+
+        <button
+          class="attach"
+          id="attachBtn"
+          type="button"
+          aria-label="Dërgo foto ose video"
+          title="Foto ose video"
+        >
+          <svg viewBox="0 0 24 24">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <path d="m3 16 5-5 4 4 3-3 6 6"/>
+            <circle cx="16.5" cy="7.5" r="2.5"/>
+          </svg>
+        </button>
+
+        <input
+          class="file-input"
+          id="mediaInput"
+          type="file"
+          accept="image/*,video/*"
+        >
+
 
         <textarea
           id="messageInput"
@@ -2065,6 +2294,7 @@ footer .container{
           rows="1"
           placeholder="Shkruaj një mesazh..."
         ></textarea>
+
 
         <button
           class="send"
@@ -2090,7 +2320,7 @@ footer .container{
 
 
 <!-- =====================================================
-     REGISTRATION MODAL
+     REGISTER MODAL
 ===================================================== -->
 
 <div
@@ -2150,6 +2380,13 @@ footer .container{
       id="registerError"
     ></div>
 
+    <div
+      class="success-message"
+      id="registerSuccess"
+    >
+      U regjistruat me sukses!
+    </div>
+
     <div class="modal-actions">
 
       <button
@@ -2175,7 +2412,7 @@ footer .container{
 
 
 <!-- =====================================================
-     ADMIN LOGIN MODAL
+     ADMIN LOGIN
 ===================================================== -->
 
 <div
@@ -2205,7 +2442,7 @@ footer .container{
 
     <p>
       Paneli privat i administratorit.
-      Passwordi verifikohet nga Supabase Auth.
+      Fjalëkalimi verifikohet në mënyrë të sigurt.
     </p>
 
     <label for="adminPassword">
@@ -2262,7 +2499,7 @@ footer .container{
 
 
 /* ========================================================
-   SUPABASE CONFIG
+   CONFIG
 ======================================================== */
 
 const SUPABASE_URL =
@@ -2273,6 +2510,12 @@ const SUPABASE_KEY =
 
 const ADMIN_EMAIL =
   "Ledjanbitri15@gmail.com";
+
+const MEDIA_BUCKET =
+  "polaris-media";
+
+const MAX_MEDIA_SIZE =
+  50 * 1024 * 1024;
 
 
 const supabase =
@@ -2298,7 +2541,8 @@ let anonymousName = null;
 let realtimeChannel = null;
 
 let typingTimer = null;
-let currentlyTyping = false;
+
+let selectedMedia = null;
 
 
 /* ========================================================
@@ -2386,7 +2630,7 @@ async function getAnonymousName(){
 
 
 /* ========================================================
-   RENDER WELCOME
+   WELCOME
 ======================================================== */
 
 function getWelcome(){
@@ -2397,6 +2641,79 @@ function getWelcome(){
       Shkruani pyetjet, idetë, sugjerimet ose mendimet tuaja.
     </div>
   `;
+
+}
+
+
+/* ========================================================
+   FORMAT MEDIA
+======================================================== */
+
+function renderMedia(message){
+
+  if(
+    !message.media_url ||
+    !message.media_type
+  ){
+    return "";
+  }
+
+
+  const url =
+    escapeHtml(
+      message.media_url
+    );
+
+
+  const type =
+    String(
+      message.media_type
+    );
+
+
+  if(type.startsWith("image/")){
+
+    return `
+      <div class="message-media">
+        <a
+          href="${url}"
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            src="${url}"
+            alt="Foto e dërguar në POLARIS Community"
+            loading="lazy"
+          >
+        </a>
+      </div>
+    `;
+
+  }
+
+
+  if(type.startsWith("video/")){
+
+    return `
+      <div class="message-media">
+        <video
+          controls
+          preload="metadata"
+          playsinline
+        >
+          <source
+            src="${url}"
+            type="${escapeHtml(type)}"
+          >
+          Shfletuesi nuk mbështet videon.
+        </video>
+      </div>
+    `;
+
+  }
+
+
+  return "";
 
 }
 
@@ -2415,7 +2732,7 @@ async function loadMessages(){
     await supabase
       .from("polaris_messages")
       .select(
-        "id,user_name,message,created_at"
+        "id,user_name,message,created_at,media_url,media_type,media_name"
       )
       .order(
         "created_at",
@@ -2437,7 +2754,7 @@ async function loadMessages(){
       ${getWelcome()}
 
       <div class="chat-welcome">
-        Chat-i nuk u lidh me databazën.
+        Chat-i nuk u lidh. Provo përsëri.
       </div>
     `;
 
@@ -2500,6 +2817,18 @@ function renderMessages(list){
               );
 
 
+        const safeMessage =
+          escapeHtml(
+            message.message || ""
+          );
+
+
+        const media =
+          renderMedia(
+            message
+          );
+
+
         return `
           <div
             class="
@@ -2530,17 +2859,23 @@ function renderMessages(list){
 
             </div>
 
+            ${
+              safeMessage
+                ? `
+                  <div class="text">
+                    ${safeMessage}
+                  </div>
+                `
+                : ""
+            }
 
-            <div class="text">
-              ${escapeHtml(message.message)}
-            </div>
-
+            ${media}
 
             ${
               isMine
                 ? `
                   <span class="sent-status">
-                    Message sent
+                    ✓ Dërguar
                   </span>
                 `
                 : ""
@@ -2580,7 +2915,7 @@ function renderMessages(list){
 
 
 /* ========================================================
-   REALTIME MESSAGES
+   REALTIME
 ======================================================== */
 
 async function setupRealtime(){
@@ -2685,6 +3020,266 @@ async function refreshIdentity(){
 
 
 /* ========================================================
+   UPDATE SEND BUTTON
+======================================================== */
+
+function updateSendButton(){
+
+  const hasText =
+    $("messageInput")
+      .value
+      .trim()
+      .length > 0;
+
+
+  const hasMedia =
+    !!selectedMedia;
+
+
+  $("sendBtn").disabled =
+    !hasText &&
+    !hasMedia;
+
+}
+
+
+/* ========================================================
+   MEDIA PREVIEW
+======================================================== */
+
+function showMediaPreview(file){
+
+  const preview =
+    $("mediaPreview");
+
+  const content =
+    $("mediaPreviewContent");
+
+  const info =
+    $("mediaPreviewInfo");
+
+
+  if(!file){
+
+    clearSelectedMedia();
+
+    return;
+  }
+
+
+  selectedMedia =
+    file;
+
+
+  const objectUrl =
+    URL.createObjectURL(
+      file
+    );
+
+
+  if(file.type.startsWith("image/")){
+
+    content.innerHTML =
+      `
+        <img
+          src="${objectUrl}"
+          alt="Preview"
+        >
+      `;
+
+  }else{
+
+    content.innerHTML =
+      `
+        <video
+          src="${objectUrl}"
+          muted
+        ></video>
+      `;
+
+  }
+
+
+  const sizeMb =
+    (
+      file.size /
+      1024 /
+      1024
+    ).toFixed(1);
+
+
+  info.innerHTML =
+    `
+      <strong>
+        ${file.type.startsWith("image/")
+          ? "Foto"
+          : "Video"}
+      </strong>
+      ${escapeHtml(file.name)}
+      <br>
+      ${sizeMb} MB
+    `;
+
+
+  preview.classList.add(
+    "show"
+  );
+
+
+  updateSendButton();
+
+}
+
+
+/* ========================================================
+   CLEAR MEDIA
+======================================================== */
+
+function clearSelectedMedia(){
+
+  selectedMedia =
+    null;
+
+
+  $("mediaInput").value =
+    "";
+
+
+  $("mediaPreview")
+    .classList
+    .remove("show");
+
+
+  $("mediaPreviewContent")
+    .innerHTML = "";
+
+
+  $("mediaPreviewInfo")
+    .innerHTML = "";
+
+
+  updateSendButton();
+
+}
+
+
+/* ========================================================
+   UPLOAD MEDIA
+======================================================== */
+
+async function uploadMedia(file){
+
+  if(!file){
+    return null;
+  }
+
+
+  if(
+    !file.type.startsWith("image/") &&
+    !file.type.startsWith("video/")
+  ){
+
+    throw new Error(
+      "Lejohen vetëm foto dhe video."
+    );
+
+  }
+
+
+  if(
+    file.size >
+    MAX_MEDIA_SIZE
+  ){
+
+    throw new Error(
+      "File-i është shumë i madh. Maksimumi është 50 MB."
+    );
+
+  }
+
+
+  const extension =
+    (
+      file.name
+        .split(".")
+        .pop() ||
+      "file"
+    )
+      .toLowerCase()
+      .replace(
+        /[^a-z0-9]/g,
+        ""
+      );
+
+
+  const uniqueName =
+    Date.now() +
+    "-" +
+    Math.random()
+      .toString(36)
+      .slice(2) +
+    "." +
+    extension;
+
+
+  const path =
+    "community/" +
+    uniqueName;
+
+
+  const upload =
+    await supabase
+      .storage
+      .from(MEDIA_BUCKET)
+      .upload(
+        path,
+        file,
+        {
+          cacheControl:"3600",
+          upsert:false,
+          contentType:file.type
+        }
+      );
+
+
+  if(upload.error){
+
+    console.error(
+      "MEDIA UPLOAD:",
+      upload.error
+    );
+
+    throw new Error(
+      "Fotoja ose videoja nuk u ngarkua."
+    );
+
+  }
+
+
+  const publicResult =
+    supabase
+      .storage
+      .from(MEDIA_BUCKET)
+      .getPublicUrl(
+        path
+      );
+
+
+  return {
+    url:
+      publicResult.data.publicUrl,
+
+    type:
+      file.type,
+
+    name:
+      file.name
+  };
+
+}
+
+
+/* ========================================================
    SEND MESSAGE
 ======================================================== */
 
@@ -2698,8 +3293,13 @@ async function sendMessage(){
     input.value.trim();
 
 
-  if(!text){
+  if(
+    !text &&
+    !selectedMedia
+  ){
+
     return;
+
   }
 
 
@@ -2718,50 +3318,107 @@ async function sendMessage(){
     true;
 
 
-  const result =
-    await supabase
-      .from("polaris_messages")
-      .insert({
-        user_name:userName,
-        message:text
-      });
+  try{
+
+    let mediaData =
+      null;
 
 
-  $("sendBtn").disabled =
-    false;
+    if(selectedMedia){
+
+      mediaData =
+        await uploadMedia(
+          selectedMedia
+        );
+
+    }
 
 
-  if(result.error){
+    const insertData = {
+
+      user_name:
+        userName,
+
+      message:
+        text
+
+    };
+
+
+    if(mediaData){
+
+      insertData.media_url =
+        mediaData.url;
+
+      insertData.media_type =
+        mediaData.type;
+
+      insertData.media_name =
+        mediaData.name;
+
+    }
+
+
+    const result =
+      await supabase
+        .from("polaris_messages")
+        .insert(
+          insertData
+        );
+
+
+    if(result.error){
+
+      console.error(
+        "MESSAGE INSERT:",
+        result.error
+      );
+
+      throw new Error(
+        "Mesazhi nuk u dërgua."
+      );
+
+    }
+
+
+    input.value = "";
+
+    input.style.height =
+      "46px";
+
+
+    clearSelectedMedia();
+
+    stopTyping();
+
+    await loadMessages();
+
+
+  }catch(error){
 
     console.error(
-      result.error
+      "POLARIS SEND:",
+      error
     );
 
 
     alert(
-      "Mesazhi nuk u dërgua. Kontrollo RLS të Supabase."
+      error.message ||
+      "Mesazhi nuk u dërgua."
     );
 
-    return;
+
+  }finally{
+
+    updateSendButton();
+
   }
-
-
-  input.value = "";
-
-  input.style.height =
-    "46px";
-
-
-  stopTyping();
-
-
-  await loadMessages();
 
 }
 
 
 /* ========================================================
-   TYPING INDICATOR
+   TYPING
 ======================================================== */
 
 function showTyping(){
@@ -2822,13 +3479,6 @@ function stopTyping(){
 }
 
 
-/*
-  Ky është indicator-i vizual lokal.
-  Realtime typing i përbashkët mund të aktivizohet
-  më tej me një tabelë/kanal typing në Supabase.
-*/
-
-
 /* ========================================================
    ADMIN LOGIN
 ======================================================== */
@@ -2875,18 +3525,9 @@ async function loginAdmin(){
   }
 
 
-  /*
-    Passwordi nuk ruhet.
-  */
-
   $("adminPassword").value =
     "";
 
-
-  /*
-    Sigurohemi që llogaria është email-i
-    i administratorit.
-  */
 
   const loggedUser =
     result.data &&
@@ -2971,7 +3612,9 @@ async function deleteMessage(id){
       "Ta fshijmë këtë mesazh?"
     )
   ){
+
     return;
+
   }
 
 
@@ -2990,7 +3633,7 @@ async function deleteMessage(id){
 
 
     alert(
-      "Mesazhi nuk u fshi. Kontrollo policy-n DELETE të adminit."
+      "Mesazhi nuk u fshi."
     );
 
     return;
@@ -3058,10 +3701,8 @@ $("closeChat")
         .remove("show");
 
 
-      /*
-        Mbyllja e chat-it =
-        logout i adminit.
-      */
+      clearSelectedMedia();
+
 
       if(adminMode){
 
@@ -3083,6 +3724,7 @@ $("menuBtn")
     event => {
 
       event.stopPropagation();
+
 
       $("chatMenu")
         .classList
@@ -3137,6 +3779,11 @@ $("joinCommunity")
         .textContent = "";
 
 
+      $("registerSuccess")
+        .classList
+        .remove("show");
+
+
       $("registerEmail")
         .value = "";
 
@@ -3180,6 +3827,11 @@ async function registerUser(){
 
   $("registerError")
     .textContent = "";
+
+
+  $("registerSuccess")
+    .classList
+    .remove("show");
 
 
   if(!email){
@@ -3226,39 +3878,103 @@ async function registerUser(){
     );
 
 
-    $("registerError")
-      .textContent =
-      result.error.message;
+    /*
+      Përdoruesi sheh vetëm
+      mesazh të thjeshtë.
+    */
+
+    const message =
+      String(
+        result.error.message || ""
+      ).toLowerCase();
+
+
+    if(
+      message.includes("already") ||
+      message.includes("registered")
+    ){
+
+      $("registerError")
+        .textContent =
+        "Ky email është tashmë i regjistruar.";
+
+    }else{
+
+      $("registerError")
+        .textContent =
+        "Regjistrimi nuk u krye. Kontrollo të dhënat.";
+
+    }
 
     return;
 
   }
 
 
-  /*
-    Krijojmë profilin vetëm nëse
-    Supabase na jep user-in.
-  */
+  if(
+    result.data &&
+    result.data.user
+  ){
 
-  if(result.data && result.data.user){
+    const profileResult =
+      await supabase
+        .from("polaris_profiles")
+        .upsert({
+          id:
+            result.data.user.id,
 
-    await supabase
-      .from("polaris_profiles")
-      .upsert({
-        id:result.data.user.id,
-        email:email
-      });
+          email:
+            email
+        });
+
+
+    /*
+      Gabimi i profilit nuk i shfaqet
+      përdoruesit.
+    */
+
+    if(profileResult.error){
+
+      console.error(
+        "PROFILE:",
+        profileResult.error
+      );
+
+    }
 
   }
 
 
-  $("registerModal")
+  $("registerEmail")
+    .value = "";
+
+  $("registerPassword")
+    .value = "";
+
+
+  $("registerError")
+    .textContent = "";
+
+
+  $("registerSuccess")
     .classList
-    .remove("show");
+    .add("show");
 
 
-  alert(
-    "Regjistrimi u krye. Kontrollo email-in nëse Supabase kërkon konfirmim."
+  setTimeout(
+    () => {
+
+      $("registerModal")
+        .classList
+        .remove("show");
+
+
+      $("registerSuccess")
+        .classList
+        .remove("show");
+
+    },
+    1800
   );
 
 }
@@ -3332,7 +4048,7 @@ $("menuAdmin")
 
 
 /* ========================================================
-   ADMIN MODAL CANCEL
+   ADMIN CANCEL
 ======================================================== */
 
 $("cancelAdmin")
@@ -3375,7 +4091,7 @@ $("adminPassword")
 
 
 /* ========================================================
-   ADMIN LOGOUT
+   LOGOUT
 ======================================================== */
 
 $("logoutAdmin")
@@ -3393,6 +4109,92 @@ $("sendBtn")
   .addEventListener(
     "click",
     sendMessage
+  );
+
+
+/* ========================================================
+   ATTACH
+======================================================== */
+
+$("attachBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      $("mediaInput")
+        .click();
+
+    }
+  );
+
+
+/* ========================================================
+   MEDIA SELECT
+======================================================== */
+
+$("mediaInput")
+  .addEventListener(
+    "change",
+    event => {
+
+      const file =
+        event.target.files &&
+        event.target.files[0];
+
+
+      if(!file){
+        return;
+      }
+
+
+      if(
+        !file.type.startsWith("image/") &&
+        !file.type.startsWith("video/")
+      ){
+
+        alert(
+          "Mund të dërgosh vetëm foto ose video."
+        );
+
+        clearSelectedMedia();
+
+        return;
+
+      }
+
+
+      if(
+        file.size >
+        MAX_MEDIA_SIZE
+      ){
+
+        alert(
+          "File-i është shumë i madh. Maksimumi është 50 MB."
+        );
+
+        clearSelectedMedia();
+
+        return;
+
+      }
+
+
+      showMediaPreview(
+        file
+      );
+
+    }
+  );
+
+
+/* ========================================================
+   REMOVE MEDIA
+======================================================== */
+
+$("removeMedia")
+  .addEventListener(
+    "click",
+    clearSelectedMedia
   );
 
 
@@ -3429,6 +4231,9 @@ $("messageInput")
         stopTyping();
 
       }
+
+
+      updateSendButton();
 
     }
   );
