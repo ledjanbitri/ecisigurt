@@ -630,51 +630,36 @@ body.chat-open .chat-launch{
   background-color:#d9fdd3;
 
   /*
-    Vendos foton "chat-wallpaper.jpg"
-    në të njëjtin folder me index.html.
+    Vendos foton "chat-wallpaper.jpg" në të njëjtin folder me index.html.
+    Nëse fotoja mungon, ngjyra #d9fdd3 më sipër vazhdon të funksionojë
+    si sfond rezervë.
 
-    Nëse fotoja mungon, gradienti/pattern-i
-    më poshtë vazhdon të funksionojë.
+    SHËNIM: "background-attachment:fixed" brenda një elementi që bën
+    scroll (si ky) shpesh NUK funksionon në telefona (Safari/iOS,
+    disa versione Chrome mobile) — fotoja thjesht zhduket. Prandaj
+    këtu përdoret "scroll" në vend të "fixed".
   */
 
   background-image:
     linear-gradient(
-      rgba(217,253,211,.18),
-      rgba(217,253,211,.18)
+      rgba(217,253,211,.15),
+      rgba(217,253,211,.15)
     ),
-    url("chat-wallpaper.jpg"),
-    radial-gradient(
-      circle at 10px 10px,
-      rgba(7,94,84,.055) 1.5px,
-      transparent 1.7px
-    ),
-    radial-gradient(
-      circle at 35px 35px,
-      rgba(7,94,84,.045) 1.5px,
-      transparent 1.7px
-    );
+    url("chat-wallpaper.jpg");
 
   background-size:
     cover,
-    cover,
-    45px 45px,
-    55px 55px;
+    cover;
 
   background-position:
     center,
-    center,
-    0 0,
-    0 0;
+    center;
 
   background-repeat:
     no-repeat,
-    no-repeat,
-    repeat,
-    repeat;
+    no-repeat;
 
   background-attachment:
-    fixed,
-    fixed,
     scroll,
     scroll;
 
@@ -835,13 +820,15 @@ body.chat-open .chat-launch{
   display:flex;
   align-items:center;
   justify-content:flex-end;
-  gap:3px;
+  gap:2px;
 
   margin-top:4px;
 
   text-align:right;
 
-  font-size:8px;
+  font-size:6.5px;
+  letter-spacing:.2px;
+  text-transform:uppercase;
 
   color:#6c8879;
 
@@ -849,12 +836,12 @@ body.chat-open .chat-launch{
 }
 
 .sent-status svg{
-  width:11px;
-  height:11px;
+  width:10px;
+  height:10px;
 
   fill:none;
   stroke:#8fa79c;
-  stroke-width:2.4;
+  stroke-width:2.6;
 }
 
 .sent-status.seen svg{
@@ -1852,15 +1839,15 @@ body.chat-open .chat-launch{
 
     background-image:
       linear-gradient(
-        rgba(217,253,211,.18),
-        rgba(217,253,211,.18)
+        rgba(217,253,211,.15),
+        rgba(217,253,211,.15)
       ),
-      url("chat-wallpaper.jpg"),
-      radial-gradient(
-        circle at 10px 10px,
-        rgba(7,94,84,.055) 1.5px,
-        transparent 1.7px
-      );
+      url("chat-wallpaper.jpg");
+
+    background-size:cover,cover;
+    background-position:center,center;
+    background-repeat:no-repeat,no-repeat;
+    background-attachment:scroll,scroll;
   }
 
   .msg{
@@ -2614,7 +2601,7 @@ function renderStatus(message, isMine){
 
   return `
     <span class="sent-status ${seen ? "seen" : ""}">
-      ${seen ? "Lexuar" : "Dërguar"}
+      ${seen ? "" : "Delivered"}
       ${seen ? doubleCheck : singleCheck}
     </span>
   `;
