@@ -375,8 +375,6 @@ footer .container{
    POLARIS CHAT
 ========================================================= */
 
-/* CHAT TAB */
-
 .chat-launch{
   position:fixed;
   left:0;
@@ -427,8 +425,6 @@ footer .container{
   font-weight:900;
   letter-spacing:1.5px;
 }
-
-/* HIDE CHAT TAB WHILE CHAT IS OPEN */
 
 body.chat-open .chat-launch{
   display:none !important;
@@ -617,12 +613,12 @@ body.chat-open .chat-launch{
 
   display:flex;
 
-  background:#d9fdd3;
-
   overflow:hidden;
 }
 
-/* MESSAGE AREA */
+/* =========================================================
+   NEW PREMIUM CHAT BACKGROUND
+========================================================= */
 
 .messages{
   flex:1;
@@ -637,7 +633,20 @@ body.chat-open .chat-launch{
 
   background-color:#d9fdd3;
 
+  /*
+    Vendos foton "chat-wallpaper.jpg"
+    në të njëjtin folder me index.html.
+
+    Nëse fotoja mungon, gradienti/pattern-i
+    më poshtë vazhdon të funksionojë.
+  */
+
   background-image:
+    linear-gradient(
+      rgba(217,253,211,.80),
+      rgba(217,253,211,.80)
+    ),
+    url("chat-wallpaper.jpg"),
     radial-gradient(
       circle at 10px 10px,
       rgba(7,94,84,.055) 1.5px,
@@ -647,19 +656,31 @@ body.chat-open .chat-launch{
       circle at 35px 35px,
       rgba(7,94,84,.045) 1.5px,
       transparent 1.7px
-    ),
-    linear-gradient(
-      45deg,
-      rgba(255,255,255,.10) 25%,
-      transparent 25%,
-      transparent 75%,
-      rgba(255,255,255,.10) 75%
     );
 
   background-size:
+    cover,
+    cover,
     45px 45px,
-    55px 55px,
-    90px 90px;
+    55px 55px;
+
+  background-position:
+    center,
+    center,
+    0 0,
+    0 0;
+
+  background-repeat:
+    no-repeat,
+    no-repeat,
+    repeat,
+    repeat;
+
+  background-attachment:
+    fixed,
+    fixed,
+    scroll,
+    scroll;
 
   scroll-behavior:smooth;
 }
@@ -686,7 +707,7 @@ body.chat-open .chat-launch{
 
   border-radius:14px;
 
-  background:rgba(255,255,255,.82);
+  background:rgba(255,255,255,.84);
 
   color:#5b665f;
 
@@ -694,9 +715,9 @@ body.chat-open .chat-launch{
 
   font-size:12px;
 
-  box-shadow:0 3px 12px rgba(0,0,0,.08);
+  box-shadow:0 5px 18px rgba(0,0,0,.10);
 
-  backdrop-filter:blur(8px);
+  backdrop-filter:blur(10px);
 }
 
 .chat-welcome strong{
@@ -726,6 +747,27 @@ body.chat-open .chat-launch{
   position:relative;
 
   overflow-wrap:anywhere;
+
+  /*
+    Kjo lejon long-press në telefon,
+    por ruan scroll-in normal.
+  */
+
+  touch-action:pan-y;
+
+  -webkit-user-select:none;
+  user-select:none;
+
+  -webkit-touch-callout:none;
+}
+
+.msg .text,
+.msg .meta,
+.msg a,
+.msg audio,
+.msg video{
+  -webkit-user-select:text;
+  user-select:text;
 }
 
 @keyframes messageIn{
@@ -784,6 +826,107 @@ body.chat-open .chat-launch{
 
   font-size:9px;
   font-weight:700;
+
+  -webkit-user-select:none;
+  user-select:none;
+}
+
+.sent-status{
+  display:block;
+
+  margin-top:4px;
+
+  text-align:right;
+
+  font-size:8px;
+
+  color:#6c8879;
+
+  font-weight:700;
+}
+
+/* =========================================================
+   LONG PRESS CONTEXT MENU
+========================================================= */
+
+.message-context{
+  position:fixed;
+
+  z-index:15000;
+
+  display:none;
+
+  width:min(245px,calc(100vw - 30px));
+
+  background:#fff;
+
+  color:#18221e;
+
+  border:1px solid rgba(0,0,0,.08);
+
+  border-radius:17px;
+
+  box-shadow:
+    0 22px 65px rgba(0,0,0,.28);
+
+  padding:7px;
+
+  overflow:hidden;
+}
+
+.message-context.show{
+  display:block;
+
+  animation:contextIn .16s ease;
+}
+
+@keyframes contextIn{
+  from{
+    opacity:0;
+    transform:translateY(5px) scale(.97);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+.message-context button{
+  width:100%;
+
+  border:0;
+
+  background:transparent;
+
+  text-align:left;
+
+  padding:13px 14px;
+
+  border-radius:11px;
+
+  font:600 14px Inter,sans-serif;
+
+  cursor:pointer;
+
+  transition:.15s;
+}
+
+.message-context button:hover{
+  background:#f3f6f4;
+}
+
+.message-context .danger{
+  color:#d92d20;
+  font-weight:800;
+}
+
+.message-context .danger:hover{
+  background:#fff1ef;
+}
+
+.message-context .cancel{
+  color:#66736c;
 }
 
 /* MEDIA */
@@ -1690,6 +1833,18 @@ body.chat-open .chat-launch{
 
   .messages{
     padding:22px 10px;
+
+    background-image:
+      linear-gradient(
+        rgba(217,253,211,.82),
+        rgba(217,253,211,.82)
+      ),
+      url("chat-wallpaper.jpg"),
+      radial-gradient(
+        circle at 10px 10px,
+        rgba(7,94,84,.055) 1.5px,
+        transparent 1.7px
+      );
   }
 
   .msg{
@@ -1781,16 +1936,16 @@ body.chat-open .chat-launch{
     font-size:20px;
   }
 
+  .message-context{
+    width:calc(100vw - 28px);
+  }
+
 }
 
 </style>
 </head>
 
 <body>
-
-<!-- =========================================================
-     WEBSITE
-========================================================= -->
 
 <nav>
 
@@ -2279,9 +2434,6 @@ body.chat-open .chat-launch{
 
   <div class="chat-app">
 
-
-    <!-- HEADER -->
-
     <div class="chat-head">
 
       <div class="chat-brand">
@@ -2324,7 +2476,6 @@ body.chat-open .chat-launch{
 
       </div>
 
-
       <div class="head-actions">
 
         <button
@@ -2343,7 +2494,6 @@ body.chat-open .chat-launch{
           </svg>
 
         </button>
-
 
         <button
           class="iconbtn"
@@ -2369,9 +2519,6 @@ body.chat-open .chat-launch{
 
     </div>
 
-
-    <!-- ADMIN BAR -->
-
     <div
       class="adminbar"
       id="adminBar"
@@ -2391,13 +2538,7 @@ body.chat-open .chat-launch{
 
     </div>
 
-
-    <!-- CHAT BODY -->
-
     <div class="chat-body">
-
-
-      <!-- MENU -->
 
       <div
         class="chat-menu"
@@ -2407,7 +2548,6 @@ body.chat-open .chat-launch{
         <div class="menu-title">
           Komuniteti
         </div>
-
 
         <button
           class="menu-item"
@@ -2457,7 +2597,6 @@ body.chat-open .chat-launch{
 
         </button>
 
-
         <button
           class="menu-item"
           id="menuAdmin"
@@ -2498,9 +2637,6 @@ body.chat-open .chat-launch{
 
       </div>
 
-
-      <!-- MESSAGES -->
-
       <div
         class="messages"
         id="messages"
@@ -2523,21 +2659,12 @@ body.chat-open .chat-launch{
 
     </div>
 
-
-    <!-- COMPOSER -->
-
     <div class="chat-compose">
-
-
-      <!-- EMOJI PICKER -->
 
       <div
         class="emoji-picker"
         id="emojiPicker"
       ></div>
-
-
-      <!-- RECORDING -->
 
       <div
         class="recording-bar"
@@ -2560,9 +2687,6 @@ body.chat-open .chat-launch{
 
       </div>
 
-
-      <!-- IDENTITY -->
-
       <div
         class="identity"
         id="identity"
@@ -2570,9 +2694,6 @@ body.chat-open .chat-launch{
         Po shkruan si
         <strong>...</strong>
       </div>
-
-
-      <!-- MEDIA PREVIEW -->
 
       <div
         class="media-preview"
@@ -2597,11 +2718,7 @@ body.chat-open .chat-launch{
 
       </div>
 
-
       <div class="compose-row">
-
-
-        <!-- EMOJI -->
 
         <button
           class="emoji-btn"
@@ -2612,9 +2729,6 @@ body.chat-open .chat-launch{
         >
           🙂
         </button>
-
-
-        <!-- PHOTO / VIDEO -->
 
         <button
           class="attach"
@@ -2653,16 +2767,12 @@ body.chat-open .chat-launch{
 
         </button>
 
-
         <input
           class="file-input"
           id="mediaInput"
           type="file"
           accept="image/*,video/*"
         >
-
-
-        <!-- MICROPHONE -->
 
         <button
           class="mic-btn"
@@ -2702,18 +2812,12 @@ body.chat-open .chat-launch{
 
         </button>
 
-
-        <!-- TEXT -->
-
         <textarea
           id="messageInput"
           maxlength="1000"
           rows="1"
           placeholder="Shkruaj një mesazh..."
         ></textarea>
-
-
-        <!-- SEND -->
 
         <button
           class="send"
@@ -2737,6 +2841,36 @@ body.chat-open .chat-launch{
     </div>
 
   </div>
+
+</div>
+
+
+<!-- =========================================================
+     LONG PRESS MENU
+========================================================= -->
+
+<div
+  class="message-context"
+  id="messageContext"
+  role="menu"
+  aria-hidden="true"
+>
+
+  <button
+    type="button"
+    id="deleteOwnContext"
+    class="danger"
+  >
+    Fshi mesazhin
+  </button>
+
+  <button
+    type="button"
+    id="cancelMessageContext"
+    class="cancel"
+  >
+    Anulo
+  </button>
 
 </div>
 
@@ -2938,10 +3072,6 @@ body.chat-open .chat-launch{
 </div>
 
 
-<!-- =========================================================
-     SUPABASE
-========================================================= -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -3036,6 +3166,23 @@ let isRecording = false;
 
 
 /* =========================================================
+   LONG PRESS STATE
+========================================================= */
+
+let longPressTimer = null;
+
+let longPressStartX = 0;
+
+let longPressStartY = 0;
+
+let contextMessageId = null;
+
+const LONG_PRESS_MS = 600;
+
+const LONG_PRESS_MOVE = 12;
+
+
+/* =========================================================
    HELPERS
 ========================================================= */
 
@@ -3045,16 +3192,7 @@ function $(id){
 
 }
 
-
-/*
-  DEFENSIVE LISTENER HELPER.
-  If an element is missing, we log a warning
-  instead of throwing and killing every
-  listener registered after it (this is what
-  was silently breaking the CHAT button).
-*/
-
-function on(id, event, handler){
+function on(id,event,handler){
 
   const el = $(id);
 
@@ -3075,7 +3213,6 @@ function on(id, event, handler){
 
 }
 
-
 function escapeHtml(value){
 
   return String(value || "")
@@ -3091,7 +3228,6 @@ function escapeHtml(value){
     );
 
 }
-
 
 function showChatConnectionError(message){
 
@@ -3153,7 +3289,6 @@ async function getAnonymousName(){
 
   }
 
-
   try{
 
     const result =
@@ -3187,7 +3322,6 @@ async function getAnonymousName(){
     );
 
   }
-
 
   const fallback =
     String(
@@ -3247,7 +3381,6 @@ function renderMedia(message){
 
   }
 
-
   const url =
     escapeHtml(
       message.media_url
@@ -3257,9 +3390,6 @@ function renderMedia(message){
     String(
       message.media_type
     );
-
-
-  /* IMAGE */
 
   if(
     type.startsWith("image/")
@@ -3288,9 +3418,6 @@ function renderMedia(message){
     `;
 
   }
-
-
-  /* VIDEO */
 
   if(
     type.startsWith("video/")
@@ -3321,9 +3448,6 @@ function renderMedia(message){
 
   }
 
-
-  /* AUDIO */
-
   if(
     type.startsWith("audio/")
   ){
@@ -3352,7 +3476,6 @@ function renderMedia(message){
 
   }
 
-
   return "";
 
 }
@@ -3374,15 +3497,12 @@ async function loadMessages(){
 
   }
 
-
   const messages =
     $("messages");
-
 
   if(!messages){
     return;
   }
-
 
   try{
 
@@ -3399,7 +3519,6 @@ async function loadMessages(){
           }
         );
 
-
     if(result.error){
 
       console.error(
@@ -3414,7 +3533,6 @@ async function loadMessages(){
       return;
 
     }
-
 
     renderMessages(
       result.data || []
@@ -3449,10 +3567,8 @@ function renderMessages(list){
     return;
   }
 
-
   let html =
     getWelcome();
-
 
   if(!list.length){
 
@@ -3477,13 +3593,11 @@ function renderMessages(list){
               message.user_name ===
               "Ledjan Bitri";
 
-
             const isMine =
               adminMode
                 ? isAdmin
                 : message.user_name ===
                   anonymousName;
-
 
             const adminLabel =
               isAdmin
@@ -3493,18 +3607,15 @@ function renderMessages(list){
                     message.user_name
                   );
 
-
             const safeMessage =
               escapeHtml(
                 message.message || ""
               );
 
-
             const media =
               renderMedia(
                 message
               );
-
 
             return `
 
@@ -3515,6 +3626,7 @@ function renderMessages(list){
                   ${isAdmin ? "admin" : ""}
                 "
                 data-message-id="${escapeHtml(message.id)}"
+                data-user-name="${escapeHtml(message.user_name)}"
               >
 
                 <div class="meta">
@@ -3575,7 +3687,6 @@ function renderMessages(list){
 
   }
 
-
   html += `
 
     <div
@@ -3595,10 +3706,8 @@ function renderMessages(list){
 
   `;
 
-
   messages.innerHTML =
     html;
-
 
   messages.scrollTop =
     messages.scrollHeight;
@@ -3616,7 +3725,6 @@ function appendRealtimeMessage(message){
     return;
   }
 
-
   const messages =
     $("messages");
 
@@ -3624,28 +3732,27 @@ function appendRealtimeMessage(message){
     return;
   }
 
-
   const existing =
-    messages.querySelector(
-      `[data-message-id="${CSS.escape(String(message.id))}"]`
-    );
+    [...messages.querySelectorAll(".msg")]
+      .find(
+        element =>
+          String(element.dataset.messageId) ===
+          String(message.id)
+      );
 
   if(existing){
     return;
   }
 
-
   const isAdmin =
     message.user_name ===
     "Ledjan Bitri";
-
 
   const isMine =
     adminMode
       ? isAdmin
       : message.user_name ===
         anonymousName;
-
 
   const label =
     isAdmin
@@ -3655,16 +3762,13 @@ function appendRealtimeMessage(message){
           message.user_name
         );
 
-
   const text =
     escapeHtml(
       message.message || ""
     );
 
-
   const media =
     renderMedia(message);
-
 
   const div =
     document.createElement("div");
@@ -3675,6 +3779,8 @@ function appendRealtimeMessage(message){
   div.dataset.messageId =
     String(message.id);
 
+  div.dataset.userName =
+    String(message.user_name || "");
 
   div.innerHTML = `
 
@@ -3716,7 +3822,6 @@ function appendRealtimeMessage(message){
 
   `;
 
-
   const typing =
     $("typingIndicator");
 
@@ -3735,7 +3840,6 @@ function appendRealtimeMessage(message){
 
   }
 
-
   messages.scrollTop =
     messages.scrollHeight;
 
@@ -3752,7 +3856,6 @@ async function setupRealtime(){
     return;
   }
 
-
   try{
 
     if(realtimeChannel){
@@ -3766,7 +3869,6 @@ async function setupRealtime(){
         null;
 
     }
-
 
     realtimeChannel =
       supabaseClient
@@ -3804,9 +3906,10 @@ async function setupRealtime(){
               );
 
             const item =
-              $("messages")
-                ?.querySelector(
-                  `[data-message-id="${CSS.escape(id)}"]`
+              [...document.querySelectorAll("#messages .msg")]
+                .find(
+                  node =>
+                    String(node.dataset.messageId) === id
                 );
 
             if(item){
@@ -3880,16 +3983,13 @@ async function refreshIdentity(){
 
   }
 
-
   $("adminBar")
     .classList
     .remove("active");
 
-
   anonymousName =
     anonymousName ||
     await getAnonymousName();
-
 
   $("identity").innerHTML = `
 
@@ -3901,7 +4001,6 @@ async function refreshIdentity(){
     </strong>
 
   `;
-
 
   $("chatStatus").textContent =
     "Komuniteti i POLARIS";
@@ -3924,10 +4023,8 @@ function updateSendButton(){
       .trim()
       .length > 0;
 
-
   const hasMedia =
     !!selectedMedia;
-
 
   $("sendBtn").disabled =
     !hasText &&
@@ -3951,16 +4048,13 @@ function showMediaPreview(file){
   const info =
     $("mediaPreviewInfo");
 
-
   if(!file){
     clearSelectedMedia();
     return;
   }
 
-
   selectedMedia =
     file;
-
 
   if(mediaObjectUrl){
 
@@ -3970,12 +4064,10 @@ function showMediaPreview(file){
 
   }
 
-
   mediaObjectUrl =
     URL.createObjectURL(
       file
     );
-
 
   if(
     file.type.startsWith("image/")
@@ -4003,14 +4095,12 @@ function showMediaPreview(file){
 
   }
 
-
   const sizeMb =
     (
       file.size /
       1024 /
       1024
     ).toFixed(1);
-
 
   info.innerHTML = `
 
@@ -4030,11 +4120,9 @@ function showMediaPreview(file){
 
   `;
 
-
   preview.classList.add(
     "show"
   );
-
 
   updateSendButton();
 
@@ -4050,14 +4138,12 @@ function clearSelectedMedia(){
   selectedMedia =
     null;
 
-
   const input =
     $("mediaInput");
 
   if(input){
     input.value = "";
   }
-
 
   if(mediaObjectUrl){
 
@@ -4070,19 +4156,15 @@ function clearSelectedMedia(){
 
   }
 
-
   $("mediaPreview")
     .classList
     .remove("show");
 
-
   $("mediaPreviewContent")
     .innerHTML = "";
 
-
   $("mediaPreviewInfo")
     .innerHTML = "";
-
 
   updateSendButton();
 
@@ -4099,7 +4181,6 @@ async function uploadMedia(file){
     return null;
   }
 
-
   if(
     !file.type.startsWith("image/") &&
     !file.type.startsWith("video/")
@@ -4110,7 +4191,6 @@ async function uploadMedia(file){
     );
 
   }
-
 
   if(
     file.size >
@@ -4123,7 +4203,6 @@ async function uploadMedia(file){
 
   }
 
-
   if(!supabaseClient){
 
     throw new Error(
@@ -4131,7 +4210,6 @@ async function uploadMedia(file){
     );
 
   }
-
 
   let extension =
     (
@@ -4146,7 +4224,6 @@ async function uploadMedia(file){
         ""
       );
 
-
   if(!extension){
 
     extension =
@@ -4155,7 +4232,6 @@ async function uploadMedia(file){
         : "mp4";
 
   }
-
 
   const uniqueName =
     Date.now() +
@@ -4166,11 +4242,9 @@ async function uploadMedia(file){
     "." +
     extension;
 
-
   const path =
     "community/" +
     uniqueName;
-
 
   const upload =
     await supabaseClient
@@ -4186,7 +4260,6 @@ async function uploadMedia(file){
         }
       );
 
-
   if(upload.error){
 
     console.error(
@@ -4200,7 +4273,6 @@ async function uploadMedia(file){
 
   }
 
-
   const publicResult =
     supabaseClient
       .storage
@@ -4208,7 +4280,6 @@ async function uploadMedia(file){
       .getPublicUrl(
         path
       );
-
 
   return {
 
@@ -4227,7 +4298,7 @@ async function uploadMedia(file){
 
 
 /* =========================================================
-   AUDIO EXTENSION
+   AUDIO
 ========================================================= */
 
 function audioExtension(mime){
@@ -4236,13 +4307,11 @@ function audioExtension(mime){
     String(mime || "")
       .toLowerCase();
 
-
   if(
     type.includes("ogg")
   ){
     return "ogg";
   }
-
 
   if(
     type.includes("mp4") ||
@@ -4251,22 +4320,16 @@ function audioExtension(mime){
     return "m4a";
   }
 
-
   return "webm";
 
 }
 
-
-/* =========================================================
-   UPLOAD AUDIO
-========================================================= */
 
 async function uploadAudio(blob){
 
   if(!blob){
     return null;
   }
-
 
   if(
     blob.size >
@@ -4279,7 +4342,6 @@ async function uploadAudio(blob){
 
   }
 
-
   if(!supabaseClient){
 
     throw new Error(
@@ -4288,17 +4350,14 @@ async function uploadAudio(blob){
 
   }
 
-
   const mime =
     blob.type ||
     "audio/webm";
-
 
   const extension =
     audioExtension(
       mime
     );
-
 
   const filename =
     "voice-" +
@@ -4310,11 +4369,9 @@ async function uploadAudio(blob){
     "." +
     extension;
 
-
   const path =
     "community/" +
     filename;
-
 
   const upload =
     await supabaseClient
@@ -4330,7 +4387,6 @@ async function uploadAudio(blob){
         }
       );
 
-
   if(upload.error){
 
     console.error(
@@ -4344,7 +4400,6 @@ async function uploadAudio(blob){
 
   }
 
-
   const publicResult =
     supabaseClient
       .storage
@@ -4352,7 +4407,6 @@ async function uploadAudio(blob){
       .getPublicUrl(
         path
       );
-
 
   return {
 
@@ -4379,10 +4433,8 @@ async function sendMessage(){
   const input =
     $("messageInput");
 
-
   const text =
     input.value.trim();
-
 
   if(
     !text &&
@@ -4392,7 +4444,6 @@ async function sendMessage(){
     return;
 
   }
-
 
   if(!supabaseClient){
 
@@ -4404,36 +4455,25 @@ async function sendMessage(){
 
   }
 
-
-  const userName =
-    adminMode
-      ? "Ledjan Bitri"
-      : anonymousName;
-
-
-  if(!userName){
+  if(!anonymousName && !adminMode){
 
     anonymousName =
       await getAnonymousName();
 
   }
 
-
   const finalUserName =
     adminMode
       ? "Ledjan Bitri"
       : anonymousName;
 
-
   $("sendBtn").disabled =
     true;
-
 
   try{
 
     let mediaData =
       null;
-
 
     if(selectedMedia){
 
@@ -4444,7 +4484,6 @@ async function sendMessage(){
 
     }
 
-
     const insertData = {
 
       user_name:
@@ -4454,7 +4493,6 @@ async function sendMessage(){
         text
 
     };
-
 
     if(mediaData){
 
@@ -4469,14 +4507,12 @@ async function sendMessage(){
 
     }
 
-
     const result =
       await supabaseClient
         .from("polaris_messages")
         .insert(
           insertData
         );
-
 
     if(result.error){
 
@@ -4491,18 +4527,15 @@ async function sendMessage(){
 
     }
 
-
     input.value =
       "";
 
     input.style.height =
       "46px";
 
-
     clearSelectedMedia();
 
     stopTyping();
-
 
   }catch(error){
 
@@ -4510,7 +4543,6 @@ async function sendMessage(){
       "POLARIS SEND:",
       error
     );
-
 
     alert(
       error.message ||
@@ -4535,7 +4567,6 @@ function showTyping(){
   const indicator =
     $("typingIndicator");
 
-
   if(indicator){
 
     indicator.classList.add(
@@ -4546,12 +4577,10 @@ function showTyping(){
 
 }
 
-
 function hideTyping(){
 
   const indicator =
     $("typingIndicator");
-
 
   if(indicator){
 
@@ -4563,16 +4592,13 @@ function hideTyping(){
 
 }
 
-
 function startTyping(){
 
   showTyping();
 
-
   clearTimeout(
     typingTimer
   );
-
 
   typingTimer =
     setTimeout(
@@ -4585,7 +4611,6 @@ function startTyping(){
     );
 
 }
-
 
 function stopTyping(){
 
@@ -4630,11 +4655,9 @@ function setupEmojiPicker(){
   const picker =
     $("emojiPicker");
 
-
   if(!picker){
     return;
   }
-
 
   picker.innerHTML =
     emojis
@@ -4656,27 +4679,20 @@ function setupEmojiPicker(){
 }
 
 
-/* =========================================================
-   INSERT EMOJI
-========================================================= */
-
 function insertEmoji(emoji){
 
   const input =
     $("messageInput");
 
-
   if(!input){
     return;
   }
-
 
   const start =
     input.selectionStart;
 
   const end =
     input.selectionEnd;
-
 
   const before =
     input.value.substring(
@@ -4689,17 +4705,14 @@ function insertEmoji(emoji){
       end
     );
 
-
   input.value =
     before +
     emoji +
     after;
 
-
   const cursor =
     start +
     emoji.length;
-
 
   input.focus();
 
@@ -4707,7 +4720,6 @@ function insertEmoji(emoji){
     cursor,
     cursor
   );
-
 
   input.dispatchEvent(
     new Event(
@@ -4722,7 +4734,7 @@ function insertEmoji(emoji){
 
 
 /* =========================================================
-   START RECORDING
+   RECORDING
 ========================================================= */
 
 async function startRecording(event){
@@ -4731,11 +4743,9 @@ async function startRecording(event){
     event.preventDefault();
   }
 
-
   if(isRecording){
     return;
   }
-
 
   if(
     !navigator.mediaDevices ||
@@ -4750,7 +4760,6 @@ async function startRecording(event){
 
   }
 
-
   if(
     typeof MediaRecorder ===
     "undefined"
@@ -4764,14 +4773,12 @@ async function startRecording(event){
 
   }
 
-
   try{
 
     const stream =
       await navigator.mediaDevices.getUserMedia({
         audio:true
       });
-
 
     const candidates = [
 
@@ -4782,10 +4789,8 @@ async function startRecording(event){
 
     ];
 
-
     let mimeType =
       "";
-
 
     for(
       const candidate of candidates
@@ -4807,7 +4812,6 @@ async function startRecording(event){
 
     }
 
-
     mediaRecorder =
       mimeType
         ? new MediaRecorder(
@@ -4820,10 +4824,8 @@ async function startRecording(event){
             stream
           );
 
-
     recordingChunks =
       [];
-
 
     mediaRecorder.ondataavailable =
       event => {
@@ -4841,18 +4843,6 @@ async function startRecording(event){
 
       };
 
-
-    mediaRecorder.onerror =
-      event => {
-
-        console.error(
-          "RECORDER:",
-          event
-        );
-
-      };
-
-
     mediaRecorder.onstop =
       async () => {
 
@@ -4860,12 +4850,10 @@ async function startRecording(event){
           recordingTimerInterval
         );
 
-
         const actualType =
           mediaRecorder.mimeType ||
           mimeType ||
           "audio/webm";
-
 
         const blob =
           new Blob(
@@ -4875,31 +4863,25 @@ async function startRecording(event){
             }
           );
 
-
         stream
           .getTracks()
           .forEach(
             track => track.stop()
           );
 
-
         isRecording =
           false;
-
 
         $("micBtn")
           .classList
           .remove("recording");
 
-
         $("recordingBar")
           .classList
           .remove("show");
 
-
         recordingChunks =
           [];
-
 
         if(
           !blob.size
@@ -4909,25 +4891,21 @@ async function startRecording(event){
 
         }
 
-
         try{
 
           $("micBtn").disabled =
             true;
-
 
           const audioData =
             await uploadAudio(
               blob
             );
 
-
           const userName =
             adminMode
               ? "Ledjan Bitri"
               : anonymousName ||
                 await getAnonymousName();
-
 
           const result =
             await supabaseClient
@@ -4950,7 +4928,6 @@ async function startRecording(event){
                   audioData.name
 
               });
-
 
           if(result.error){
 
@@ -4986,7 +4963,6 @@ async function startRecording(event){
 
       };
 
-
     mediaRecorder.start();
 
     isRecording =
@@ -4995,16 +4971,13 @@ async function startRecording(event){
     recordingStartTime =
       Date.now();
 
-
     $("micBtn")
       .classList
       .add("recording");
 
-
     $("recordingBar")
       .classList
       .add("show");
-
 
     updateRecordingTimer();
 
@@ -5030,16 +5003,11 @@ async function startRecording(event){
 }
 
 
-/* =========================================================
-   RECORDING TIMER
-========================================================= */
-
 function updateRecordingTimer(){
 
   if(!recordingStartTime){
     return;
   }
-
 
   const seconds =
     Math.floor(
@@ -5049,16 +5017,13 @@ function updateRecordingTimer(){
       ) / 1000
     );
 
-
   const minutes =
     Math.floor(
       seconds / 60
     );
 
-
   const remaining =
     seconds % 60;
-
 
   $("recordingTimer")
     .textContent =
@@ -5074,16 +5039,11 @@ function updateRecordingTimer(){
 }
 
 
-/* =========================================================
-   STOP RECORDING
-========================================================= */
-
 function stopRecording(event){
 
   if(event){
     event.preventDefault();
   }
-
 
   if(
     !isRecording ||
@@ -5093,7 +5053,6 @@ function stopRecording(event){
     return;
 
   }
-
 
   if(
     mediaRecorder.state !==
@@ -5119,7 +5078,6 @@ async function openChat(){
   const launcher =
     $("chatLaunch");
 
-
   if(!panel){
 
     console.error(
@@ -5130,21 +5088,13 @@ async function openChat(){
 
   }
 
-
-  /*
-    HAP CHAT-IN MENJËHERË.
-    Supabase nuk duhet ta bllokojë hapjen.
-  */
-
   panel.classList.add(
     "open"
   );
 
-
   document.body.classList.add(
     "chat-open"
   );
-
 
   if(launcher){
 
@@ -5153,13 +5103,11 @@ async function openChat(){
 
   }
 
-
   try{
 
     anonymousName =
       anonymousName ||
       await getAnonymousName();
-
 
     await refreshIdentity();
 
@@ -5195,11 +5143,6 @@ async function closeChat(){
   const launcher =
     $("chatLaunch");
 
-
-  /*
-    Mbylle menjëherë.
-  */
-
   if(panel){
 
     panel.classList.remove(
@@ -5208,15 +5151,9 @@ async function closeChat(){
 
   }
 
-
   document.body.classList.remove(
     "chat-open"
   );
-
-
-  /*
-    RIKTHE CHAT TAB.
-  */
 
   if(launcher){
 
@@ -5225,34 +5162,29 @@ async function closeChat(){
 
   }
 
-
-  const chatMenuEl = $("chatMenu");
+  const chatMenuEl =
+    $("chatMenu");
 
   if(chatMenuEl){
     chatMenuEl.classList.remove("show");
   }
 
-
-  const emojiPickerEl = $("emojiPicker");
+  const emojiPickerEl =
+    $("emojiPicker");
 
   if(emojiPickerEl){
     emojiPickerEl.classList.remove("show");
   }
 
+  closeMessageContext();
 
   clearSelectedMedia();
-
 
   if(isRecording){
 
     stopRecording();
 
   }
-
-
-  /*
-    ADMIN LOGOUT
-  */
 
   if(adminMode){
 
@@ -5283,10 +5215,8 @@ async function loginAdmin(){
   const password =
     $("adminPassword").value;
 
-
   $("adminError")
     .textContent = "";
-
 
   if(!password){
 
@@ -5298,7 +5228,6 @@ async function loginAdmin(){
 
   }
 
-
   if(!supabaseClient){
 
     $("adminError")
@@ -5309,10 +5238,8 @@ async function loginAdmin(){
 
   }
 
-
   $("loginAdmin")
     .disabled = true;
-
 
   try{
 
@@ -5328,7 +5255,6 @@ async function loginAdmin(){
 
         });
 
-
     if(result.error){
 
       console.error(
@@ -5343,11 +5269,9 @@ async function loginAdmin(){
 
     }
 
-
     const loggedUser =
       result.data &&
       result.data.user;
-
 
     if(
       !loggedUser ||
@@ -5361,7 +5285,6 @@ async function loginAdmin(){
         .auth
         .signOut();
 
-
       $("adminError")
         .textContent =
         "Kjo llogari nuk është administratori.";
@@ -5370,26 +5293,22 @@ async function loginAdmin(){
 
     }
 
-
     $("adminPassword")
       .value = "";
 
-
     adminMode =
       true;
-
 
     $("adminModal")
       .classList
       .remove("show");
 
-
-    const chatMenuElAfterLogin = $("chatMenu");
+    const chatMenuElAfterLogin =
+      $("chatMenu");
 
     if(chatMenuElAfterLogin){
       chatMenuElAfterLogin.classList.remove("show");
     }
-
 
     await refreshIdentity();
 
@@ -5425,7 +5344,6 @@ async function logoutAdmin(){
   adminMode =
     false;
 
-
   if(supabaseClient){
 
     try{
@@ -5445,11 +5363,9 @@ async function logoutAdmin(){
 
   }
 
-
   $("adminBar")
     .classList
     .remove("active");
-
 
   await refreshIdentity();
 
@@ -5459,7 +5375,7 @@ async function logoutAdmin(){
 
 
 /* =========================================================
-   DELETE
+   DELETE — ADMIN
 ========================================================= */
 
 async function deleteMessage(id){
@@ -5468,10 +5384,526 @@ async function deleteMessage(id){
     return;
   }
 
-
   if(
     !confirm(
       "Ta fshijmë këtë mesazh?"
+    )
+  ){
+
+    return;
+
+  }
+
+  if(!supabaseClient){
+
+    alert(
+      "Supabase nuk është i lidhur."
+    );
+
+    return;
+
+  }
+
+  try{
+
+    const result =
+      await supabaseClient
+        .from("polaris_messages")
+        .delete()
+        .eq(
+          "id",
+          id
+        );
+
+    if(result.error){
+
+      console.error(
+        result.error
+      );
+
+      alert(
+        "Mesazhi nuk u fshi."
+      );
+
+      return;
+
+    }
+
+    removeMessageFromScreen(id);
+
+  }catch(error){
+
+    console.error(
+      "DELETE:",
+      error
+    );
+
+    alert(
+      "Mesazhi nuk u fshi."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   REMOVE MESSAGE FROM SCREEN
+========================================================= */
+
+function removeMessageFromScreen(id){
+
+  const elements =
+    document.querySelectorAll(
+      "#messages .msg"
+    );
+
+  elements.forEach(
+    element => {
+
+      if(
+        String(
+          element.dataset.messageId
+        ) ===
+        String(id)
+      ){
+
+        element.remove();
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   LONG PRESS
+========================================================= */
+
+function clearLongPress(){
+
+  if(longPressTimer){
+
+    clearTimeout(
+      longPressTimer
+    );
+
+    longPressTimer =
+      null;
+
+  }
+
+}
+
+
+/* =========================================================
+   OPEN MESSAGE CONTEXT
+========================================================= */
+
+function openMessageContext(
+  messageId,
+  x,
+  y
+){
+
+  const menu =
+    $("messageContext");
+
+  if(!menu){
+    return;
+  }
+
+  const messageElement =
+    [...document.querySelectorAll("#messages .msg")]
+      .find(
+        element =>
+          String(
+            element.dataset.messageId
+          ) ===
+          String(messageId)
+      );
+
+  if(!messageElement){
+    return;
+  }
+
+  const owner =
+    String(
+      messageElement.dataset.userName || ""
+    );
+
+  /*
+    ADMIN mund të fshijë çdo mesazh.
+
+    Përdoruesi normal mund të fshijë
+    vetëm mesazhin e vet.
+  */
+
+  const canDelete =
+    adminMode ||
+    owner ===
+      String(anonymousName);
+
+  if(!canDelete){
+    return;
+  }
+
+  contextMessageId =
+    String(messageId);
+
+  menu.classList.add(
+    "show"
+  );
+
+  menu.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  requestAnimationFrame(
+    () => {
+
+      const rect =
+        menu.getBoundingClientRect();
+
+      const safeX =
+        Math.min(
+          Math.max(
+            10,
+            x
+          ),
+          window.innerWidth -
+            rect.width -
+            10
+        );
+
+      const safeY =
+        Math.min(
+          Math.max(
+            10,
+            y
+          ),
+          window.innerHeight -
+            rect.height -
+            10
+        );
+
+      menu.style.left =
+        safeX + "px";
+
+      menu.style.top =
+        safeY + "px";
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   CLOSE MESSAGE CONTEXT
+========================================================= */
+
+function closeMessageContext(){
+
+  const menu =
+    $("messageContext");
+
+  if(!menu){
+    return;
+  }
+
+  menu.classList.remove(
+    "show"
+  );
+
+  menu.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  menu.style.left =
+    "";
+
+  menu.style.top =
+    "";
+
+  contextMessageId =
+    null;
+
+}
+
+
+/* =========================================================
+   BIND LONG PRESS
+========================================================= */
+
+function bindLongPress(){
+
+  const box =
+    $("messages");
+
+  if(
+    !box ||
+    box.dataset.longpressBound
+  ){
+
+    return;
+
+  }
+
+  box.dataset.longpressBound =
+    "1";
+
+
+  /*
+    TELEFON / TOUCH / POINTER
+  */
+
+  box.addEventListener(
+    "pointerdown",
+    event => {
+
+      const message =
+        event.target.closest(
+          ".msg"
+        );
+
+      if(
+        !message ||
+        !message.dataset.messageId
+      ){
+
+        return;
+
+      }
+
+
+      /*
+        Mos aktivizo long-press
+        kur përdoruesi prek një
+        buton, link, video ose audio.
+      */
+
+      if(
+        event.target.closest(
+          "button,a,input,textarea,video,audio"
+        )
+      ){
+
+        return;
+
+      }
+
+
+      if(
+        event.pointerType === "mouse" &&
+        event.button !== 0
+      ){
+
+        return;
+
+      }
+
+
+      clearLongPress();
+
+
+      longPressStartX =
+        event.clientX;
+
+      longPressStartY =
+        event.clientY;
+
+
+      const messageId =
+        message.dataset.messageId;
+
+
+      longPressTimer =
+        setTimeout(
+          () => {
+
+            openMessageContext(
+              messageId,
+              event.clientX,
+              event.clientY
+            );
+
+            longPressTimer =
+              null;
+
+          },
+          LONG_PRESS_MS
+        );
+
+    }
+  );
+
+
+  box.addEventListener(
+    "pointermove",
+    event => {
+
+      if(!longPressTimer){
+        return;
+      }
+
+
+      const distance =
+        Math.hypot(
+          event.clientX -
+            longPressStartX,
+
+          event.clientY -
+            longPressStartY
+        );
+
+
+      if(
+        distance >
+        LONG_PRESS_MOVE
+      ){
+
+        clearLongPress();
+
+      }
+
+    }
+  );
+
+
+  [
+    "pointerup",
+    "pointercancel",
+    "pointerleave"
+  ].forEach(
+    type => {
+
+      box.addEventListener(
+        type,
+        clearLongPress
+      );
+
+    }
+  );
+
+
+  /*
+    DESKTOP RIGHT CLICK
+  */
+
+  box.addEventListener(
+    "contextmenu",
+    event => {
+
+      const message =
+        event.target.closest(
+          ".msg"
+        );
+
+      if(
+        !message ||
+        !message.dataset.messageId
+      ){
+
+        return;
+
+      }
+
+
+      if(
+        event.target.closest(
+          "button,a,input,textarea,video,audio"
+        )
+      ){
+
+        return;
+
+      }
+
+
+      event.preventDefault();
+
+
+      openMessageContext(
+        message.dataset.messageId,
+        event.clientX,
+        event.clientY
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   DELETE FROM LONG PRESS
+========================================================= */
+
+async function deleteContextMessage(){
+
+  const id =
+    contextMessageId;
+
+  closeMessageContext();
+
+  if(!id){
+    return;
+  }
+
+
+  /*
+    Kontrollojmë përsëri pronësinë
+    para fshirjes.
+  */
+
+  const element =
+    [...document.querySelectorAll("#messages .msg")]
+      .find(
+        node =>
+          String(
+            node.dataset.messageId
+          ) ===
+          String(id)
+      );
+
+  if(!element){
+    return;
+  }
+
+
+  const owner =
+    String(
+      element.dataset.userName || ""
+    );
+
+
+  const allowed =
+    adminMode ||
+    owner ===
+      String(anonymousName);
+
+
+  if(!allowed){
+
+    alert(
+      "Mund të fshish vetëm mesazhet e tua."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !confirm(
+      adminMode
+        ? "Ta fshijmë këtë mesazh?"
+        : "Ta fshijmë mesazhin tënd?"
     )
   ){
 
@@ -5493,6 +5925,75 @@ async function deleteMessage(id){
 
   try{
 
+    /*
+      Merr të dhënat nga serveri
+      për të kontrolluar pronarin
+      edhe një herë.
+    */
+
+    const fetchResult =
+      await supabaseClient
+        .from("polaris_messages")
+        .select(
+          "id,user_name"
+        )
+        .eq(
+          "id",
+          id
+        )
+        .maybeSingle();
+
+
+    if(fetchResult.error){
+
+      console.error(
+        "DELETE FETCH:",
+        fetchResult.error
+      );
+
+      alert(
+        "Nuk mund të verifikohej mesazhi."
+      );
+
+      return;
+
+    }
+
+
+    if(!fetchResult.data){
+
+      alert(
+        "Mesazhi nuk u gjet."
+      );
+
+      return;
+
+    }
+
+
+    const serverOwner =
+      String(
+        fetchResult.data.user_name || ""
+      );
+
+
+    const serverAllowed =
+      adminMode ||
+      serverOwner ===
+        String(anonymousName);
+
+
+    if(!serverAllowed){
+
+      alert(
+        "Mund të fshish vetëm mesazhet e tua."
+      );
+
+      return;
+
+    }
+
+
     const result =
       await supabaseClient
         .from("polaris_messages")
@@ -5506,11 +6007,12 @@ async function deleteMessage(id){
     if(result.error){
 
       console.error(
+        "DELETE OWN:",
         result.error
       );
 
       alert(
-        "Mesazhi nuk u fshi."
+        "Mesazhi nuk u fshi. Kontrollo RLS në Supabase."
       );
 
       return;
@@ -5518,22 +6020,14 @@ async function deleteMessage(id){
     }
 
 
-    const element =
-      $("messages")
-        .querySelector(
-          `[data-message-id="${CSS.escape(String(id))}"]`
-        );
-
-
-    if(element){
-      element.remove();
-    }
-
+    removeMessageFromScreen(
+      id
+    );
 
   }catch(error){
 
     console.error(
-      "DELETE:",
+      "DELETE CONTEXT:",
       error
     );
 
@@ -5548,35 +6042,41 @@ async function deleteMessage(id){
 
 /* =========================================================
    EVENT LISTENERS
-   (all wired through the safe on() helper below,
-   so a single missing element can never block the
-   rest of the setup — including the CHAT button)
 ========================================================= */
 
+on(
+  "chatLaunch",
+  "click",
+  openChat
+);
 
-/* OPEN */
-
-on("chatLaunch", "click", openChat);
-
-
-/* CLOSE */
-
-on("closeChat", "click", closeChat);
+on(
+  "closeChat",
+  "click",
+  closeChat
+);
 
 
 /* MENU */
 
-on("menuBtn", "click", event => {
+on(
+  "menuBtn",
+  "click",
+  event => {
 
-  event.stopPropagation();
+    event.stopPropagation();
 
-  const menu = $("chatMenu");
+    const menu =
+      $("chatMenu");
 
-  if(menu){
-    menu.classList.toggle("show");
+    if(menu){
+      menu.classList.toggle(
+        "show"
+      );
+    }
+
   }
-
-});
+);
 
 
 /* OUTSIDE MENU */
@@ -5590,7 +6090,6 @@ document.addEventListener(
 
     const button =
       $("menuBtn");
-
 
     if(
       menu &&
@@ -5610,103 +6109,118 @@ document.addEventListener(
 );
 
 
-/* EMOJI BUTTON */
+/* EMOJI */
 
-on("emojiBtn", "click", event => {
+on(
+  "emojiBtn",
+  "click",
+  event => {
 
-  event.stopPropagation();
+    event.stopPropagation();
 
-  const menu = $("chatMenu");
+    const menu =
+      $("chatMenu");
 
-  if(menu){
-    menu.classList.remove("show");
+    if(menu){
+      menu.classList.remove(
+        "show"
+      );
+    }
+
+    const picker =
+      $("emojiPicker");
+
+    if(picker){
+      picker.classList.toggle(
+        "show"
+      );
+    }
+
   }
-
-  const picker = $("emojiPicker");
-
-  if(picker){
-    picker.classList.toggle("show");
-  }
-
-});
+);
 
 
-/* EMOJI SELECT */
+on(
+  "emojiPicker",
+  "click",
+  event => {
 
-on("emojiPicker", "click", event => {
+    const button =
+      event.target.closest(
+        "[data-emoji]"
+      );
 
-  const button =
-    event.target.closest(
-      "[data-emoji]"
+    if(!button){
+      return;
+    }
+
+    insertEmoji(
+      button.dataset.emoji
     );
 
+    const picker =
+      $("emojiPicker");
 
-  if(!button){
-    return;
+    if(picker){
+      picker.classList.remove(
+        "show"
+      );
+    }
+
   }
+);
 
 
-  insertEmoji(
-    button.dataset.emoji
-  );
+/* JOIN */
 
+on(
+  "joinCommunity",
+  "click",
+  () => {
 
-  const picker = $("emojiPicker");
+    const menu =
+      $("chatMenu");
 
-  if(picker){
-    picker.classList.remove("show");
+    if(menu){
+      menu.classList.remove(
+        "show"
+      );
+    }
+
+    $("registerError")
+      .textContent = "";
+
+    $("registerSuccess")
+      .classList
+      .remove("show");
+
+    $("registerEmail")
+      .value = "";
+
+    $("registerPassword")
+      .value = "";
+
+    $("registerModal")
+      .classList
+      .add("show");
+
+    setTimeout(
+      () => {
+
+        $("registerEmail")
+          .focus();
+
+      },
+      50
+    );
+
   }
-
-});
-
-
-/* JOIN COMMUNITY */
-
-on("joinCommunity", "click", () => {
-
-  const menu = $("chatMenu");
-
-  if(menu){
-    menu.classList.remove("show");
-  }
+);
 
 
-  $("registerError")
-    .textContent = "";
-
-
-  $("registerSuccess")
-    .classList
-    .remove("show");
-
-
-  $("registerEmail")
-    .value = "";
-
-
-  $("registerPassword")
-    .value = "";
-
-
-  $("registerModal")
-    .classList
-    .add("show");
-
-
-  setTimeout(
-    () => {
-
-      $("registerEmail")
-        .focus();
-
-    },
-    50
-  );
-
-});
-
-
-/* REGISTER */
+/* =========================================================
+   REGISTER
+========================================================= */
 
 async function registerUser(){
 
@@ -5715,20 +6229,16 @@ async function registerUser(){
       .value
       .trim();
 
-
   const password =
     $("registerPassword")
       .value;
 
-
   $("registerError")
     .textContent = "";
-
 
   $("registerSuccess")
     .classList
     .remove("show");
-
 
   if(!email){
 
@@ -5740,7 +6250,6 @@ async function registerUser(){
 
   }
 
-
   if(password.length < 6){
 
     $("registerError")
@@ -5750,7 +6259,6 @@ async function registerUser(){
     return;
 
   }
-
 
   if(!supabaseClient){
 
@@ -5762,10 +6270,8 @@ async function registerUser(){
 
   }
 
-
   $("registerBtn")
     .disabled = true;
-
 
   try{
 
@@ -5781,20 +6287,17 @@ async function registerUser(){
 
         });
 
-
     if(result.error){
 
       console.error(
         result.error
       );
 
-
       const message =
         String(
           result.error.message ||
           ""
         ).toLowerCase();
-
 
       if(
         message.includes("already") ||
@@ -5817,7 +6320,6 @@ async function registerUser(){
 
     }
 
-
     if(
       result.data &&
       result.data.user
@@ -5837,7 +6339,6 @@ async function registerUser(){
                 email
 
             });
-
 
         if(profileResult.error){
 
@@ -5859,19 +6360,15 @@ async function registerUser(){
 
     }
 
-
     $("registerEmail")
       .value = "";
-
 
     $("registerPassword")
       .value = "";
 
-
     $("registerSuccess")
       .classList
       .add("show");
-
 
     setTimeout(
       () => {
@@ -5909,206 +6406,231 @@ async function registerUser(){
 }
 
 
-on("registerBtn", "click", registerUser);
+on(
+  "registerBtn",
+  "click",
+  registerUser
+);
 
 
-on("cancelRegister", "click", () => {
+on(
+  "cancelRegister",
+  "click",
+  () => {
 
-  $("registerModal")
-    .classList
-    .remove("show");
+    $("registerModal")
+      .classList
+      .remove("show");
 
-});
+  }
+);
 
 
 /* ADMIN MENU */
 
-on("menuAdmin", "click", () => {
+on(
+  "menuAdmin",
+  "click",
+  () => {
 
-  const menu = $("chatMenu");
+    const menu =
+      $("chatMenu");
 
-  if(menu){
-    menu.classList.remove("show");
+    if(menu){
+      menu.classList.remove(
+        "show"
+      );
+    }
+
+    if(adminMode){
+      return;
+    }
+
+    $("adminError")
+      .textContent = "";
+
+    $("adminPassword")
+      .value = "";
+
+    $("adminModal")
+      .classList
+      .add("show");
+
+    setTimeout(
+      () => {
+
+        $("adminPassword")
+          .focus();
+
+      },
+      50
+    );
+
   }
-
-
-  if(adminMode){
-    return;
-  }
-
-
-  $("adminError")
-    .textContent = "";
-
-
-  $("adminPassword")
-    .value = "";
-
-
-  $("adminModal")
-    .classList
-    .add("show");
-
-
-  setTimeout(
-    () => {
-
-      $("adminPassword")
-        .focus();
-
-    },
-    50
-  );
-
-});
+);
 
 
 /* ADMIN CANCEL */
 
-on("cancelAdmin", "click", () => {
+on(
+  "cancelAdmin",
+  "click",
+  () => {
 
-  $("adminModal")
-    .classList
-    .remove("show");
+    $("adminModal")
+      .classList
+      .remove("show");
 
-});
+  }
+);
 
 
 /* ADMIN LOGIN */
 
-on("loginAdmin", "click", loginAdmin);
+on(
+  "loginAdmin",
+  "click",
+  loginAdmin
+);
 
 
-on("adminPassword", "keydown", event => {
+on(
+  "adminPassword",
+  "keydown",
+  event => {
 
-  if(
-    event.key ===
-    "Enter"
-  ){
+    if(
+      event.key ===
+      "Enter"
+    ){
 
-    loginAdmin();
+      loginAdmin();
+
+    }
 
   }
-
-});
+);
 
 
 /* LOGOUT */
 
-on("logoutAdmin", "click", logoutAdmin);
+on(
+  "logoutAdmin",
+  "click",
+  logoutAdmin
+);
 
 
 /* SEND */
 
-on("sendBtn", "click", sendMessage);
+on(
+  "sendBtn",
+  "click",
+  sendMessage
+);
 
 
 /* ATTACH */
 
-on("attachBtn", "click", () => {
+on(
+  "attachBtn",
+  "click",
+  () => {
 
-  const input = $("mediaInput");
+    const input =
+      $("mediaInput");
 
-  if(input){
-    input.click();
+    if(input){
+      input.click();
+    }
+
   }
-
-});
-
-
-/* MEDIA INPUT */
-
-on("mediaInput", "change", event => {
-
-  const file =
-    event.target.files &&
-    event.target.files[0];
+);
 
 
-  if(!file){
-    return;
-  }
+/* MEDIA */
 
+on(
+  "mediaInput",
+  "change",
+  event => {
 
-  if(
-    !file.type.startsWith("image/") &&
-    !file.type.startsWith("video/")
-  ){
+    const file =
+      event.target.files &&
+      event.target.files[0];
 
-    alert(
-      "Mund të dërgosh vetëm foto ose video."
+    if(!file){
+      return;
+    }
+
+    if(
+      !file.type.startsWith("image/") &&
+      !file.type.startsWith("video/")
+    ){
+
+      alert(
+        "Mund të dërgosh vetëm foto ose video."
+      );
+
+      clearSelectedMedia();
+
+      return;
+
+    }
+
+    if(
+      file.size >
+      MAX_MEDIA_SIZE
+    ){
+
+      alert(
+        "File-i është shumë i madh. Maksimumi është 50 MB."
+      );
+
+      clearSelectedMedia();
+
+      return;
+
+    }
+
+    showMediaPreview(
+      file
     );
 
-    clearSelectedMedia();
-
-    return;
-
   }
+);
 
 
-  if(
-    file.size >
-    MAX_MEDIA_SIZE
-  ){
-
-    alert(
-      "File-i është shumë i madh. Maksimumi është 50 MB."
-    );
-
-    clearSelectedMedia();
-
-    return;
-
-  }
-
-
-  showMediaPreview(
-    file
-  );
-
-});
-
-
-/* REMOVE MEDIA */
-
-on("removeMedia", "click", clearSelectedMedia);
+on(
+  "removeMedia",
+  "click",
+  clearSelectedMedia
+);
 
 
 /* =========================================================
-   MICROPHONE EVENTS
+   MICROPHONE
 ========================================================= */
 
 const micBtn =
   $("micBtn");
 
-
 if(micBtn){
-
-  /*
-    POINTER DOWN = START
-  */
 
   micBtn.addEventListener(
     "pointerdown",
     startRecording
   );
 
-
-  /*
-    POINTER UP = SEND
-  */
-
   micBtn.addEventListener(
     "pointerup",
     stopRecording
   );
 
-
   micBtn.addEventListener(
     "pointercancel",
     stopRecording
   );
-
 
   micBtn.addEventListener(
     "pointerleave",
@@ -6132,116 +6654,132 @@ if(micBtn){
    TEXTAREA
 ========================================================= */
 
-on("messageInput", "input", () => {
+on(
+  "messageInput",
+  "input",
+  () => {
 
-  const input =
-    $("messageInput");
+    const input =
+      $("messageInput");
 
+    input.style.height =
+      "46px";
 
-  input.style.height =
-    "46px";
+    input.style.height =
+      Math.min(
+        input.scrollHeight,
+        130
+      ) + "px";
 
+    if(
+      input.value.trim()
+    ){
 
-  input.style.height =
-    Math.min(
-      input.scrollHeight,
-      130
-    ) + "px";
+      startTyping();
 
+    }else{
 
-  if(
-    input.value.trim()
-  ){
+      stopTyping();
 
-    startTyping();
+    }
 
-  }else{
-
-    stopTyping();
+    updateSendButton();
 
   }
-
-
-  updateSendButton();
-
-});
+);
 
 
 /* ENTER */
 
-on("messageInput", "keydown", event => {
+on(
+  "messageInput",
+  "keydown",
+  event => {
 
-  if(
-    event.key === "Enter" &&
-    !event.shiftKey
-  ){
+    if(
+      event.key === "Enter" &&
+      !event.shiftKey
+    ){
 
-    event.preventDefault();
+      event.preventDefault();
 
-    sendMessage();
+      sendMessage();
+
+    }
 
   }
-
-});
+);
 
 
 /* =========================================================
-   DELETE
+   ADMIN DELETE BUTTON
 ========================================================= */
 
-on("messages", "click", event => {
+on(
+  "messages",
+  "click",
+  event => {
 
-  const button =
-    event.target.closest(
-      "[data-delete]"
-    );
+    const button =
+      event.target.closest(
+        "[data-delete]"
+      );
 
+    if(button){
 
-  if(button){
+      event.stopPropagation();
 
-    deleteMessage(
-      button.dataset.delete
-    );
+      deleteMessage(
+        button.dataset.delete
+      );
+
+    }
 
   }
-
-});
+);
 
 
 /* =========================================================
-   MODAL OUTSIDE CLICK
+   LONG PRESS DELETE BUTTONS
 ========================================================= */
 
-on("registerModal", "click", event => {
+on(
+  "deleteOwnContext",
+  "click",
+  deleteContextMessage
+);
 
-  if(
-    event.target ===
-    $("registerModal")
-  ){
 
-    $("registerModal")
-      .classList
-      .remove("show");
+on(
+  "cancelMessageContext",
+  "click",
+  closeMessageContext
+);
+
+
+/* =========================================================
+   CLOSE CONTEXT WHEN CLICKING OUTSIDE
+========================================================= */
+
+document.addEventListener(
+  "click",
+  event => {
+
+    const menu =
+      $("messageContext");
+
+    if(
+      menu &&
+      menu.classList.contains("show") &&
+      !event.target.closest("#messageContext")
+    ){
+
+      closeMessageContext();
+
+    }
 
   }
-
-});
-
-
-on("adminModal", "click", event => {
-
-  if(
-    event.target ===
-    $("adminModal")
-  ){
-
-    $("adminModal")
-      .classList
-      .remove("show");
-
-  }
-
-});
+);
 
 
 /* =========================================================
@@ -6257,28 +6795,87 @@ document.addEventListener(
       "Escape"
     ){
 
-      const registerModalEl = $("registerModal");
+      const registerModalEl =
+        $("registerModal");
+
       if(registerModalEl){
-        registerModalEl.classList.remove("show");
+        registerModalEl.classList.remove(
+          "show"
+        );
       }
 
+      const adminModalEl =
+        $("adminModal");
 
-      const adminModalEl = $("adminModal");
       if(adminModalEl){
-        adminModalEl.classList.remove("show");
+        adminModalEl.classList.remove(
+          "show"
+        );
       }
 
+      const chatMenuElEsc =
+        $("chatMenu");
 
-      const chatMenuElEsc = $("chatMenu");
       if(chatMenuElEsc){
-        chatMenuElEsc.classList.remove("show");
+        chatMenuElEsc.classList.remove(
+          "show"
+        );
       }
 
+      const emojiPickerElEsc =
+        $("emojiPicker");
 
-      const emojiPickerElEsc = $("emojiPicker");
       if(emojiPickerElEsc){
-        emojiPickerElEsc.classList.remove("show");
+        emojiPickerElEsc.classList.remove(
+          "show"
+        );
       }
+
+      closeMessageContext();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   MODAL OUTSIDE CLICK
+========================================================= */
+
+on(
+  "registerModal",
+  "click",
+  event => {
+
+    if(
+      event.target ===
+      $("registerModal")
+    ){
+
+      $("registerModal")
+        .classList
+        .remove("show");
+
+    }
+
+  }
+);
+
+
+on(
+  "adminModal",
+  "click",
+  event => {
+
+    if(
+      event.target ===
+      $("adminModal")
+    ){
+
+      $("adminModal")
+        .classList
+        .remove("show");
 
     }
 
@@ -6292,11 +6889,8 @@ document.addEventListener(
 
 setupEmojiPicker();
 
+bindLongPress();
 
-/*
-  Mos e bëjmë inicializimin e Supabase
-  kusht për hapjen e CHAT.
-*/
 
 (async function(){
 
@@ -6306,10 +6900,6 @@ setupEmojiPicker();
       await getAnonymousName();
 
     await refreshIdentity();
-
-    /*
-      Realtime bëhet në background.
-    */
 
     await setupRealtime();
 
@@ -6330,4 +6920,4 @@ setupEmojiPicker();
 </script>
 
 </body>
-</html>
+  </html>
